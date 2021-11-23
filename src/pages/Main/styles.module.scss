@@ -1,0 +1,56 @@
+.charactersContainer {
+  margin-top: 50px;
+  & > h1 {
+    margin-bottom: 25px;
+  }
+
+  .charactersGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+
+    .characterBox {
+      padding: 30px;
+      box-shadow: 5px 5px 0px #000;
+      border: 1px solid #000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: 300ms all;
+
+      &:hover {
+        box-shadow: 2px 2px 0px #000;
+        cursor: pointer;
+      }
+
+      .row {
+        // display: flex;
+        // flex-direction: row;
+        // align-items: center;
+        margin-bottom: 20px;
+
+        display: grid;
+        grid-template-columns: 80px 3fr;
+        grid-gap: 10px;
+        width: 100%;
+
+        span {
+          font-size: 1rem;
+          margin-right: 10px;
+          color: rgb(192, 192, 192);
+          text-transform: lowercase;
+        }
+
+        h1 {
+          text-transform: uppercase;
+          font-size: 1rem;
+        }
+      }
+
+      img {
+        width: 200px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
