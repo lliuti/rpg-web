@@ -13,10 +13,10 @@ const Login = () => {
         <h1>Login</h1>
 
         <div className={styles.gridTwoItems}>
-          <TextField id="usernameInput" label="Username" variant="outlined" />
+          <TextField id="usernameInput" label="Usuario" variant="outlined" />
           <TextField
             id="usernamePassword"
-            label="Password"
+            label="Senha"
             variant="outlined"
             type="password"
           />
