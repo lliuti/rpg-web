@@ -14,7 +14,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-const Vitals = () => {
+export const Vitals = () => {
   const [lifeDialogOpen, setLifeDialogOpen] = useState(false);
   const [sanityDialogOpen, setSanityDialogOpen] = useState(false);
   const [effortDialogOpen, setEffortDialogOpen] = useState(false);
@@ -313,5 +313,3 @@ const Vitals = () => {
     </div>
   );
 };
-
-export default Vitals;
