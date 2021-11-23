@@ -5,6 +5,7 @@ import CharacterDetails from "../../components/characterDetails/index";
 import Attributes from "../../components/attributes/index";
 import Skills from "../../components/skills/index";
 import Vitals from "../../components/vitals/index";
+import Defenses from "../../components/defenses/index";
 
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
@@ -35,6 +36,7 @@ const Sheet = () => {
           </div>
           <div className={styles.rightGridContainer}>
             <Vitals />
+            <Defenses />
           </div>
         </div>
       </div>
