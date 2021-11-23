@@ -19,7 +19,7 @@ export const Router = () => {
           path="/create-character"
           element={<ProtectedCreateCharacter />}
         />
-        <Route path="/characters/xpto" element={<ProtectedSheet />} />
+        <Route path="/characters/:character_id" element={<ProtectedSheet />} />
       </Routes>
     </BrowserRouter>
   );
