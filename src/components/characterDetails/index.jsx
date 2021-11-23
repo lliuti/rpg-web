@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 const CharacterDetails = () => {
   return (
     <div className={styles.characterDetailsContainer}>
-      <h1>Informacoes Pessoais</h1>
+      <h1>Informacoes Pessoais 📝</h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="nameInput"
