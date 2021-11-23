@@ -205,7 +205,7 @@ const Sheet = () => {
                     <Button onClick={handleDiceDialogClose} color="inherit">
                       Cancelar
                     </Button>
-                    <Button autoFocus color="inherit">
+                    <Button autoFocus color="inherit" variant="outlined">
                       Rolar
                     </Button>
                   </DialogActions>
@@ -259,7 +259,7 @@ const Sheet = () => {
                   <Button onClick={handleLifeDialogClose} color="error">
                     Cancelar
                   </Button>
-                  <Button autoFocus color="error">
+                  <Button autoFocus color="error" variant="outlined">
                     Salvar
                   </Button>
                 </DialogActions>
@@ -313,7 +313,7 @@ const Sheet = () => {
                   <Button onClick={handleSanityDialogClose} color="primary">
                     Cancelar
                   </Button>
-                  <Button autoFocus color="primary">
+                  <Button autoFocus color="primary" variant="outlined">
                     Salvar
                   </Button>
                 </DialogActions>
@@ -367,7 +367,7 @@ const Sheet = () => {
                   <Button onClick={handleEffortDialogClose} color="warning">
                     Cancelar
                   </Button>
-                  <Button autoFocus color="warning">
+                  <Button autoFocus color="warning" variant="outlined">
                     Salvar
                   </Button>
                 </DialogActions>
