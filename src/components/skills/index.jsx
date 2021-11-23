@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 const Skills = () => {
   return (
     <div className={styles.skillsContainer}>
-      <h1>Perícias</h1>
+      <h1>Perícias 🗡</h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="atletistmoInput"
