@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 
 import TextField from "@mui/material/TextField";
 
-const CharacterDetails = () => {
+export const CharacterDetails = () => {
   return (
     <div className={styles.characterDetailsContainer}>
       <h1>Informacoes Pessoais 📝</h1>
@@ -47,5 +47,3 @@ const CharacterDetails = () => {
     </div>
   );
 };
-
-export default CharacterDetails;
