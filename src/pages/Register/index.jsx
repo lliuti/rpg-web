@@ -11,7 +11,7 @@ const Register = () => {
       <div className={styles.formBox}>
         <h1>Registrar</h1>
         <div className={styles.gridTwoItems}>
-          <TextField id="nameInput" label="Name" variant="outlined" />
+          <TextField id="nameInput" label="Nome" variant="outlined" />
           <TextField id="usernameInput" label="Usuario" variant="outlined" />
         </div>
         <div className={styles.gridTwoItems}>
