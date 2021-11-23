@@ -10,12 +10,8 @@ export const NotFound = () => {
     <Container>
       <div className={styles.notFoundContainer}>
         <h1>Essa página não existe... :(</h1>
-        <Button
-          onClick={() => navigate("/login")}
-          variant="outlined"
-          sx={{ mt: 5 }}
-        >
-          Voltar para &gt; LOGIN
+        <Button onClick={() => navigate("/")} variant="outlined" sx={{ mt: 5 }}>
+          Voltar
         </Button>
       </div>
     </Container>
