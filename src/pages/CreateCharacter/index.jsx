@@ -11,7 +11,7 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 
-const CreateCharacter = () => {
+export const CreateCharacter = () => {
   const [archetype, setArchetype] = useState("");
 
   const navigate = useNavigate();
@@ -64,5 +64,3 @@ const CreateCharacter = () => {
     </Container>
   );
 };
-
-export default CreateCharacter;
