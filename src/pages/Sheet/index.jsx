@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 import Box from "@mui/material/Box";
@@ -6,11 +7,12 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
+import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -25,6 +27,8 @@ const Sheet = () => {
   const [diceFaceAmount, setDiceFaceAmount] = useState("");
 
   const characterImage = "https://pbs.twimg.com/media/EYFiJSNWAAEFSi9.png";
+
+  const navigate = useNavigate();
 
   const handleLifeDialogOpen = () => {
     setLifeDialogOpen(true);
@@ -69,6 +73,17 @@ const Sheet = () => {
   return (
     <Container>
       <div className={styles.sheetContainer}>
+        <div className={styles.topContainer}>
+          <Button
+            variant="outlined"
+            onClick={() => navigate("/")}
+            color="inherit"
+            startIcon={<ArrowBack />}
+          >
+            VOLTAR
+          </Button>
+          <h1>Ficha de Personagem</h1>
+        </div>
         <div className={styles.grid}>
           <div className={styles.leftGridContainer}>
             <div className={styles.characterDetailsContainer}>
