@@ -1,8 +1,9 @@
 import "./App.css";
-import Router from "./routes";
+import { AuthProvider } from "./contexts/auth";
+import { Router } from "./routes";
 import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
 
-function App() {
+export const App = () => {
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
@@ -13,9 +14,9 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </ThemeProvider>
   );
-}
-
-export default App;
+};
