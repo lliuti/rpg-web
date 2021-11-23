@@ -1,0 +1,23 @@
+.vitalsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  box-shadow: 5px 5px 0px #000;
+  border: 1px solid #000;
+
+  h1 {
+    margin-bottom: 25px;
+  }
+
+  .imageDiceRollContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    img {
+      width: 120px;
+      margin-bottom: 20px;
+      margin-right: 30px;
+    }
+  }
+}
