@@ -1,5 +1,5 @@
 import "./App.css";
-import { Router } from "./routes";
+import Router from "./routes";
 import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
 
 function App() {
