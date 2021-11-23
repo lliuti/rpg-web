@@ -14,12 +14,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export const DiceRoll = () => {
+export const DiceRoll = ({ picture }) => {
   const [diceDialogOpen, setDiceDialogOpen] = useState(false);
   const [diceAmount, setDiceAmount] = useState("");
   const [diceFaceAmount, setDiceFaceAmount] = useState("");
-
-  const characterImage = "https://pbs.twimg.com/media/EYFiJSNWAAEFSi9.png";
 
   const handleDiceDialogOpen = () => {
     setDiceDialogOpen(true);
@@ -39,7 +37,7 @@ export const DiceRoll = () => {
 
   return (
     <div className={styles.imageDiceRollContainer}>
-      <img src={characterImage} alt="Character picture" />
+      <img src={picture.picture} alt="Character picture" />
       <Button
         variant="outlined"
         onClick={handleDiceDialogOpen}
