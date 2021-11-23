@@ -1,29 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
+
+import { DiceRoll } from "../diceRoll/index";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export const Vitals = () => {
+export const Vitals = ({ details }) => {
   const [lifeDialogOpen, setLifeDialogOpen] = useState(false);
   const [sanityDialogOpen, setSanityDialogOpen] = useState(false);
   const [effortDialogOpen, setEffortDialogOpen] = useState(false);
-  const [diceDialogOpen, setDiceDialogOpen] = useState(false);
 
-  const [diceAmount, setDiceAmount] = useState("");
-  const [diceFaceAmount, setDiceFaceAmount] = useState("");
+  const [currLife, setCurrLife] = useState("");
+  const [maxLife, setMaxLife] = useState("");
 
-  const characterImage = "https://pbs.twimg.com/media/EYFiJSNWAAEFSi9.png";
+  const [currSan, setCurrSan] = useState("");
+  const [maxSan, setMaxSan] = useState("");
+
+  const [currEff, setCurrEff] = useState("");
+  const [maxEff, setMaxEff] = useState("");
+
+  useEffect(() => {
+    setCurrLife(details?.curr_life);
+    setMaxLife(details?.max_life);
+
+    setCurrSan(details?.curr_san);
+    setMaxSan(details?.max_san);
+
+    setCurrEff(details?.curr_eff);
+    setMaxEff(details?.max_eff);
+  }, [details]);
 
   const handleLifeDialogOpen = () => {
     setLifeDialogOpen(true);
@@ -49,121 +61,23 @@ export const Vitals = () => {
     setEffortDialogOpen(false);
   };
 
-  const handleDiceDialogOpen = () => {
-    setDiceDialogOpen(true);
-  };
+  // CHANGE VALUES
 
-  const handleDiceDialogClose = () => {
-    setDiceDialogOpen(false);
-  };
-
-  const handleDiceAmountChange = (event) => {
-    setDiceAmount(event.target.value);
-  };
-
-  const handleDiceFaceAmountChange = (event) => {
-    setDiceFaceAmount(event.target.value);
-  };
+  const handleChangeLife = async () => {};
+  const handleChangeSanity = async () => {};
+  const handleChangeEffort = async () => {};
 
   return (
     <div className={styles.vitalsContainer}>
       <h1>Detalhes Vitais ❤</h1>
-      <div className={styles.imageDiceRollContainer}>
-        <img src={characterImage} alt="Character picture" />
-        <Button
-          variant="outlined"
-          onClick={handleDiceDialogOpen}
-          color="inherit"
-          sx={{ mb: 2 }}
-        >
-          Rolar dados
-        </Button>
-        <Dialog
-          open={diceDialogOpen}
-          onClose={handleDiceDialogClose}
-          aria-labelledby="diceDialogTitle"
-          aria-describedby="diceDialogDescription"
-        >
-          <DialogTitle id="diceDialogTitle">{"Rolar dados"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText
-              id="diceDialogDescription"
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              Rolar dados para testar qualidade de determinada acao.
-            </DialogContentText>
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gridGap: "20px",
-                mt: 3,
-              }}
-            >
-              <FormControl>
-                <InputLabel id="dice-amount-select-label">Qtde</InputLabel>
-                <Select
-                  labelId="dice-amount-select-label"
-                  id="dice-amount-select"
-                  value={diceAmount}
-                  label="Qtde"
-                  onChange={handleDiceAmountChange}
-                >
-                  <MenuItem value={"1"}>1</MenuItem>
-                  <MenuItem value={"2"}>2</MenuItem>
-                  <MenuItem value={"3"}>3</MenuItem>
-                  <MenuItem value={"4"}>4</MenuItem>
-                  <MenuItem value={"5"}>5</MenuItem>
-                  <MenuItem value={"6"}>6</MenuItem>
-                  <MenuItem value={"7"}>7</MenuItem>
-                  <MenuItem value={"8"}>8</MenuItem>
-                  <MenuItem value={"9"}>9</MenuItem>
-                  <MenuItem value={"10"}>10</MenuItem>
-                  <MenuItem value={"11"}>11</MenuItem>
-                  <MenuItem value={"12"}>12</MenuItem>
-                  <MenuItem value={"13"}>13</MenuItem>
-                  <MenuItem value={"14"}>14</MenuItem>
-                  <MenuItem value={"15"}>15</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl>
-                <InputLabel id="dice-face-select-label">Faces</InputLabel>
-                <Select
-                  labelId="dice-face-select-label"
-                  id="dice-face-select"
-                  value={diceFaceAmount}
-                  label="Faces"
-                  onChange={handleDiceFaceAmountChange}
-                >
-                  <MenuItem value={"D3"}>D3</MenuItem>
-                  <MenuItem value={"D4"}>D4</MenuItem>
-                  <MenuItem value={"D6"}>D6</MenuItem>
-                  <MenuItem value={"D8"}>D8</MenuItem>
-                  <MenuItem value={"D10"}>D10</MenuItem>
-                  <MenuItem value={"D12"}>D12</MenuItem>
-                  <MenuItem value={"D20"}>D20</MenuItem>
-                  <MenuItem value={"D100"}>D100</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleDiceDialogClose} color="inherit">
-              Cancelar
-            </Button>
-            <Button autoFocus color="inherit" variant="outlined">
-              Rolar
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      <DiceRoll />
       <Button
         variant="outlined"
         onClick={handleLifeDialogOpen}
         color="error"
         sx={{ mb: 2 }}
       >
-        100 / 100
+        {details.curr_life} / {details.max_life}
       </Button>
       <Dialog
         open={lifeDialogOpen}
@@ -187,12 +101,16 @@ export const Vitals = () => {
             <TextField
               id="currentLifeInput"
               label="Vida Atual"
+              value={currLife}
+              onChange={(e) => setCurrLife(e.target.value)}
               color="error"
               sx={{ my: 3, width: "100%" }}
             />
             <TextField
               id="maxLifeInput"
               label="Vida Máxima"
+              value={maxLife}
+              onChange={(e) => setMaxLife(e.target.value)}
               color="error"
               sx={{ my: 3, width: "100%" }}
             />
@@ -202,7 +120,12 @@ export const Vitals = () => {
           <Button onClick={handleLifeDialogClose} color="error">
             Cancelar
           </Button>
-          <Button autoFocus color="error" variant="outlined">
+          <Button
+            onClick={handleChangeLife}
+            autoFocus
+            color="error"
+            variant="outlined"
+          >
             Salvar
           </Button>
         </DialogActions>
@@ -214,7 +137,7 @@ export const Vitals = () => {
         color="primary"
         sx={{ mb: 2 }}
       >
-        100 / 100
+        {details.curr_san} / {details.max_san}
       </Button>
       <Dialog
         open={sanityDialogOpen}
@@ -239,12 +162,16 @@ export const Vitals = () => {
             <TextField
               id="currentSanityInput"
               label="Sanidade Atual"
+              value={currSan}
+              onChange={(e) => setCurrSan(e.target.value)}
               color="primary"
               sx={{ my: 3, width: "100%" }}
             />
             <TextField
               id="maxSanityInput"
               label="Sanidade Máxima"
+              value={maxSan}
+              onChange={(e) => setMaxSan(e.target.value)}
               color="primary"
               sx={{ my: 3, width: "100%" }}
             />
@@ -254,7 +181,12 @@ export const Vitals = () => {
           <Button onClick={handleSanityDialogClose} color="primary">
             Cancelar
           </Button>
-          <Button autoFocus color="primary" variant="outlined">
+          <Button
+            onClick={handleChangeSanity}
+            autoFocus
+            color="primary"
+            variant="outlined"
+          >
             Salvar
           </Button>
         </DialogActions>
@@ -266,7 +198,7 @@ export const Vitals = () => {
         color="warning"
         sx={{ mb: 2 }}
       >
-        100 / 100
+        {details.curr_eff} / {details.max_eff}
       </Button>
       <Dialog
         open={effortDialogOpen}
@@ -290,12 +222,16 @@ export const Vitals = () => {
             <TextField
               id="currentEffortInput"
               label="P.E Atual"
+              value={currEff}
+              onChange={(e) => setCurrEff(e.target.value)}
               color="warning"
               sx={{ my: 3, width: "100%" }}
             />
             <TextField
               id="maxEffortInput"
               label="P.E Máxima"
+              value={maxEff}
+              onChange={(e) => setMaxEff(e.target.value)}
               color="warning"
               sx={{ my: 3, width: "100%" }}
             />
@@ -305,7 +241,12 @@ export const Vitals = () => {
           <Button onClick={handleEffortDialogClose} color="warning">
             Cancelar
           </Button>
-          <Button autoFocus color="warning" variant="outlined">
+          <Button
+            onClick={handleChangeEffort}
+            autoFocus
+            color="warning"
+            variant="outlined"
+          >
             Salvar
           </Button>
         </DialogActions>
