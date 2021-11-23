@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
       setToken(storedToken);
       api.defaults.headers.Authorization = `Bearer ${storedToken}`;
     }
-  }, []);
+  }, [token]);
 
   const Login = async (username, password) => {
     const response = await api.post("/login", {
