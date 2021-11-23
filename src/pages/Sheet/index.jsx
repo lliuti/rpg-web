@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
-import CharacterDetails from "../../components/characterDetails/index";
-import Attributes from "../../components/attributes/index";
-import Skills from "../../components/skills/index";
-import Vitals from "../../components/vitals/index";
-import Defenses from "../../components/defenses/index";
-import Inventory from "../../components/inventory/index";
+import { CharacterDetails } from "../../components/characterDetails/index";
+import { Attributes } from "../../components/attributes/index";
+import { Skills } from "../../components/skills/index";
+import { Vitals } from "../../components/vitals/index";
+import { Defenses } from "../../components/defenses/index";
+import { Inventory } from "../../components/inventory/index";
 
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Container from "@mui/material/Container";
 
-const Sheet = () => {
+export const Sheet = () => {
   const navigate = useNavigate();
 
   return (
@@ -45,5 +45,3 @@ const Sheet = () => {
     </Container>
   );
 };
-
-export default Sheet;
