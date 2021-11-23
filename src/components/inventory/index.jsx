@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
 
-const Inventory = () => {
+export const Inventory = () => {
   return (
     <div className={styles.inventoryContainer}>
       <h1>Inventário 🎒</h1>
@@ -12,5 +12,3 @@ const Inventory = () => {
     </div>
   );
 };
-
-export default Inventory;
