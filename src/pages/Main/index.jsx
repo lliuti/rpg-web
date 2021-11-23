@@ -1,15 +1,29 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 
 const Main = () => {
   const characterImage = "https://pbs.twimg.com/media/EYFiJSNWAAEFSi9.png";
+  const navigate = useNavigate();
 
   return (
     <Container>
       <div className={styles.charactersContainer}>
-        <h1>Meus personagens</h1>
+        <div className={styles.topRow}>
+          <h1>Meus personagens</h1>
+          <Button
+            variant="outlined"
+            onClick={() => navigate("/create-character")}
+          >
+            Criar Personagem
+          </Button>
+        </div>
         <div className={styles.charactersGrid}>
-          <div className={styles.characterBox}>
+          <div
+            onClick={() => navigate("/characters/xpto")}
+            className={styles.characterBox}
+          >
             <div className={styles.row}>
               <span>nome:</span>
               <h1>Elizabeth Webber</h1>
