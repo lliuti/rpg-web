@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 
 import TextField from "@mui/material/TextField";
 
-const Attributes = () => {
+export const Attributes = () => {
   return (
     <div className={styles.attributesContainer}>
       <h1>Atributos 💪🏻</h1>
@@ -55,5 +55,3 @@ const Attributes = () => {
     </div>
   );
 };
-
-export default Attributes;
