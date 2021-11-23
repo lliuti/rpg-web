@@ -26,7 +26,7 @@ export const Sheet = () => {
   const fetchCharacter = async () => {
     const response = await api.get(`/characters/${character_id}`);
     setCharacterSheet(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   };
 
   return (
@@ -98,6 +98,8 @@ export const Sheet = () => {
                 curr_san: characterSheet?.curr_san,
                 max_eff: characterSheet?.max_eff,
                 curr_eff: characterSheet?.curr_eff,
+                picture: characterSheet?.picture_url,
+                character_id: character_id,
               }}
             />
             <Defenses
