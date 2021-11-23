@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import styles from "./styles.module.scss";
 
-const Skills = () => {
+export const Skills = () => {
   return (
     <div className={styles.skillsContainer}>
       <h1>Perícias 🗡</h1>
@@ -206,5 +206,3 @@ const Skills = () => {
     </div>
   );
 };
-
-export default Skills;
