@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
 
-export const Login = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   return (
@@ -24,11 +24,13 @@ export const Login = () => {
 
         <div className={styles.gridTwoItems}>
           <Button variant="text" onClick={() => navigate("/register")}>
-            CREATE ACCOUNT
+            CRIAR CONTA
           </Button>
-          <Button variant="contained">LOGIN</Button>
+          <Button variant="contained">ENTRAR</Button>
         </div>
       </div>
     </Container>
   );
 };
+
+export default Login;
