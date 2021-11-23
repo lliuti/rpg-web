@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
 
-const Defenses = () => {
+export const Defenses = () => {
   return (
     <div className={styles.defensesContainer}>
       <h1>Defesas / Resistencias 🛡</h1>
@@ -87,5 +87,3 @@ const Defenses = () => {
     </div>
   );
 };
-
-export default Defenses;
