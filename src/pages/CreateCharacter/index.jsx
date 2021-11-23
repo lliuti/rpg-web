@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 import styles from "./styles.module.scss";
 
 import Container from "@mui/material/Container";
@@ -13,6 +14,9 @@ import ArrowBack from "@mui/icons-material/ArrowBack";
 
 export const CreateCharacter = () => {
   const [archetype, setArchetype] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(0);
+  const [occupation, setOccupation] = useState("");
 
   const navigate = useNavigate();
 
@@ -20,13 +24,36 @@ export const CreateCharacter = () => {
     setArchetype(event.target.value);
   };
 
+  const handleCreateCharacter = async () => {
+    const response = await api.post("/characters", {
+      name,
+      occupation,
+      age: parseInt(age),
+      archetype,
+    });
+
+    navigate("/");
+  };
+
   return (
     <Container>
       <div className={styles.formBox}>
         <h1>Criar Personagem</h1>
         <div className={styles.gridTwoItems}>
-          <TextField id="nameInput" label="Nome" variant="outlined" />
-          <TextField id="occupationInput" label="Ocupacao" variant="outlined" />
+          <TextField
+            id="nameInput"
+            label="Nome"
+            variant="outlined"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            id="occupationInput"
+            label="Ocupacao"
+            variant="outlined"
+            value={occupation}
+            onChange={(e) => setOccupation(e.target.value)}
+          />
         </div>
         <div className={styles.gridTwoItems}>
           <TextField
@@ -34,6 +61,8 @@ export const CreateCharacter = () => {
             label="Idade"
             variant="outlined"
             type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           />
           <FormControl>
             <InputLabel id="demo-simple-select-label">Arquétipo</InputLabel>
@@ -58,7 +87,9 @@ export const CreateCharacter = () => {
           >
             VOLTAR
           </Button>
-          <Button variant="contained">CRIAR</Button>
+          <Button onClick={handleCreateCharacter} variant="contained">
+            CRIAR
+          </Button>
         </div>
       </div>
     </Container>
