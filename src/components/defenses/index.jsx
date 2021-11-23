@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
 
-export const Defenses = () => {
+export const Defenses = ({ details }) => {
   return (
     <div className={styles.defensesContainer}>
       <h1>Defesas / Resistencias 🛡</h1>
@@ -9,9 +9,11 @@ export const Defenses = () => {
         <TextField
           id="defInput"
           label="Defesa"
-          defaultValue="Defesa"
+          defaultValue={details.defesa}
+          value={details.defesa}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
@@ -20,17 +22,21 @@ export const Defenses = () => {
         <TextField
           id="physicalResInput"
           label="Fisico"
-          defaultValue="Fisico"
+          defaultValue={details.fisico}
+          value={details.fisico}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
         <TextField
           id="ballisticResInput"
           label="Balistico"
-          defaultValue="Balistico"
+          defaultValue={details.balistico}
+          value={details.balistico}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
@@ -39,18 +45,22 @@ export const Defenses = () => {
         <TextField
           id="bloodResInput"
           label="Sangue"
-          defaultValue="Sangue"
+          defaultValue={details.sangue}
+          value={details.sangue}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
 
         <TextField
           id="knowledgeResInput"
           label="Conhecimento"
-          defaultValue="Conhecimento"
+          defaultValue={details.conhecimento}
+          value={details.conhecimento}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
@@ -59,17 +69,21 @@ export const Defenses = () => {
         <TextField
           id="deathResInput"
           label="Morte"
-          defaultValue="Morte"
+          defaultValue={details.morte}
+          value={details.morte}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
         <TextField
           id="energyResInput"
           label="Energia"
-          defaultValue="Energia"
+          defaultValue={details.energia}
+          value={details.energia}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
@@ -78,9 +92,11 @@ export const Defenses = () => {
         <TextField
           id="fearResInput"
           label="Medo"
-          defaultValue="Medo"
+          defaultValue={details.medo}
+          value={details.medo}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
