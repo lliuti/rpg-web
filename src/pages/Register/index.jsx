@@ -4,21 +4,21 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
 
-export const Register = () => {
+const Register = () => {
   const navigate = useNavigate();
   return (
     <Container>
       <div className={styles.formBox}>
-        <h1>Register</h1>
+        <h1>Registrar</h1>
         <div className={styles.gridTwoItems}>
           <TextField id="nameInput" label="Name" variant="outlined" />
-          <TextField id="usernameInput" label="Username" variant="outlined" />
+          <TextField id="usernameInput" label="Usuario" variant="outlined" />
         </div>
         <div className={styles.gridTwoItems}>
           <TextField id="emailInput" label="Email" variant="outlined" />
           <TextField
             id="passwordInput"
-            label="Password"
+            label="Senha"
             variant="outlined"
             type="password"
           />
@@ -27,9 +27,11 @@ export const Register = () => {
           <Button variant="text" onClick={() => navigate("/login")}>
             LOGIN
           </Button>
-          <Button variant="contained">CREATE</Button>
+          <Button variant="contained">REGISTRAR</Button>
         </div>
       </div>
     </Container>
   );
 };
+
+export default Register;
