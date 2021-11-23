@@ -67,7 +67,7 @@ const Vitals = () => {
 
   return (
     <div className={styles.vitalsContainer}>
-      <h1>Detalhes Vitais</h1>
+      <h1>Detalhes Vitais ❤</h1>
       <div className={styles.imageDiceRollContainer}>
         <img src={characterImage} alt="Character picture" />
         <Button
