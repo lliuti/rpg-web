@@ -1,0 +1,35 @@
+import { useNavigate } from "react-router-dom";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import styles from "./styles.module.scss";
+
+export const Register = () => {
+  const navigate = useNavigate();
+  return (
+    <Container>
+      <div className={styles.formBox}>
+        <h1>Register</h1>
+        <div className={styles.gridTwoItems}>
+          <TextField id="nameInput" label="Name" variant="outlined" />
+          <TextField id="usernameInput" label="Username" variant="outlined" />
+        </div>
+        <div className={styles.gridTwoItems}>
+          <TextField id="emailInput" label="Email" variant="outlined" />
+          <TextField
+            id="passwordInput"
+            label="Password"
+            variant="outlined"
+            type="password"
+          />
+        </div>
+        <div className={styles.gridTwoItems}>
+          <Button variant="text" onClick={() => navigate("/login")}>
+            LOGIN
+          </Button>
+          <Button variant="contained">CREATE</Button>
+        </div>
+      </div>
+    </Container>
+  );
+};

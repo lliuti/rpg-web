@@ -1,0 +1,23 @@
+/*
+
+COLORS
+#1A1A1D black
+#4E4E50 gray
+#6F2232 dark red
+#950740 purple
+#C3073F pink
+
+*/
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%;
+  background-color: #1a1a1d;
+  color: #f2f2f2;
+}
