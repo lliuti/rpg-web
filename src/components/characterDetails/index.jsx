@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 
 import TextField from "@mui/material/TextField";
 
-export const CharacterDetails = () => {
+export const CharacterDetails = ({ details }) => {
   return (
     <div className={styles.characterDetailsContainer}>
       <h1>Informacoes Pessoais 📝</h1>
@@ -10,18 +10,22 @@ export const CharacterDetails = () => {
         <TextField
           id="nameInput"
           label="Nome"
-          defaultValue="Nome"
+          defaultValue={details.name}
+          value={details.name}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
 
         <TextField
           id="ageInput"
           label="Idade"
-          defaultValue="0"
+          defaultValue={details.age}
+          value={details.age}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
@@ -29,18 +33,22 @@ export const CharacterDetails = () => {
         <TextField
           id="occupationInput"
           label="Ocupacao"
-          defaultValue="Ocupacao"
+          defaultValue={details.occupation}
+          value={details.occupation}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
 
         <TextField
           id="archetypeInput"
           label="Arquétipo"
-          defaultValue="Arquétipo"
+          defaultValue={details.archetype}
+          value={details.archetype}
           InputProps={{
             readOnly: true,
+            autoFocus: true,
           }}
         />
       </div>
