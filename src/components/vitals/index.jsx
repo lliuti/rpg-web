@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
+import { api } from "../../services/api";
 import { DiceRoll } from "../diceRoll/index";
 
 import Box from "@mui/material/Box";
@@ -62,22 +63,56 @@ export const Vitals = ({ details }) => {
   };
 
   // CHANGE VALUES
+  const handleChangeLife = async () => {
+    const response = await api.put(`/characters/${details.character_id}/life`, {
+      currLife,
+      maxLife,
+    });
 
-  const handleChangeLife = async () => {};
-  const handleChangeSanity = async () => {};
-  const handleChangeEffort = async () => {};
+    setCurrLife(response.data.currLife);
+    setMaxLife(response.data.maxLife);
+    setLifeDialogOpen(false);
+  };
+
+  const handleChangeSanity = async () => {
+    const response = await api.put(
+      `/characters/${details.character_id}/sanity`,
+      {
+        currSan,
+        maxSan,
+      }
+    );
+
+    setCurrSan(response.data.currSan);
+    setMaxSan(response.data.maxSan);
+    setSanityDialogOpen(false);
+  };
+
+  const handleChangeEffort = async () => {
+    const response = await api.put(
+      `/characters/${details.character_id}/effort`,
+      {
+        currEff,
+        maxEff,
+      }
+    );
+
+    setCurrEff(response.data.currEff);
+    setMaxEff(response.data.maxEff);
+    setEffortDialogOpen(false);
+  };
 
   return (
     <div className={styles.vitalsContainer}>
       <h1>Detalhes Vitais ❤</h1>
-      <DiceRoll />
+      <DiceRoll picture={{ picture: details.picture }} />
       <Button
         variant="outlined"
         onClick={handleLifeDialogOpen}
         color="error"
         sx={{ mb: 2 }}
       >
-        {details.curr_life} / {details.max_life}
+        {currLife} / {maxLife}
       </Button>
       <Dialog
         open={lifeDialogOpen}
@@ -117,7 +152,7 @@ export const Vitals = ({ details }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleLifeDialogClose} color="error">
+          <Button onClick={handleLifeDialogClose} color="error" variant="text">
             Cancelar
           </Button>
           <Button
@@ -137,7 +172,7 @@ export const Vitals = ({ details }) => {
         color="primary"
         sx={{ mb: 2 }}
       >
-        {details.curr_san} / {details.max_san}
+        {currSan} / {maxSan}
       </Button>
       <Dialog
         open={sanityDialogOpen}
@@ -178,7 +213,11 @@ export const Vitals = ({ details }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSanityDialogClose} color="primary">
+          <Button
+            onClick={handleSanityDialogClose}
+            color="primary"
+            variant="text"
+          >
             Cancelar
           </Button>
           <Button
@@ -198,7 +237,7 @@ export const Vitals = ({ details }) => {
         color="warning"
         sx={{ mb: 2 }}
       >
-        {details.curr_eff} / {details.max_eff}
+        {currEff} / {maxEff}
       </Button>
       <Dialog
         open={effortDialogOpen}
@@ -238,7 +277,11 @@ export const Vitals = ({ details }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleEffortDialogClose} color="warning">
+          <Button
+            onClick={handleEffortDialogClose}
+            color="warning"
+            variant="text"
+          >
             Cancelar
           </Button>
           <Button
