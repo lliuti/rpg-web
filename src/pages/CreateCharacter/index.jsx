@@ -86,6 +86,7 @@ export const CreateCharacter = () => {
         <div className={styles.gridTwoItems}>
           <Button
             variant="text"
+            color="inherit"
             onClick={() => navigate("/")}
             startIcon={<ArrowBack />}
           >
