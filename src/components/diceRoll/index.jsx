@@ -98,7 +98,7 @@ export const DiceRoll = ({ details }) => {
               <Select
                 labelId="dice-amount-select-label"
                 id="dice-amount-select"
-                value={diceAmount}
+                value={diceAmount || ""}
                 label="Qtde"
                 onChange={handleDiceAmountChange}
               >
@@ -124,7 +124,7 @@ export const DiceRoll = ({ details }) => {
               <Select
                 labelId="dice-face-select-label"
                 id="dice-face-select"
-                value={diceFaceAmount}
+                value={diceFaceAmount || ""}
                 label="Faces"
                 onChange={handleDiceFaceAmountChange}
               >
