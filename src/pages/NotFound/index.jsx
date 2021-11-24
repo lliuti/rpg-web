@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -5,6 +6,10 @@ import Button from "@mui/material/Button";
 
 export const NotFound = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "RPG - Page not Found.";
+  }, []);
 
   return (
     <Container>
