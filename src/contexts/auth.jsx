@@ -6,6 +6,8 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState("");
+  const [player, setPlayer] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -22,8 +24,10 @@ export const AuthProvider = ({ children }) => {
       password,
     });
 
-    setToken(response.data);
-    localStorage.setItem("token", response.data);
+    setToken(response.data.token);
+    setPlayer(response.data.player);
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("player@id", response.data.player.id);
     api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
   };
 
@@ -32,8 +36,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
   };
 
+  const VerifyAdmin = async () => {
+    const id = localStorage.getItem("player@id");
+    const response = await api.get(`/players/${id}/admin`);
+    setAdmin(response.data);
+    return response.data;
+  };
+
   return (
-    <AuthContext.Provider value={{ signed: Boolean(token), Login, Logout }}>
+    <AuthContext.Provider
+      value={{ signed: Boolean(token), admin, Login, Logout, VerifyAdmin }}
+    >
       {children}
     </AuthContext.Provider>
   );
