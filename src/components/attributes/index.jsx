@@ -11,7 +11,7 @@ export const Attributes = ({ details }) => {
           id="strInput"
           label="Forca"
           defaultValue={details.forca}
-          value={details.forca}
+          value={details.forca || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -21,7 +21,7 @@ export const Attributes = ({ details }) => {
           id="intInput"
           label="Intelecto"
           defaultValue={details.intelecto}
-          value={details.intelecto}
+          value={details.intelecto || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -33,7 +33,7 @@ export const Attributes = ({ details }) => {
           id="preInput"
           label="Presenca"
           defaultValue={details.presenca}
-          value={details.presenca}
+          value={details.presenca || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -43,7 +43,7 @@ export const Attributes = ({ details }) => {
           id="dexInput"
           label="Agilidade"
           defaultValue={details.agilidade}
-          value={details.agilidade}
+          value={details.agilidade || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -55,7 +55,7 @@ export const Attributes = ({ details }) => {
           id="vigInput"
           label="Vigor"
           defaultValue={details.vigor}
-          value={details.vigor}
+          value={details.vigor || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
