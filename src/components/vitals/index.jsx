@@ -12,6 +12,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import EmojiEmotions from "@mui/icons-material/EmojiEmotions";
+import Favorite from "@mui/icons-material/Favorite";
+import BatteryCharging50 from "@mui/icons-material/BatteryCharging50";
 
 export const Vitals = ({ details }) => {
   const [lifeDialogOpen, setLifeDialogOpen] = useState(false);
@@ -116,6 +119,7 @@ export const Vitals = ({ details }) => {
         onClick={handleLifeDialogOpen}
         color="error"
         sx={{ mb: 2 }}
+        endIcon={<Favorite />}
       >
         {currLife} / {maxLife}
       </Button>
@@ -175,6 +179,7 @@ export const Vitals = ({ details }) => {
         variant="outlined"
         onClick={handleSanityDialogOpen}
         color="primary"
+        endIcon={<EmojiEmotions />}
         sx={{ mb: 2 }}
       >
         {currSan} / {maxSan}
@@ -240,6 +245,7 @@ export const Vitals = ({ details }) => {
         variant="outlined"
         onClick={handleEffortDialogOpen}
         color="warning"
+        endIcon={<BatteryCharging50 />}
         sx={{ mb: 2 }}
       >
         {currEff} / {maxEff}
