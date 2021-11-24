@@ -16,7 +16,6 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<ProtectedMain />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -30,6 +29,7 @@ export const Router = () => {
         <Route path="/assign-ritual" element={<ProtectedAssignRitual />} />
         <Route path="/create-attack" element={<ProtectedCreateAttack />} />
         <Route path="/assign-attack" element={<ProtectedAssignAttack />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
