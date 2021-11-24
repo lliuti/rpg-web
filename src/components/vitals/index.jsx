@@ -141,7 +141,7 @@ export const Vitals = ({ details }) => {
             <TextField
               id="currentLifeInput"
               label="Vida Atual"
-              value={currLife}
+              value={currLife || ""}
               onChange={(e) => setCurrLife(e.target.value)}
               color="error"
               sx={{ my: 3, width: "100%" }}
@@ -149,7 +149,7 @@ export const Vitals = ({ details }) => {
             <TextField
               id="maxLifeInput"
               label="Vida Máxima"
-              value={maxLife}
+              value={maxLife || ""}
               onChange={(e) => setMaxLife(e.target.value)}
               color="error"
               sx={{ my: 3, width: "100%" }}
@@ -202,7 +202,7 @@ export const Vitals = ({ details }) => {
             <TextField
               id="currentSanityInput"
               label="Sanidade Atual"
-              value={currSan}
+              value={currSan || ""}
               onChange={(e) => setCurrSan(e.target.value)}
               color="primary"
               sx={{ my: 3, width: "100%" }}
@@ -210,7 +210,7 @@ export const Vitals = ({ details }) => {
             <TextField
               id="maxSanityInput"
               label="Sanidade Máxima"
-              value={maxSan}
+              value={maxSan || ""}
               onChange={(e) => setMaxSan(e.target.value)}
               color="primary"
               sx={{ my: 3, width: "100%" }}
@@ -274,7 +274,7 @@ export const Vitals = ({ details }) => {
             <TextField
               id="maxEffortInput"
               label="P.E Máxima"
-              value={maxEff}
+              value={maxEff || ""}
               onChange={(e) => setMaxEff(e.target.value)}
               color="warning"
               sx={{ my: 3, width: "100%" }}
