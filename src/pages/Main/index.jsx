@@ -11,14 +11,14 @@ import { api } from "../../services/api";
 export const Main = () => {
   const [characters, setCharacters] = useState([]);
 
-  useEffect(() => {
-    fetchMyCharacters();
-    document.title = "RPG - PLATFORM";
-  }, []);
-
-  const characterImage = "https://pbs.twimg.com/media/EYFiJSNWAAEFSi9.png";
   const navigate = useNavigate();
   const context = useAuth();
+
+  useEffect(() => {
+    fetchMyCharacters();
+    context.VerifyAdmin();
+    document.title = "RPG - PLATFORM";
+  }, []);
 
   const handleLogout = () => {
     context.Logout();
@@ -38,12 +38,38 @@ export const Main = () => {
         <div className={styles.charactersContainer}>
           <div className={styles.topRow}>
             <h1>Meus personagens</h1>
-            <Button
-              variant="outlined"
-              onClick={() => navigate("/create-character")}
-            >
-              Criar Personagem
-            </Button>
+            <div>
+              {context.admin ? (
+                <Button
+                  variant="outlined"
+                  color="success"
+                  onClick={() => navigate("/dashboard")}
+                  sx={{ ml: 2 }}
+                >
+                  Dashboard
+                </Button>
+              ) : (
+                <></>
+              )}
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => navigate("/create-character")}
+                sx={{ ml: 2 }}
+              >
+                Criar Personagem
+              </Button>
+
+              <Button
+                variant="outlined"
+                color="error"
+                sx={{ ml: 2 }}
+                endIcon={<ExitToApp />}
+                onClick={handleLogout}
+              >
+                Sair
+              </Button>
+            </div>
           </div>
           <div className={styles.charactersGrid}>
             {characters?.map((character) => (
@@ -74,13 +100,6 @@ export const Main = () => {
           </div>
         </div>
       </Container>
-      <Button
-        sx={{ p: 5, position: "fixed", bottom: 20, right: "24px" }}
-        endIcon={<ExitToApp />}
-        onClick={handleLogout}
-      >
-        Sair
-      </Button>
     </>
   );
 };
