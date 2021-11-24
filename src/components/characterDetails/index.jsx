@@ -11,7 +11,7 @@ export const CharacterDetails = ({ details }) => {
           id="nameInput"
           label="Nome"
           defaultValue={details.name}
-          value={details.name}
+          value={details.name || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -22,7 +22,7 @@ export const CharacterDetails = ({ details }) => {
           id="ageInput"
           label="Idade"
           defaultValue={details.age}
-          value={details.age}
+          value={details.age || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -34,7 +34,7 @@ export const CharacterDetails = ({ details }) => {
           id="occupationInput"
           label="Ocupacao"
           defaultValue={details.occupation}
-          value={details.occupation}
+          value={details.occupation || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
@@ -45,7 +45,7 @@ export const CharacterDetails = ({ details }) => {
           id="archetypeInput"
           label="Arquétipo"
           defaultValue={details.archetype}
-          value={details.archetype}
+          value={details.archetype || ""}
           InputProps={{
             readOnly: true,
             autoFocus: true,
