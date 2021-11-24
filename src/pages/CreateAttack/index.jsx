@@ -9,10 +9,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import Container from "@mui/material/Container";
 
 import { api } from "../../services/api";
-
-import Container from "@mui/material/Container";
 
 export const CreateAttack = () => {
   const [name, setName] = useState("");
