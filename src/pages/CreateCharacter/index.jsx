@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
@@ -19,6 +19,10 @@ export const CreateCharacter = () => {
   const [occupation, setOccupation] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "RPG - CREATE CHARACTER";
+  }, []);
 
   const handleArchetypeChange = (event) => {
     setArchetype(event.target.value);
