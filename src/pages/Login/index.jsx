@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/useAuth";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -12,6 +12,10 @@ export const Login = () => {
 
   const navigate = useNavigate();
   const context = useAuth();
+
+  useEffect(() => {
+    document.title = "RPG - LOGIN";
+  }, []);
 
   const handleLogin = () => {
     context.Login(username, password);
