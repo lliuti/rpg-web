@@ -27,6 +27,7 @@ export const Sheet = () => {
     const response = await api.get(`/characters/${character_id}`);
     setCharacterSheet(response.data);
     // console.log(response.data);
+    document.title = `RPG - ${response.data.name}`;
   };
 
   return (
