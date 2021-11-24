@@ -27,6 +27,8 @@ export const DiceRoll = ({ details }) => {
 
   const handleDiceResultDialogClose = () => {
     setDiceResultDialogOpen(false);
+    setDiceAmount("");
+    setDiceFaceAmount("");
   };
 
   const handleDiceDialogOpen = () => {
@@ -35,6 +37,8 @@ export const DiceRoll = ({ details }) => {
 
   const handleDiceDialogClose = () => {
     setDiceDialogOpen(false);
+    setDiceAmount("");
+    setDiceFaceAmount("");
   };
 
   const handleDiceAmountChange = (event) => {
@@ -46,6 +50,13 @@ export const DiceRoll = ({ details }) => {
   };
 
   const handleRollDice = async () => {
+    if (diceAmount === "" || diceFaceAmount === "") {
+      setDiceAmount("");
+      setDiceFaceAmount("");
+      setDiceDialogOpen(false);
+      return;
+    }
+
     const response = await api.post(
       `/characters/${details.character_id}/dice`,
       {
@@ -58,6 +69,7 @@ export const DiceRoll = ({ details }) => {
     setDiceRolls(response.data.diceRolls);
     setDiceDialogOpen(false);
     setDiceResultDialogOpen(true);
+    return;
   };
 
   return (
@@ -112,11 +124,6 @@ export const DiceRoll = ({ details }) => {
                 <MenuItem value={"8"}>8</MenuItem>
                 <MenuItem value={"9"}>9</MenuItem>
                 <MenuItem value={"10"}>10</MenuItem>
-                <MenuItem value={"11"}>11</MenuItem>
-                <MenuItem value={"12"}>12</MenuItem>
-                <MenuItem value={"13"}>13</MenuItem>
-                <MenuItem value={"14"}>14</MenuItem>
-                <MenuItem value={"15"}>15</MenuItem>
               </Select>
             </FormControl>
             <FormControl>
