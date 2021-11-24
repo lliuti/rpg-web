@@ -8,6 +8,7 @@ import { api } from "../../services/api";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import Add from "@mui/icons-material/Add";
 
 const socket = io("http://localhost:3333");
 
@@ -29,7 +30,6 @@ export const Dashboard = () => {
 
   const fetchCharacters = async () => {
     const response = await api.get("/dashboard/characters");
-    console.log(response.data);
     setCharacterList(response.data);
   };
 
@@ -37,15 +37,36 @@ export const Dashboard = () => {
     <Container>
       <div className={styles.dashboardContainer}>
         <div className={styles.topContainer}>
-          <Button
-            variant="outlined"
-            onClick={() => navigate("/")}
-            color="inherit"
-            startIcon={<ArrowBack />}
-          >
-            VOLTAR
-          </Button>
-          <h1>Dashboard</h1>
+          <div className={styles.leftArea}>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/")}
+              color="inherit"
+              startIcon={<ArrowBack />}
+            >
+              VOLTAR
+            </Button>
+            <h1>Dashboard</h1>
+          </div>
+          <div>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/create-ritual")}
+              color="primary"
+              startIcon={<Add />}
+            >
+              CRIAR RITUAL
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/create-attack")}
+              color="success"
+              startIcon={<Add />}
+              sx={{ ml: 1 }}
+            >
+              CRIAR ATAQUE
+            </Button>
+          </div>
         </div>
         <div className={styles.grid}>
           {characterList?.map((character) => (
