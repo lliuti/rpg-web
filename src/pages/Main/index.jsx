@@ -13,6 +13,7 @@ export const Main = () => {
 
   useEffect(() => {
     fetchMyCharacters();
+    document.title = "RPG - PLATFORM";
   }, []);
 
   const characterImage = "https://pbs.twimg.com/media/EYFiJSNWAAEFSi9.png";
