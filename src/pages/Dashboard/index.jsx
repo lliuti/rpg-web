@@ -59,12 +59,28 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
+              onClick={() => navigate("/assign-ritual")}
+              color="primary"
+              sx={{ ml: 1 }}
+            >
+              ATRIBUIR RITUAL
+            </Button>
+            <Button
+              variant="outlined"
               onClick={() => navigate("/create-attack")}
               color="success"
               startIcon={<Add />}
               sx={{ ml: 1 }}
             >
               CRIAR ATAQUE
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/assign-attack")}
+              color="success"
+              sx={{ ml: 1 }}
+            >
+              ATRIBUIR ATAQUE
             </Button>
           </div>
         </div>
