@@ -6,6 +6,9 @@ import styles from "./styles.module.scss";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ExitToApp from "@mui/icons-material/ExitToApp";
+import Add from "@mui/icons-material/Add";
+import Dashboard from "@mui/icons-material/Dashboard";
+
 import { api } from "../../services/api";
 
 export const Main = () => {
@@ -44,7 +47,8 @@ export const Main = () => {
                   variant="outlined"
                   color="success"
                   onClick={() => navigate("/dashboard")}
-                  sx={{ ml: 2 }}
+                  sx={{ ml: 1 }}
+                  startIcon={<Dashboard />}
                 >
                   Dashboard
                 </Button>
@@ -55,7 +59,8 @@ export const Main = () => {
                 variant="outlined"
                 color="primary"
                 onClick={() => navigate("/create-character")}
-                sx={{ ml: 2 }}
+                startIcon={<Add />}
+                sx={{ ml: 1 }}
               >
                 Criar Personagem
               </Button>
@@ -63,7 +68,7 @@ export const Main = () => {
               <Button
                 variant="outlined"
                 color="error"
-                sx={{ ml: 2 }}
+                sx={{ ml: 1 }}
                 endIcon={<ExitToApp />}
                 onClick={handleLogout}
               >
