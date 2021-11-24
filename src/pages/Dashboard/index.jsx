@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { io } from "socket.io-client";
 import styles from "./styles.module.scss";
 import { useAuth } from "../../contexts/useAuth";
 import { api } from "../../services/api";
@@ -8,8 +9,11 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 
+const socket = io("http://localhost:3333");
+
 export const Dashboard = () => {
   const [characterList, setCharacterList] = useState([]);
+  const [data, setData] = useState();
 
   const context = useAuth();
   const navigate = useNavigate();
@@ -17,7 +21,11 @@ export const Dashboard = () => {
   useEffect(() => {
     document.title = "RPG - Dashboard";
     fetchCharacters();
-  }, []);
+  }, [data]);
+
+  socket.on("vitalsChanged", (data) => {
+    setData(data);
+  });
 
   const fetchCharacters = async () => {
     const response = await api.get("/dashboard/characters");
