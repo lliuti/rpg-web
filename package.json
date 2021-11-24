@@ -1,10 +1,13 @@
 {
+  "homepage": "http://lliuti.github.io/rpg-web",
   "name": "rpg-web",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.0",
+    "gh-pages": "^3.2.3",
     "vite": "^2.6.4"
   }
 }
