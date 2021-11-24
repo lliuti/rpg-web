@@ -7,6 +7,8 @@ import { CreateCharacter } from "./pages/CreateCharacter/index";
 import { Sheet } from "./pages/Sheet/index";
 import { NotFound } from "./pages/NotFound/index";
 import { Dashboard } from "./pages/Dashboard/index";
+import { CreateRitual } from "./pages/CreateRitual/index";
+import { CreateAttack } from "./pages/CreateAttack/index";
 
 export const Router = () => {
   return (
@@ -22,6 +24,8 @@ export const Router = () => {
         />
         <Route path="/characters/:character_id" element={<ProtectedSheet />} />
         <Route path="/dashboard" element={<ProtectedDashboard />} />
+        <Route path="/create-ritual" element={<ProtectedCreateRitual />} />
+        <Route path="/create-attack" element={<ProtectedCreateAttack />} />
       </Routes>
     </BrowserRouter>
   );
@@ -50,4 +54,18 @@ const ProtectedDashboard = () => {
   context.VerifyAdmin();
 
   return context.admin ? <Dashboard /> : <Login />;
+};
+
+const ProtectedCreateRitual = () => {
+  const context = useAuth();
+  context.VerifyAdmin();
+
+  return context.admin ? <CreateRitual /> : <Login />;
+};
+
+const ProtectedCreateAttack = () => {
+  const context = useAuth();
+  context.VerifyAdmin();
+
+  return context.admin ? <CreateAttack /> : <Login />;
 };
