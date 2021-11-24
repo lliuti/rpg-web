@@ -9,6 +9,7 @@ import { NotFound } from "./pages/NotFound/index";
 import { Dashboard } from "./pages/Dashboard/index";
 import { CreateRitual } from "./pages/CreateRitual/index";
 import { CreateAttack } from "./pages/CreateAttack/index";
+import { AssignAttack } from "./pages/AssignAttack/index";
 
 export const Router = () => {
   return (
@@ -26,6 +27,7 @@ export const Router = () => {
         <Route path="/dashboard" element={<ProtectedDashboard />} />
         <Route path="/create-ritual" element={<ProtectedCreateRitual />} />
         <Route path="/create-attack" element={<ProtectedCreateAttack />} />
+        <Route path="/assign-attack" element={<ProtectedAssignAttack />} />
       </Routes>
     </BrowserRouter>
   );
@@ -68,4 +70,11 @@ const ProtectedCreateAttack = () => {
   context.VerifyAdmin();
 
   return context.admin ? <CreateAttack /> : <Login />;
+};
+
+const ProtectedAssignAttack = () => {
+  const context = useAuth();
+  context.VerifyAdmin();
+
+  return context.admin ? <AssignAttack /> : <Login />;
 };
