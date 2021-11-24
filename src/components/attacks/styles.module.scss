@@ -4,7 +4,8 @@
 
   .gridTitles {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    // grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: 1fr 0.6fr 80px 90px 1fr 0.6fr 65px 100px 60px 1fr;
     margin-bottom: 5px;
     grid-gap: 5px;
     padding: 5px 0px;
@@ -17,7 +18,8 @@
   .gridAttacks {
     .gridAttack {
       display: grid;
-      grid-template-columns: repeat(10, 1fr);
+      // grid-template-columns: repeat(10, 1fr);
+      grid-template-columns: 1fr 0.6fr 80px 90px 1fr 0.6fr 65px 100px 60px 1fr;
       grid-gap: 5px;
       transition: 300ms all;
       padding: 10px 0px;
