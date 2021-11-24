@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/useAuth";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -15,6 +15,10 @@ export const Register = () => {
 
   const navigate = useNavigate();
   const context = useAuth();
+
+  useEffect(() => {
+    document.title = "RPG - CREATE ACCOUNT";
+  }, []);
 
   const handleCreateAccount = async () => {
     if (name == "" && username == "" && email == "" && password == "") {
