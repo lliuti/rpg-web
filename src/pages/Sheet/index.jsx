@@ -134,6 +134,7 @@ export const Sheet = () => {
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
+            sx={{ mb: 5 }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -148,12 +149,13 @@ export const Sheet = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Attacks />
+              <Attacks details={character_id} />
             </AccordionDetails>
           </Accordion>
           <Accordion
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
+            sx={{ mt: 5 }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
