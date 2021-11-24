@@ -26,7 +26,6 @@ export const Sheet = () => {
   const fetchCharacter = async () => {
     const response = await api.get(`/characters/${character_id}`);
     setCharacterSheet(response.data);
-    // console.log(response.data);
     document.title = `RPG - ${response.data.name}`;
   };
 
