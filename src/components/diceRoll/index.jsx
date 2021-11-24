@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import { api } from "../../services/api";
+
 import styles from "./styles.module.scss";
 
 import Button from "@mui/material/Button";
@@ -14,10 +17,17 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export const DiceRoll = ({ picture }) => {
+export const DiceRoll = ({ details }) => {
   const [diceDialogOpen, setDiceDialogOpen] = useState(false);
   const [diceAmount, setDiceAmount] = useState("");
   const [diceFaceAmount, setDiceFaceAmount] = useState("");
+  const [diceResultDialogOpen, setDiceResultDialogOpen] = useState(false);
+  const [diceRollResult, setDiceRollResult] = useState(0);
+  const [diceRolls, setDiceRolls] = useState([]);
+
+  const handleDiceResultDialogClose = () => {
+    setDiceResultDialogOpen(false);
+  };
 
   const handleDiceDialogOpen = () => {
     setDiceDialogOpen(true);
@@ -35,9 +45,24 @@ export const DiceRoll = ({ picture }) => {
     setDiceFaceAmount(event.target.value);
   };
 
+  const handleRollDice = async () => {
+    const response = await api.post(
+      `/characters/${details.character_id}/dice`,
+      {
+        diceAmount,
+        diceFaceAmount,
+      }
+    );
+
+    setDiceRollResult(response.data.diceResult);
+    setDiceRolls(response.data.diceRolls);
+    setDiceDialogOpen(false);
+    setDiceResultDialogOpen(true);
+  };
+
   return (
     <div className={styles.imageDiceRollContainer}>
-      <img src={picture.picture} alt="Character picture" />
+      <img src={details.picture} alt="Character picture" />
       <Button
         variant="outlined"
         onClick={handleDiceDialogOpen}
@@ -119,8 +144,45 @@ export const DiceRoll = ({ picture }) => {
           <Button onClick={handleDiceDialogClose} color="inherit">
             Cancelar
           </Button>
-          <Button autoFocus color="inherit" variant="outlined">
+          <Button
+            onClick={handleRollDice}
+            autoFocus
+            color="inherit"
+            variant="outlined"
+          >
             Rolar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={diceResultDialogOpen}
+        onClose={handleDiceResultDialogClose}
+        aria-labelledby="diceResultDialogTitle"
+        aria-describedby="diceResultDialogDescription"
+      >
+        <DialogTitle id="diceResultDialogTitle">
+          {"Resultado dados"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            id="diceResultDialogDescription"
+            sx={{ display: "flex", flexDirection: "column" }}
+          >
+            Resultado da rolagem de dados. <br />
+            &nbsp; <br />
+            Rolagens: {diceRolls.map((roll) => `${roll} `)} <br />
+            Soma rolagens: {diceRollResult}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleDiceResultDialogClose}
+            autoFocus
+            color="inherit"
+            variant="outlined"
+          >
+            Fechar
           </Button>
         </DialogActions>
       </Dialog>
