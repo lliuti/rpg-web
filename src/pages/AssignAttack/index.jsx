@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
@@ -17,14 +17,46 @@ export const AssignAttack = () => {
   const [character, setCharacter] = useState("");
   const [attack, setAttack] = useState("");
 
+  const [assignableAttacks, setAssignableAttacks] = useState([]);
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    fetchCharacters();
+  }, []);
+
+  const fetchCharacters = async () => {
+    const response = await api.get("/characters");
+    setCharacters(response.data);
+  };
+
   const handleCharacterChange = (e) => {
     setCharacter(e.target.value);
+    setAttack("");
+    fetchAssignableAttacks(e.target.value);
   };
+
+  const fetchAssignableAttacks = async (id) => {
+    const response = await api.get(`/characters/${id}/attacks/assignable`);
+    setAssignableAttacks(response.data);
+  };
+
   const handleAttackChange = (e) => {
     setAttack(e.target.value);
   };
 
-  const handleAssign = async () => {};
+  const handleAssign = async () => {
+    if (character == "" || attack == "") {
+      return;
+    }
+
+    const response = await api.post(
+      `/characters/${character}/attacks/${attack}`
+    );
+
+    setCharacter("");
+    setAttack("");
+    fetchAssignableAttacks();
+  };
 
   const navigate = useNavigate();
 
@@ -54,8 +86,11 @@ export const AssignAttack = () => {
                 label="Personagem"
                 onChange={handleCharacterChange}
               >
-                <MenuItem value={"Dante"}>Dante</MenuItem>
-                <MenuItem value={"Masda"}>Masda</MenuItem>
+                {characters?.map((character) => (
+                  <MenuItem key={character.id} value={`${character.id}`}>
+                    {character.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
             <FormControl>
@@ -67,8 +102,11 @@ export const AssignAttack = () => {
                 label="Ataque"
                 onChange={handleAttackChange}
               >
-                <MenuItem value={"Sniper"}>Sniper</MenuItem>
-                <MenuItem value={"Revolver"}>Revolver</MenuItem>
+                {assignableAttacks?.map((attack) => (
+                  <MenuItem key={attack.id} value={`${attack.id}`}>
+                    {attack.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
