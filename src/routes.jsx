@@ -10,6 +10,7 @@ import { Dashboard } from "./pages/Dashboard/index";
 import { CreateRitual } from "./pages/CreateRitual/index";
 import { CreateAttack } from "./pages/CreateAttack/index";
 import { AssignAttack } from "./pages/AssignAttack/index";
+import { AssignRitual } from "./pages/AssignRitual/index";
 
 export const Router = () => {
   return (
@@ -26,6 +27,7 @@ export const Router = () => {
         <Route path="/characters/:character_id" element={<ProtectedSheet />} />
         <Route path="/dashboard" element={<ProtectedDashboard />} />
         <Route path="/create-ritual" element={<ProtectedCreateRitual />} />
+        <Route path="/assign-ritual" element={<ProtectedAssignRitual />} />
         <Route path="/create-attack" element={<ProtectedCreateAttack />} />
         <Route path="/assign-attack" element={<ProtectedAssignAttack />} />
       </Routes>
@@ -77,4 +79,11 @@ const ProtectedAssignAttack = () => {
   context.VerifyAdmin();
 
   return context.admin ? <AssignAttack /> : <Login />;
+};
+
+const ProtectedAssignRitual = () => {
+  const context = useAuth();
+  context.VerifyAdmin();
+
+  return context.admin ? <AssignRitual /> : <Login />;
 };
