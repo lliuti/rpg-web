@@ -12,7 +12,6 @@ export const Attacks = ({ details }) => {
   const fetchAttacks = async () => {
     const response = await api.get(`/characters/${details}/attacks`);
     setAttacks(response.data);
-    console.log(response.data);
   };
 
   return (
