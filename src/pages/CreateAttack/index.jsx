@@ -46,8 +46,6 @@ export const CreateAttack = () => {
       weight,
     });
 
-    console.log(response.data);
-
     setName("");
     setType("");
     setSkill("");
