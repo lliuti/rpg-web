@@ -10,6 +10,7 @@ import { Vitals } from "../../components/vitals/index";
 import { Defenses } from "../../components/defenses/index";
 import { Inventory } from "../../components/inventory/index";
 import { Attacks } from "../../components/attacks/index";
+import { Rituals } from "../../components/rituals/index";
 
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
@@ -170,11 +171,7 @@ export const Sheet = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Donec placerat, lectus sed mattis semper, neque lectus feugiat
-                lectus, varius pulvinar diam eros in elit. Pellentesque
-                convallis laoreet laoreet.
-              </Typography>
+              <Rituals details={character_id} />
             </AccordionDetails>
           </Accordion>
         </div>
