@@ -1,0 +1,35 @@
+.attacks {
+  display: flex;
+  flex-direction: column;
+
+  .gridTitles {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    margin-bottom: 5px;
+    grid-gap: 5px;
+    padding: 5px 0px;
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
+
+  .gridAttacks {
+    .gridAttack {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-gap: 5px;
+      transition: 300ms all;
+      padding: 10px 0px;
+
+      &:hover {
+        background-color: #151515;
+        cursor: pointer;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
