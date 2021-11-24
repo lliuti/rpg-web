@@ -6,6 +6,7 @@ import { Main } from "./pages/Main/index";
 import { CreateCharacter } from "./pages/CreateCharacter/index";
 import { Sheet } from "./pages/Sheet/index";
 import { NotFound } from "./pages/NotFound/index";
+import { Dashboard } from "./pages/Dashboard/index";
 
 export const Router = () => {
   return (
@@ -20,6 +21,7 @@ export const Router = () => {
           element={<ProtectedCreateCharacter />}
         />
         <Route path="/characters/:character_id" element={<ProtectedSheet />} />
+        <Route path="/dashboard" element={<ProtectedDashboard />} />
       </Routes>
     </BrowserRouter>
   );
@@ -41,4 +43,11 @@ const ProtectedSheet = () => {
   const context = useAuth();
 
   return context.signed ? <Sheet /> : <Login />;
+};
+
+const ProtectedDashboard = () => {
+  const context = useAuth();
+  context.VerifyAdmin();
+
+  return context.admin ? <Dashboard /> : <Login />;
 };
