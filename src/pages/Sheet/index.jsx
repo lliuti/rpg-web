@@ -127,7 +127,7 @@ export const Sheet = () => {
                 energia: characterSheet?.energia_res,
               }}
             />
-            <Inventory />
+            {/* <Inventory /> */}
           </div>
         </div>
 
