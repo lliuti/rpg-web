@@ -105,7 +105,12 @@ export const Vitals = ({ details }) => {
   return (
     <div className={styles.vitalsContainer}>
       <h1>Detalhes Vitais ❤</h1>
-      <DiceRoll picture={{ picture: details.picture }} />
+      <DiceRoll
+        details={{
+          picture: details.picture,
+          character_id: details.character_id,
+        }}
+      />
       <Button
         variant="outlined"
         onClick={handleLifeDialogOpen}
