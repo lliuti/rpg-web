@@ -92,7 +92,7 @@ export const CreateCharacter = () => {
           >
             VOLTAR
           </Button>
-          <Button onClick={handleCreateCharacter} variant="contained">
+          <Button onClick={handleCreateCharacter} variant="outlined">
             CRIAR
           </Button>
         </div>
