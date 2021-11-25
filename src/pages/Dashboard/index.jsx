@@ -4,30 +4,69 @@ import { io } from "socket.io-client";
 import styles from "./styles.module.scss";
 import { useAuth } from "../../contexts/useAuth";
 import { api } from "../../services/api";
+import { DashboardLogs } from "../../components/dashboardLogs/index";
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Add from "@mui/icons-material/Add";
 
+import { styled, useTheme } from "@mui/material/styles";
+import Drawer from "@mui/material/Drawer";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+
 const socket = io("https://rpg-platform.herokuapp.com/");
 // const socket = io("http://localhost:3333");
+
+const drawerWidth = 320;
+// const drawerHeight = 300;
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
 
 export const Dashboard = () => {
   const [characterList, setCharacterList] = useState([]);
   const [data, setData] = useState();
+  const [open, setOpen] = useState(false);
+  const [logs, setLogs] = useState([]);
 
   const context = useAuth();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   useEffect(() => {
     document.title = "RPG - Dashboard";
     fetchCharacters();
   }, [data]);
 
-  socket.on("vitalsChanged", (data) => {
-    setData(data);
-  });
+  useEffect(() => {
+    socket.on("diceRoll", ({ character, dices, faces, rolls, totalResult }) => {
+      setLogs([
+        ...logs,
+        `${character} rolled ${dices}d${faces} (${rolls}) => ${totalResult}`,
+      ]);
+    });
+
+    socket.on("vitalsChanged", (data) => {
+      setData(data);
+    });
+  }, [socket]);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const fetchCharacters = async () => {
     const response = await api.get("/dashboard/characters");
@@ -35,7 +74,11 @@ export const Dashboard = () => {
   };
 
   return (
-    <Container>
+    <Container
+      disableGutters={true}
+      maxWidth={false}
+      sx={{ padding: open == true ? "0px 350px 0px 30px" : "0px 150px" }}
+    >
       <div className={styles.dashboardContainer}>
         <div className={styles.topContainer}>
           <div className={styles.leftArea}>
@@ -83,6 +126,25 @@ export const Dashboard = () => {
             >
               ATRIBUIR ATAQUE
             </Button>
+            {/* <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: "none" }) }}
+            >
+              <MenuIcon />
+            </IconButton> */}
+            <Button
+              color="inherit"
+              variant="outlined"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ml: 1, ...(open && { display: "none" }) }}
+            >
+              ROLAGENS
+            </Button>
           </div>
         </div>
         <div className={styles.grid}>
@@ -110,6 +172,32 @@ export const Dashboard = () => {
           ))}
         </div>
       </div>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          // height: drawerHeight,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            // height: drawerHeight,
+            boxSizing: "border-box",
+          },
+        }}
+        variant="persistent"
+        anchor="right"
+        open={open}
+      >
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </DrawerHeader>
+        <DashboardLogs logsProp={logs} />
+      </Drawer>
     </Container>
   );
 };
