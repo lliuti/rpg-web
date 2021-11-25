@@ -25,7 +25,7 @@ export const AssignRitual = () => {
   }, []);
 
   const fetchCharacters = async () => {
-    const response = await api.get("/characters");
+    const response = await api.get("/dashboard/characters");
     setCharacters(response.data);
   };
 
