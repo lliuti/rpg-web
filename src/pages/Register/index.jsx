@@ -33,7 +33,7 @@ export const Register = () => {
     });
 
     context.Login(username, password);
-    navigate("/rpg-web/");
+    navigate(process.env.REACT_APP_PUBLIC_URL + "/");
   };
 
   return (
@@ -74,7 +74,12 @@ export const Register = () => {
           />
         </div>
         <div className={styles.gridTwoItems}>
-          <Button variant="text" onClick={() => navigate("/rpg-web/login")}>
+          <Button
+            variant="text"
+            onClick={() =>
+              navigate(process.env.REACT_APP_PUBLIC_URL + "/login")
+            }
+          >
             LOGIN
           </Button>
           <Button onClick={handleCreateAccount} variant="contained">

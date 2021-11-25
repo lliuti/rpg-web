@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Add from "@mui/icons-material/Add";
 
-const socket = io("https://rpg-platform.herokuapp.com/");
+const socket = io(process.env.REACT_APP_API_URL);
 
 export const Dashboard = () => {
   const [characterList, setCharacterList] = useState([]);
@@ -40,7 +40,7 @@ export const Dashboard = () => {
           <div className={styles.leftArea}>
             <Button
               variant="outlined"
-              onClick={() => navigate("/rpg-web/")}
+              onClick={() => navigate(process.env.REACT_APP_PUBLIC_URL + "/")}
               color="inherit"
               startIcon={<ArrowBack />}
             >
@@ -51,7 +51,9 @@ export const Dashboard = () => {
           <div>
             <Button
               variant="outlined"
-              onClick={() => navigate("/rpg-web/create-ritual")}
+              onClick={() =>
+                navigate(process.env.REACT_APP_PUBLIC_URL + "/create-ritual")
+              }
               color="primary"
               startIcon={<Add />}
             >
@@ -59,7 +61,9 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => navigate("/rpg-web/assign-ritual")}
+              onClick={() =>
+                navigate(process.env.REACT_APP_PUBLIC_URL + "/assign-ritual")
+              }
               color="primary"
               sx={{ ml: 1 }}
             >
@@ -67,7 +71,9 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => navigate("/rpg-web/create-attack")}
+              onClick={() =>
+                navigate(process.env.REACT_APP_PUBLIC_URL + "/create-attack")
+              }
               color="success"
               startIcon={<Add />}
               sx={{ ml: 1 }}
@@ -76,7 +82,9 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => navigate("/rpg-web/assign-attack")}
+              onClick={() =>
+                navigate(process.env.REACT_APP_PUBLIC_URL + "/assign-attack")
+              }
               color="success"
               sx={{ ml: 1 }}
             >
@@ -88,7 +96,11 @@ export const Dashboard = () => {
           {characterList?.map((character) => (
             <div
               key={character.id}
-              onClick={() => navigate(`/characters/${character.id}`)}
+              onClick={() =>
+                navigate(
+                  `${process.env.REACT_APP_PUBLIC_URL}/characters/${character.id}`
+                )
+              }
               className={styles.characterBox}
             >
               <img src={character?.picture_url} alt={character?.name} />

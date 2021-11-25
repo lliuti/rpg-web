@@ -19,7 +19,7 @@ export const Login = () => {
 
   const handleLogin = () => {
     context.Login(username, password);
-    navigate("/rpg-web/");
+    navigate(process.env.REACT_APP_PUBLIC_URL + "/");
   };
 
   const handleKeyPress = (e) => {
@@ -53,7 +53,12 @@ export const Login = () => {
         </div>
 
         <div className={styles.gridTwoItems}>
-          <Button variant="text" onClick={() => navigate("/rpg-web/register")}>
+          <Button
+            variant="text"
+            onClick={() =>
+              navigate(process.env.REACT_APP_PUBLIC_URL + "/register")
+            }
+          >
             CRIAR CONTA
           </Button>
           <Button onClick={handleLogin} variant="contained">

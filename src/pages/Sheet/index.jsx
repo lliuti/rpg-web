@@ -48,7 +48,7 @@ export const Sheet = () => {
         <div className={styles.topContainer}>
           <Button
             variant="outlined"
-            onClick={() => navigate("/rpg-web/")}
+            onClick={() => navigate(process.env.REACT_APP_PUBLIC_URL + "/")}
             color="inherit"
             startIcon={<ArrowBack />}
           >

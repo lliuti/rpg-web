@@ -16,32 +16,44 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/rpg-web/" element={<ProtectedMain />} />
-        <Route path="/rpg-web/login" element={<Login />} />
-        <Route path="/rpg-web/register" element={<Register />} />
         <Route
-          path="/rpg-web/create-character"
+          path={process.env.REACT_APP_PUBLIC_URL + "/"}
+          element={<ProtectedMain />}
+        />
+        <Route
+          path={process.env.REACT_APP_PUBLIC_URL + "/login"}
+          element={<Login />}
+        />
+        <Route
+          path={process.env.REACT_APP_PUBLIC_URL + "/register"}
+          element={<Register />}
+        />
+        <Route
+          path={process.env.REACT_APP_PUBLIC_URL + "/create-character"}
           element={<ProtectedCreateCharacter />}
         />
         <Route
-          path="/rpg-web/characters/:character_id"
+          path={process.env.REACT_APP_PUBLIC_URL + "/characters/:character_id"}
           element={<ProtectedSheet />}
         />
-        <Route path="/rpg-web/dashboard" element={<ProtectedDashboard />} />
         <Route
-          path="/rpg-web/create-ritual"
+          path={process.env.REACT_APP_PUBLIC_URL + "/dashboard"}
+          element={<ProtectedDashboard />}
+        />
+        <Route
+          path={process.env.REACT_APP_PUBLIC_URL + "/create-ritual"}
           element={<ProtectedCreateRitual />}
         />
         <Route
-          path="/rpg-web/assign-ritual"
+          path={process.env.REACT_APP_PUBLIC_URL + "/assign-ritual"}
           element={<ProtectedAssignRitual />}
         />
         <Route
-          path="/rpg-web/create-attack"
+          path={process.env.REACT_APP_PUBLIC_URL + "/create-attack"}
           element={<ProtectedCreateAttack />}
         />
         <Route
-          path="/rpg-web/assign-attack"
+          path={process.env.REACT_APP_PUBLIC_URL + "/assign-attack"}
           element={<ProtectedAssignAttack />}
         />
         <Route path="*" element={<NotFound />} />

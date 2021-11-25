@@ -25,7 +25,7 @@ export const Main = () => {
 
   const handleLogout = () => {
     context.Logout();
-    navigate("/rpg-web/login");
+    navigate(process.env.REACT_APP_PUBLIC_URL + "/login");
   };
 
   const fetchMyCharacters = () => {
@@ -46,7 +46,9 @@ export const Main = () => {
                 <Button
                   variant="outlined"
                   color="success"
-                  onClick={() => navigate("/rpg-web/dashboard")}
+                  onClick={() =>
+                    navigate(process.env.REACT_APP_PUBLIC_URL + "/dashboard")
+                  }
                   sx={{ ml: 1 }}
                   startIcon={<Dashboard />}
                 >
@@ -58,7 +60,11 @@ export const Main = () => {
               <Button
                 variant="outlined"
                 color="primary"
-                onClick={() => navigate("/rpg-web/create-character")}
+                onClick={() =>
+                  navigate(
+                    process.env.REACT_APP_PUBLIC_URL + "/create-character"
+                  )
+                }
                 startIcon={<Add />}
                 sx={{ ml: 1 }}
               >

@@ -16,7 +16,7 @@ export const NotFound = () => {
       <div className={styles.notFoundContainer}>
         <h1>Essa página não existe... :(</h1>
         <Button
-          onClick={() => navigate("/rpg-web/")}
+          onClick={() => navigate(process.env.REACT_APP_PUBLIC_URL + "/")}
           variant="outlined"
           sx={{ mt: 5 }}
         >

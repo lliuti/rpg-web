@@ -66,7 +66,9 @@ export const AssignAttack = () => {
         <div className={styles.topArea}>
           <Button
             variant="outlined"
-            onClick={() => navigate("/rpg-web/dashboard")}
+            onClick={() =>
+              navigate(process.env.REACT_APP_PUBLIC_URL + "/dashboard")
+            }
             color="inherit"
             startIcon={<ArrowBack />}
             sx={{ mr: 4 }}

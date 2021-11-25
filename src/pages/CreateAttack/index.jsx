@@ -179,7 +179,9 @@ export const CreateAttack = () => {
         <div className={styles.gridTwoItems}>
           <Button
             variant="text"
-            onClick={() => navigate("/rpg-web/dashboard")}
+            onClick={() =>
+              navigate(process.env.REACT_APP_PUBLIC_URL + "/dashboard")
+            }
             color="inherit"
             startIcon={<ArrowBack />}
           >
