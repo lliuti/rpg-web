@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import { useAuth } from "./contexts/useAuth";
 import { Login } from "./pages/Login/index";
 import { Register } from "./pages/Register/index";
@@ -11,6 +11,7 @@ import { CreateRitual } from "./pages/CreateRitual/index";
 import { CreateAttack } from "./pages/CreateAttack/index";
 import { AssignAttack } from "./pages/AssignAttack/index";
 import { AssignRitual } from "./pages/AssignRitual/index";
+import { EditSheet } from "./pages/EditSheet/index";
 
 export const Router = () => {
   return (
@@ -26,6 +27,10 @@ export const Router = () => {
         <Route
           path={"/characters/:character_id"}
           element={<ProtectedSheet />}
+        />
+        <Route
+          path={"/characters/:character_id/edit"}
+          element={<ProtectedEditSheet />}
         />
         <Route path={"/dashboard"} element={<ProtectedDashboard />} />
         <Route path={"/create-ritual"} element={<ProtectedCreateRitual />} />
@@ -54,6 +59,13 @@ const ProtectedSheet = () => {
   const context = useAuth();
 
   return context.signed ? <Sheet /> : <Login />;
+};
+
+const ProtectedEditSheet = () => {
+  const context = useAuth();
+  context.VerifyAdmin();
+
+  return context.admin ? <EditSheet /> : <Login />;
 };
 
 const ProtectedDashboard = () => {
