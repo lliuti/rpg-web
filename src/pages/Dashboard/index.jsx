@@ -77,7 +77,9 @@ export const Dashboard = () => {
     <Container
       disableGutters={true}
       maxWidth={false}
-      sx={{ padding: open == true ? "0px 350px 0px 30px" : "0px 150px" }}
+      sx={{
+        padding: open == true ? "0px 350px 100px 30px" : "0px 150px 100px",
+      }}
     >
       <div className={styles.dashboardContainer}>
         <div className={styles.topContainer}>
