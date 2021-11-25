@@ -1,0 +1,27 @@
+.dashboardLogsContainer {
+  padding: 0px 60px;
+  padding: 0px 60px;
+  max-height: 100%;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: #333;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #000;
+  }
+
+  .log {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 25px;
+
+    &:last-of-type {
+      padding-bottom: 25px;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  }
+}
