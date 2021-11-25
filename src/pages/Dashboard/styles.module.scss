@@ -71,3 +71,36 @@
     }
   }
 }
+
+@media (max-width: 1315px) {
+  .topContainer {
+    h1 {
+      margin-left: 10px !important;
+    }
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 10px !important;
+  }
+}
+
+@media (max-width: 932px) {
+  .topContainer {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-gap: 5px !important;
+
+    .characterBox {
+      box-shadow: 1.5px 1.5px 0px #000 !important;
+      padding: 10px !important;
+
+      &:hover {
+        box-shadow: 0.5px 0.5px 0px #000 !important;
+      }
+    }
+  }
+}
