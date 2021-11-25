@@ -15,11 +15,7 @@ export const NotFound = () => {
     <Container>
       <div className={styles.notFoundContainer}>
         <h1>Essa página não existe... :(</h1>
-        <Button
-          onClick={() => navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/")}
-          variant="outlined"
-          sx={{ mt: 5 }}
-        >
+        <Button onClick={() => navigate("/")} variant="outlined" sx={{ mt: 5 }}>
           Voltar
         </Button>
       </div>

@@ -48,7 +48,7 @@ export const Sheet = () => {
         <div className={styles.topContainer}>
           <Button
             variant="outlined"
-            onClick={() => navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/")}
+            onClick={() => navigate("/")}
             color="inherit"
             startIcon={<ArrowBack />}
           >

@@ -16,48 +16,22 @@ export const Router = () => {
   return (
     <HashRouter>
       <Routes>
+        <Route path={"/"} element={<ProtectedMain />} />
+        <Route path={"/login"} element={<Login />} />
+        <Route path={"/register"} element={<Register />} />
         <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/"}
-          element={<ProtectedMain />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/login"}
-          element={<Login />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/register"}
-          element={<Register />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/create-character"}
+          path={"/create-character"}
           element={<ProtectedCreateCharacter />}
         />
         <Route
-          path={
-            import.meta.env.VITE_APP_PUBLIC_URL + "/characters/:character_id"
-          }
+          path={"/characters/:character_id"}
           element={<ProtectedSheet />}
         />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard"}
-          element={<ProtectedDashboard />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/create-ritual"}
-          element={<ProtectedCreateRitual />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/assign-ritual"}
-          element={<ProtectedAssignRitual />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/create-attack"}
-          element={<ProtectedCreateAttack />}
-        />
-        <Route
-          path={import.meta.env.VITE_APP_PUBLIC_URL + "/assign-attack"}
-          element={<ProtectedAssignAttack />}
-        />
+        <Route path={"/dashboard"} element={<ProtectedDashboard />} />
+        <Route path={"/create-ritual"} element={<ProtectedCreateRitual />} />
+        <Route path={"/assign-ritual"} element={<ProtectedAssignRitual />} />
+        <Route path={"/create-attack"} element={<ProtectedCreateAttack />} />
+        <Route path={"/assign-attack"} element={<ProtectedAssignAttack />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </HashRouter>

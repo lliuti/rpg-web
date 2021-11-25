@@ -33,7 +33,7 @@ export const Register = () => {
     });
 
     context.Login(username, password);
-    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/");
+    navigate("/");
   };
 
   return (
@@ -74,12 +74,7 @@ export const Register = () => {
           />
         </div>
         <div className={styles.gridTwoItems}>
-          <Button
-            variant="text"
-            onClick={() =>
-              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/login")
-            }
-          >
+          <Button variant="text" onClick={() => navigate("/login")}>
             LOGIN
           </Button>
           <Button onClick={handleCreateAccount} variant="contained">

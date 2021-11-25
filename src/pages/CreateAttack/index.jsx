@@ -179,9 +179,7 @@ export const CreateAttack = () => {
         <div className={styles.gridTwoItems}>
           <Button
             variant="text"
-            onClick={() =>
-              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard")
-            }
+            onClick={() => navigate("/dashboard")}
             color="inherit"
             startIcon={<ArrowBack />}
           >

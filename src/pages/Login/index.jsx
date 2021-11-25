@@ -19,7 +19,7 @@ export const Login = () => {
 
   const handleLogin = () => {
     context.Login(username, password);
-    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/");
+    navigate("/");
   };
 
   const handleKeyPress = (e) => {
@@ -53,12 +53,7 @@ export const Login = () => {
         </div>
 
         <div className={styles.gridTwoItems}>
-          <Button
-            variant="text"
-            onClick={() =>
-              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/register")
-            }
-          >
+          <Button variant="text" onClick={() => navigate("/register")}>
             CRIAR CONTA
           </Button>
           <Button onClick={handleLogin} variant="contained">

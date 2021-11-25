@@ -36,7 +36,7 @@ export const CreateCharacter = () => {
       archetype,
     });
 
-    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/");
+    navigate("/");
   };
 
   return (
@@ -87,7 +87,7 @@ export const CreateCharacter = () => {
           <Button
             variant="text"
             color="inherit"
-            onClick={() => navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/")}
+            onClick={() => navigate("/")}
             startIcon={<ArrowBack />}
           >
             VOLTAR

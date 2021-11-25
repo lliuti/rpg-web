@@ -63,9 +63,7 @@ export const CreateRitual = () => {
         <div className={styles.topArea}>
           <Button
             variant="outlined"
-            onClick={() =>
-              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard")
-            }
+            onClick={() => navigate("/dashboard")}
             color="inherit"
             startIcon={<ArrowBack />}
           >

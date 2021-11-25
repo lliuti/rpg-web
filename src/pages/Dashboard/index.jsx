@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Add from "@mui/icons-material/Add";
 
-const socket = io(import.meta.env.VITE_APP_API_URL);
+const socket = io("https://rpg-platform.herokuapp.com/");
 
 export const Dashboard = () => {
   const [characterList, setCharacterList] = useState([]);
@@ -40,9 +40,7 @@ export const Dashboard = () => {
           <div className={styles.leftArea}>
             <Button
               variant="outlined"
-              onClick={() =>
-                navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/")
-              }
+              onClick={() => navigate("/")}
               color="inherit"
               startIcon={<ArrowBack />}
             >
@@ -53,9 +51,7 @@ export const Dashboard = () => {
           <div>
             <Button
               variant="outlined"
-              onClick={() =>
-                navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/create-ritual")
-              }
+              onClick={() => navigate("/create-ritual")}
               color="primary"
               startIcon={<Add />}
             >
@@ -63,9 +59,7 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() =>
-                navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/assign-ritual")
-              }
+              onClick={() => navigate("/assign-ritual")}
               color="primary"
               sx={{ ml: 1 }}
             >
@@ -73,9 +67,7 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() =>
-                navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/create-attack")
-              }
+              onClick={() => navigate("/create-attack")}
               color="success"
               startIcon={<Add />}
               sx={{ ml: 1 }}
@@ -84,9 +76,7 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() =>
-                navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/assign-attack")
-              }
+              onClick={() => navigate("/assign-attack")}
               color="success"
               sx={{ ml: 1 }}
             >

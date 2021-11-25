@@ -25,7 +25,7 @@ export const Main = () => {
 
   const handleLogout = () => {
     context.Logout();
-    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/login");
+    navigate("/login");
   };
 
   const fetchMyCharacters = () => {
@@ -46,9 +46,7 @@ export const Main = () => {
                 <Button
                   variant="outlined"
                   color="success"
-                  onClick={() =>
-                    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard")
-                  }
+                  onClick={() => navigate("/dashboard")}
                   sx={{ ml: 1 }}
                   startIcon={<Dashboard />}
                 >
@@ -60,11 +58,7 @@ export const Main = () => {
               <Button
                 variant="outlined"
                 color="primary"
-                onClick={() =>
-                  navigate(
-                    import.meta.env.VITE_APP_PUBLIC_URL + "/create-character"
-                  )
-                }
+                onClick={() => navigate("/create-character")}
                 startIcon={<Add />}
                 sx={{ ml: 1 }}
               >
