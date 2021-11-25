@@ -66,7 +66,7 @@ export const AssignRitual = () => {
         <div className={styles.topArea}>
           <Button
             variant="outlined"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/rpg-web/dashboard")}
             color="inherit"
             startIcon={<ArrowBack />}
             sx={{ mr: 4 }}

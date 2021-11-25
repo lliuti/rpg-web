@@ -48,7 +48,7 @@ export const Sheet = () => {
         <div className={styles.topContainer}>
           <Button
             variant="outlined"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/rpg-web/")}
             color="inherit"
             startIcon={<ArrowBack />}
           >

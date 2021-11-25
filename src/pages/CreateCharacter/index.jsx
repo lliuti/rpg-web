@@ -36,7 +36,7 @@ export const CreateCharacter = () => {
       archetype,
     });
 
-    navigate("/");
+    navigate("/rpg-web/");
   };
 
   return (
@@ -87,7 +87,7 @@ export const CreateCharacter = () => {
           <Button
             variant="text"
             color="inherit"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/rpg-web/")}
             startIcon={<ArrowBack />}
           >
             VOLTAR

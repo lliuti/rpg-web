@@ -40,7 +40,7 @@ export const Dashboard = () => {
           <div className={styles.leftArea}>
             <Button
               variant="outlined"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/rpg-web/")}
               color="inherit"
               startIcon={<ArrowBack />}
             >
@@ -51,7 +51,7 @@ export const Dashboard = () => {
           <div>
             <Button
               variant="outlined"
-              onClick={() => navigate("/create-ritual")}
+              onClick={() => navigate("/rpg-web/create-ritual")}
               color="primary"
               startIcon={<Add />}
             >
@@ -59,7 +59,7 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => navigate("/assign-ritual")}
+              onClick={() => navigate("/rpg-web/assign-ritual")}
               color="primary"
               sx={{ ml: 1 }}
             >
@@ -67,7 +67,7 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => navigate("/create-attack")}
+              onClick={() => navigate("/rpg-web/create-attack")}
               color="success"
               startIcon={<Add />}
               sx={{ ml: 1 }}
@@ -76,7 +76,7 @@ export const Dashboard = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() => navigate("/assign-attack")}
+              onClick={() => navigate("/rpg-web/assign-attack")}
               color="success"
               sx={{ ml: 1 }}
             >

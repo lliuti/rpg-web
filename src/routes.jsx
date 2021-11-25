@@ -16,19 +16,34 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProtectedMain />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/rpg-web/" element={<ProtectedMain />} />
+        <Route path="/rpg-web/login" element={<Login />} />
+        <Route path="/rpg-web/register" element={<Register />} />
         <Route
-          path="/create-character"
+          path="/rpg-web/create-character"
           element={<ProtectedCreateCharacter />}
         />
-        <Route path="/characters/:character_id" element={<ProtectedSheet />} />
-        <Route path="/dashboard" element={<ProtectedDashboard />} />
-        <Route path="/create-ritual" element={<ProtectedCreateRitual />} />
-        <Route path="/assign-ritual" element={<ProtectedAssignRitual />} />
-        <Route path="/create-attack" element={<ProtectedCreateAttack />} />
-        <Route path="/assign-attack" element={<ProtectedAssignAttack />} />
+        <Route
+          path="/rpg-web/characters/:character_id"
+          element={<ProtectedSheet />}
+        />
+        <Route path="/rpg-web/dashboard" element={<ProtectedDashboard />} />
+        <Route
+          path="/rpg-web/create-ritual"
+          element={<ProtectedCreateRitual />}
+        />
+        <Route
+          path="/rpg-web/assign-ritual"
+          element={<ProtectedAssignRitual />}
+        />
+        <Route
+          path="/rpg-web/create-attack"
+          element={<ProtectedCreateAttack />}
+        />
+        <Route
+          path="/rpg-web/assign-attack"
+          element={<ProtectedAssignAttack />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

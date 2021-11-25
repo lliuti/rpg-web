@@ -33,7 +33,7 @@ export const Register = () => {
     });
 
     context.Login(username, password);
-    navigate("/");
+    navigate("/rpg-web/");
   };
 
   return (
@@ -74,7 +74,7 @@ export const Register = () => {
           />
         </div>
         <div className={styles.gridTwoItems}>
-          <Button variant="text" onClick={() => navigate("/login")}>
+          <Button variant="text" onClick={() => navigate("/rpg-web/login")}>
             LOGIN
           </Button>
           <Button onClick={handleCreateAccount} variant="contained">
