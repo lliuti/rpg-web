@@ -58,3 +58,31 @@
     }
   }
 }
+
+@media (max-width: 1280px) {
+  .charactersGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topRow {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: space-between;
+    margin-bottom: 25px;
+
+    h1 {
+      margin-bottom: 15px !important;
+    }
+  }
+
+  .charactersGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-gap: 20px;
+  }
+}

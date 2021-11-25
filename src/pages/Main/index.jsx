@@ -47,7 +47,7 @@ export const Main = () => {
                   variant="outlined"
                   color="success"
                   onClick={() => navigate("/dashboard")}
-                  sx={{ ml: 1 }}
+                  sx={{ ml: 0 }}
                   startIcon={<Dashboard />}
                 >
                   Dashboard

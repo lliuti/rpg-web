@@ -37,7 +37,7 @@ export const Register = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{ pb: 10 }}>
       <div className={styles.formBox}>
         <h1>Registrar</h1>
         <div className={styles.gridTwoItems}>

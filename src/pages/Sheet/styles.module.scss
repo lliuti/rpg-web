@@ -21,3 +21,10 @@
   .attacksRituals {
   }
 }
+
+@media (max-width: 678px) {
+  .grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
