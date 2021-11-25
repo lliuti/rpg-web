@@ -10,7 +10,8 @@ import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Add from "@mui/icons-material/Add";
 
-const socket = io("https://rpg-platform.herokuapp.com/");
+// const socket = io("https://rpg-platform.herokuapp.com/");
+const socket = io("http://localhost:3333");
 
 export const Dashboard = () => {
   const [characterList, setCharacterList] = useState([]);
@@ -88,7 +89,7 @@ export const Dashboard = () => {
           {characterList?.map((character) => (
             <div
               key={character.id}
-              onClick={() => navigate(`/characters/${character.id}`)}
+              onClick={() => navigate(`/characters/${character.id}/edit`)}
               className={styles.characterBox}
             >
               <img src={character?.picture_url} alt={character?.name} />
