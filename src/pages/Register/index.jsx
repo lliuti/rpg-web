@@ -33,7 +33,7 @@ export const Register = () => {
     });
 
     context.Login(username, password);
-    navigate(process.env.REACT_APP_PUBLIC_URL + "/");
+    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/");
   };
 
   return (
@@ -77,7 +77,7 @@ export const Register = () => {
           <Button
             variant="text"
             onClick={() =>
-              navigate(process.env.REACT_APP_PUBLIC_URL + "/login")
+              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/login")
             }
           >
             LOGIN

@@ -64,7 +64,7 @@ export const CreateRitual = () => {
           <Button
             variant="outlined"
             onClick={() =>
-              navigate(process.env.REACT_APP_PUBLIC_URL + "/dashboard")
+              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard")
             }
             color="inherit"
             startIcon={<ArrowBack />}

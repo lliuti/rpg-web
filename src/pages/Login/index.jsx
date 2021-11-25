@@ -19,7 +19,7 @@ export const Login = () => {
 
   const handleLogin = () => {
     context.Login(username, password);
-    navigate(process.env.REACT_APP_PUBLIC_URL + "/");
+    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/");
   };
 
   const handleKeyPress = (e) => {
@@ -56,7 +56,7 @@ export const Login = () => {
           <Button
             variant="text"
             onClick={() =>
-              navigate(process.env.REACT_APP_PUBLIC_URL + "/register")
+              navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/register")
             }
           >
             CRIAR CONTA

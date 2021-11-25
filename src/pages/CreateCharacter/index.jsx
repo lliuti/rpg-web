@@ -36,7 +36,7 @@ export const CreateCharacter = () => {
       archetype,
     });
 
-    navigate(process.env.REACT_APP_PUBLIC_URL + "/");
+    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/");
   };
 
   return (
@@ -87,7 +87,7 @@ export const CreateCharacter = () => {
           <Button
             variant="text"
             color="inherit"
-            onClick={() => navigate(process.env.REACT_APP_PUBLIC_URL + "/")}
+            onClick={() => navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/")}
             startIcon={<ArrowBack />}
           >
             VOLTAR

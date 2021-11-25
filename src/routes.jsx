@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { useAuth } from "./contexts/useAuth";
 import { Login } from "./pages/Login/index";
 import { Register } from "./pages/Register/index";
@@ -14,51 +14,53 @@ import { AssignRitual } from "./pages/AssignRitual/index";
 
 export const Router = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/"}
           element={<ProtectedMain />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/login"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/login"}
           element={<Login />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/register"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/register"}
           element={<Register />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/create-character"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/create-character"}
           element={<ProtectedCreateCharacter />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/characters/:character_id"}
+          path={
+            import.meta.env.VITE_APP_PUBLIC_URL + "/characters/:character_id"
+          }
           element={<ProtectedSheet />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/dashboard"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard"}
           element={<ProtectedDashboard />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/create-ritual"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/create-ritual"}
           element={<ProtectedCreateRitual />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/assign-ritual"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/assign-ritual"}
           element={<ProtectedAssignRitual />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/create-attack"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/create-attack"}
           element={<ProtectedCreateAttack />}
         />
         <Route
-          path={process.env.REACT_APP_PUBLIC_URL + "/assign-attack"}
+          path={import.meta.env.VITE_APP_PUBLIC_URL + "/assign-attack"}
           element={<ProtectedAssignAttack />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

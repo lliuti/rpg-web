@@ -25,7 +25,7 @@ export const Main = () => {
 
   const handleLogout = () => {
     context.Logout();
-    navigate(process.env.REACT_APP_PUBLIC_URL + "/login");
+    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/login");
   };
 
   const fetchMyCharacters = () => {
@@ -47,7 +47,7 @@ export const Main = () => {
                   variant="outlined"
                   color="success"
                   onClick={() =>
-                    navigate(process.env.REACT_APP_PUBLIC_URL + "/dashboard")
+                    navigate(import.meta.env.VITE_APP_PUBLIC_URL + "/dashboard")
                   }
                   sx={{ ml: 1 }}
                   startIcon={<Dashboard />}
@@ -62,7 +62,7 @@ export const Main = () => {
                 color="primary"
                 onClick={() =>
                   navigate(
-                    process.env.REACT_APP_PUBLIC_URL + "/create-character"
+                    import.meta.env.VITE_APP_PUBLIC_URL + "/create-character"
                   )
                 }
                 startIcon={<Add />}
