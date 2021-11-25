@@ -1,5 +1,6 @@
 {
   "name": "rpg-web",
+  "homepage": "rpg-web/",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
