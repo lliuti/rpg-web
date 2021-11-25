@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Add from "@mui/icons-material/Add";
 
-const socket = io(window.env.REACT_APP_API_URL);
+const socket = io("https://rpg-platform.herokuapp.com/");
 
 export const Dashboard = () => {
   const [characterList, setCharacterList] = useState([]);
