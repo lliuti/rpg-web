@@ -1,0 +1,30 @@
+.sheetContainer {
+  padding-bottom: 100px;
+  .topContainer {
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    h1 {
+      margin-left: 50px;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+  }
+
+  .attacksRituals {
+  }
+}
+
+@media (max-width: 678px) {
+  .grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
