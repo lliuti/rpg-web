@@ -88,13 +88,7 @@ export const Dashboard = () => {
           {characterList?.map((character) => (
             <div
               key={character.id}
-              onClick={() =>
-                navigate(
-                  `${import.meta.env.VITE_APP_PUBLIC_URL}/characters/${
-                    character.id
-                  }`
-                )
-              }
+              onClick={() => navigate(`/characters/${character.id}`)}
               className={styles.characterBox}
             >
               <img src={character?.picture_url} alt={character?.name} />
