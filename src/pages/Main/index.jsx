@@ -30,8 +30,13 @@ export const Main = () => {
 
   const fetchMyCharacters = () => {
     setTimeout(async () => {
-      const response = await api.get("/characters");
-      setCharacters(response.data);
+      try {
+        const response = await api.get("/characters");
+        setCharacters(response.data);
+      } catch (err) {
+        console.log(err);
+        navigate("/login");
+      }
     }, 150);
   };
 
