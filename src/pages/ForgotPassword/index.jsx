@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
@@ -8,18 +8,54 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export const ForgotPassword = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSendEmail = async () => {
-    const response = await api.post("/players/new-password-send-email", {
-      usernameOrEmail: usernameOrEmail,
-    });
-
-    console.log(response.data);
+    try {
+      const response = await api.post("/players/new-password-send-email", {
+        usernameOrEmail: usernameOrEmail,
+      });
+      setOpen(true);
+    } catch (err) {
+      return;
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="success"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
@@ -51,6 +87,14 @@ export const ForgotPassword = () => {
           </Button>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="success"
+        message="Email enviado! (Voce pode fechar essa janela)"
+        action={action}
+      />
     </Container>
   );
 };
