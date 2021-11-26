@@ -26,9 +26,11 @@ export const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const handleSendEmail = async () => {
+    const lowerUsernameOrEmail = usernameOrEmail.toLowerCase();
+
     try {
       const response = await api.post("/players/new-password-send-email", {
-        usernameOrEmail: usernameOrEmail,
+        usernameOrEmail: lowerUsernameOrEmail,
       });
       setOpen(true);
     } catch (err) {
