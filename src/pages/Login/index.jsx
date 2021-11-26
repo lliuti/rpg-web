@@ -60,6 +60,15 @@ export const Login = () => {
             ENTRAR
           </Button>
         </div>
+        <div className={styles.gridOneItem}>
+          <Button
+            variant="text"
+            color="inherit"
+            onClick={() => navigate("/player/forgot-password")}
+          >
+            ESQUECI MINHA SENHA
+          </Button>
+        </div>
       </div>
     </Container>
   );
