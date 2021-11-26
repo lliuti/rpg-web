@@ -18,7 +18,8 @@ export const Login = () => {
   }, []);
 
   const handleLogin = () => {
-    context.Login(username, password);
+    const lowerUsername = username.toLowerCase();
+    context.Login(lowerUsername, password);
     navigate("/");
   };
 
