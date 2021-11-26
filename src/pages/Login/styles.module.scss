@@ -17,6 +17,14 @@
 
     margin-top: 25px;
   }
+
+  .gridOneItem {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 50px;
+
+    margin-top: 25px;
+  }
 }
 
 @media (max-width: 620px) {
