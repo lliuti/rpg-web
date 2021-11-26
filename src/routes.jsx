@@ -12,6 +12,8 @@ import { CreateAttack } from "./pages/CreateAttack/index";
 import { AssignAttack } from "./pages/AssignAttack/index";
 import { AssignRitual } from "./pages/AssignRitual/index";
 import { EditSheet } from "./pages/EditSheet/index";
+import { ForgotPassword } from "./pages/ForgotPassword/index";
+import { NewPassword } from "./pages/NewPassword/index";
 
 export const Router = () => {
   return (
@@ -37,6 +39,11 @@ export const Router = () => {
         <Route path={"/assign-ritual"} element={<ProtectedAssignRitual />} />
         <Route path={"/create-attack"} element={<ProtectedCreateAttack />} />
         <Route path={"/assign-attack"} element={<ProtectedAssignAttack />} />
+        <Route path={"/player/forgot-password"} element={<ForgotPassword />} />
+        <Route
+          path={"/players/:player_id/new-password"}
+          element={<NewPassword />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </HashRouter>
