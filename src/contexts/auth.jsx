@@ -37,10 +37,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const VerifyAdmin = async () => {
-    const id = localStorage.getItem("player@id");
-    const response = await api.get(`/players/${id}/admin`);
-    setAdmin(response.data);
-    return response.data;
+    try {
+      const id = localStorage.getItem("player@id");
+      const response = await api.get(`/players/${id}/admin`);
+      setAdmin(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
