@@ -17,6 +17,14 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 50px;
   }
+  .deleteButtonContainer {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 
   .attacksRituals {
   }
