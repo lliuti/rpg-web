@@ -25,10 +25,10 @@ export const Register = () => {
       return;
     }
 
-    const lowerUsername = username.toLowerCase();
-    const lowerEmail = email.toLowerCase();
+    const lowerUsername = username.toLowerCase().trim();
+    const lowerEmail = email.toLowerCase().trim();
 
-    const response = await api.post("/players", {
+    await api.post("/players", {
       name,
       username: lowerUsername,
       email: lowerEmail,
