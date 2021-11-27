@@ -160,16 +160,16 @@ export const Dashboard = () => {
               <h1>{character?.name}</h1>
               <h3>{character?.archetype}</h3>
               <p className={styles.life}>
-                {character?.sheet.curr_life} / {character?.sheet.max_life}
+                {character?.sheet?.curr_life} / {character?.sheet?.max_life}
               </p>
               <p className={styles.san}>
-                {character?.sheet.curr_san} / {character?.sheet.max_san}
+                {character?.sheet?.curr_san} / {character?.sheet?.max_san}
               </p>
               <p className={styles.eff}>
-                {character?.sheet.curr_eff} / {character?.sheet.max_eff}
+                {character?.sheet?.curr_eff} / {character?.sheet?.max_eff}
               </p>
               <p>EXP: {character?.exp}</p>
-              <p>DEF: {character?.sheet.defesa_def}</p>
+              <p>DEF: {character?.sheet?.defesa_def}</p>
             </div>
           ))}
         </div>
