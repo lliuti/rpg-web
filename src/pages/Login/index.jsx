@@ -37,7 +37,7 @@ export const Login = () => {
         <div className={styles.gridTwoItems}>
           <TextField
             id="usernameInput"
-            label="Usuario"
+            label="Usuario/Email"
             variant="outlined"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
