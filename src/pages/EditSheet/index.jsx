@@ -21,6 +21,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteForever from "@mui/icons-material/DeleteForever";
 
 export const EditSheet = () => {
   const [characterSheet, setCharacterSheet] = useState([]);
@@ -40,6 +41,15 @@ export const EditSheet = () => {
     const response = await api.get(`/characters/${character_id}`);
     setCharacterSheet(response.data);
     document.title = `RPG - ${response.data.name}`;
+  };
+
+  const handleDeleteCharacter = async () => {
+    try {
+      await api.delete(`/characters/${character_id}`);
+      navigate("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -178,6 +188,17 @@ export const EditSheet = () => {
               <Rituals details={character_id} />
             </AccordionDetails>
           </Accordion>
+        </div>
+        <div className={styles.deleteButtonContainer}>
+          <Button
+            variant="outlined"
+            onClick={handleDeleteCharacter}
+            color="inherit"
+            startIcon={<DeleteForever />}
+            sx={{ width: "100%" }}
+          >
+            DELETAR
+          </Button>
         </div>
       </div>
     </Container>
