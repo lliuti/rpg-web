@@ -19,16 +19,20 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const Login = async (username, password) => {
-    const response = await api.post("/login", {
-      username,
-      password,
-    });
+    try {
+      const response = await api.post("/login", {
+        username,
+        password,
+      });
 
-    setToken(response.data.token);
-    setPlayer(response.data.player);
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("player@id", response.data.player.id);
-    api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+      setToken(response.data.token);
+      setPlayer(response.data.player);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("player@id", response.data.player.id);
+      api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+    } catch (err) {
+      return false;
+    }
   };
 
   const Logout = async () => {
