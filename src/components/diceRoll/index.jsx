@@ -10,13 +10,14 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
+import LoadingButton from "@mui/lab/LoadingButton";
+
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import Casino from "@mui/icons-material/Casino";
 
 export const DiceRoll = ({ details }) => {
   const [diceDialogOpen, setDiceDialogOpen] = useState(false);
@@ -25,6 +26,9 @@ export const DiceRoll = ({ details }) => {
   const [diceResultDialogOpen, setDiceResultDialogOpen] = useState(false);
   const [diceRollResult, setDiceRollResult] = useState(0);
   const [diceRolls, setDiceRolls] = useState([]);
+  const [diceGreaterRoll, setDiceGreaterRoll] = useState(0);
+
+  const [loading, setLoading] = useState(false);
 
   const handleDiceResultDialogClose = () => {
     setDiceResultDialogOpen(false);
@@ -57,6 +61,7 @@ export const DiceRoll = ({ details }) => {
       setDiceDialogOpen(false);
       return;
     }
+    setLoading(true);
 
     const response = await api.post(
       `/characters/${details.character_id}/dice`,
@@ -67,8 +72,10 @@ export const DiceRoll = ({ details }) => {
     );
 
     setDiceRollResult(response.data.diceResult);
+    setDiceGreaterRoll(response.data.diceGreater);
     setDiceRolls(response.data.diceRolls);
     setDiceDialogOpen(false);
+    setLoading(false);
     setDiceResultDialogOpen(true);
     return;
   };
@@ -152,14 +159,15 @@ export const DiceRoll = ({ details }) => {
           <Button onClick={handleDiceDialogClose} color="inherit">
             Cancelar
           </Button>
-          <Button
+          <LoadingButton
+            loading={loading}
             onClick={handleRollDice}
             autoFocus
             color="inherit"
             variant="outlined"
           >
             Rolar
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
 
@@ -180,6 +188,7 @@ export const DiceRoll = ({ details }) => {
             Resultado da rolagem de dados. <br />
             &nbsp; <br />
             Rolagens: {diceRolls.map((roll) => `${roll} `)} <br />
+            Maior número: {diceGreaterRoll} <br />
             Soma rolagens: {diceRollResult}
           </DialogContentText>
         </DialogContent>
