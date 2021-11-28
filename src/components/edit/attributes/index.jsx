@@ -5,6 +5,11 @@ import { api } from "../../../services/api";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const EditAttributes = ({ details }) => {
   const [forca, setForca] = useState("");
@@ -12,20 +17,45 @@ export const EditAttributes = ({ details }) => {
   const [agilidade, setAgilidade] = useState("");
   const [presenca, setPresenca] = useState("");
   const [intelecto, setIntelecto] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   const handleUpdateSheet = async () => {
-    const response = await api.put(
-      `/characters/${details.character_id}/attributes`,
-      {
+    setLoading(true);
+    try {
+      await api.put(`/characters/${details.character_id}/attributes`, {
         for_attr: forca,
         vig_attr: vigor,
         agi_attr: agilidade,
         pre_attr: presenca,
         int_attr: intelecto,
-      }
-    );
-
-    console.log(response.data);
+      });
+      setLoading(false);
+    } catch (err) {
+      setOpen(true);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -47,8 +77,7 @@ export const EditAttributes = ({ details }) => {
         <TextField
           id="strInput"
           label="Forca"
-          defaultValue={details.forca}
-          value={forca}
+          value={forca ?? ""}
           onChange={(e) => setForca(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -58,8 +87,7 @@ export const EditAttributes = ({ details }) => {
         <TextField
           id="intInput"
           label="Intelecto"
-          defaultValue={details.intelecto}
-          value={intelecto}
+          value={intelecto ?? ""}
           onChange={(e) => setIntelecto(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -71,8 +99,7 @@ export const EditAttributes = ({ details }) => {
         <TextField
           id="preInput"
           label="Presenca"
-          defaultValue={details.presenca}
-          value={presenca}
+          value={presenca ?? ""}
           onChange={(e) => setPresenca(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -82,8 +109,7 @@ export const EditAttributes = ({ details }) => {
         <TextField
           id="dexInput"
           label="Agilidade"
-          defaultValue={details.agilidade}
-          value={agilidade}
+          value={agilidade ?? ""}
           onChange={(e) => setAgilidade(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -95,18 +121,29 @@ export const EditAttributes = ({ details }) => {
         <TextField
           id="vigInput"
           label="Vigor"
-          defaultValue={details.vigor}
-          value={vigor}
+          value={vigor ?? ""}
           onChange={(e) => setVigor(e.target.value)}
           InputProps={{
             readOnly: false,
             autoFocus: true,
           }}
         />
-        <Button onClick={handleUpdateSheet} variant="outlined">
+        <LoadingButton
+          loading={loading}
+          onClick={handleUpdateSheet}
+          variant="outlined"
+        >
           ATUALIZAR
-        </Button>
+        </LoadingButton>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível atualizar os atributos."
+        action={action}
+      />
     </div>
   );
 };
