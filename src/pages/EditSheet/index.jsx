@@ -23,24 +23,40 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 export const EditSheet = () => {
   const [characterSheet, setCharacterSheet] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const { character_id } = useParams();
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+
+  const handleCloseBackdrop = () => {
+    setOpenBackdrop(false);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   useEffect(() => {
+    setOpenBackdrop(true);
     fetchCharacter();
   }, [character_id]);
 
   const fetchCharacter = async () => {
-    const response = await api.get(`/characters/${character_id}`);
-    setCharacterSheet(response.data);
-    document.title = `RPG - ${response.data.name}`;
+    setOpenBackdrop(true);
+    try {
+      const response = await api.get(`/characters/${character_id}`);
+      setCharacterSheet(response.data);
+      document.title = `RPG - ${response.data.name}`;
+      setOpenBackdrop(false);
+    } catch (err) {
+      setOpenBackdrop(false);
+      navigate("/dashboard");
+    }
   };
 
   const handleDeleteCharacter = async () => {
@@ -201,6 +217,13 @@ export const EditSheet = () => {
           </Button>
         </div>
       </div>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+        onClick={handleCloseBackdrop}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Container>
   );
 };
