@@ -6,7 +6,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
 
-import Stack from "@mui/material/Stack";
+import LoadingButton from "@mui/lab/LoadingButton";
+
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
@@ -20,6 +21,7 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const context = useAuth();
@@ -29,12 +31,15 @@ export const Login = () => {
   }, []);
 
   const handleLogin = async () => {
+    setLoading(true);
     const lowerUsername = username.toLowerCase().trim();
     const loginResponse = await context.Login(lowerUsername, password.trim());
     if (loginResponse === false) {
       setOpen(true);
+      setLoading(false);
       return;
     }
+    setLoading(false);
     navigate("/");
   };
 
@@ -93,9 +98,13 @@ export const Login = () => {
           <Button variant="text" onClick={() => navigate("/register")}>
             CRIAR CONTA
           </Button>
-          <Button onClick={handleLogin} variant="contained">
+          <LoadingButton
+            loading={loading}
+            onClick={handleLogin}
+            variant="contained"
+          >
             ENTRAR
-          </Button>
+          </LoadingButton>
         </div>
         <div className={styles.gridOneItem}>
           <Button
