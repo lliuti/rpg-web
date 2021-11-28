@@ -9,8 +9,28 @@ import Button from "@mui/material/Button";
 export const Rituals = ({ details }) => {
   const [rituals, setRituals] = useState([]);
   const [open, setOpen] = useState(false);
+  const [ritualName, setRitualName] = useState("");
+  const [ritualDescription, setRitualDescription] = useState("");
+  const [ritualElement, setRitualElement] = useState("");
+  const [ritualCircle, setRitualCircle] = useState("");
+  const [ritualCost, setRitualCost] = useState("");
+  const [ritualRange, setRitualRange] = useState("");
+  const [ritualExecTime, setRitualExecTime] = useState("");
+  const [ritualArea, setRitualArea] = useState("");
+  const [ritualDuration, setRitualDuration] = useState("");
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (ritual) => {
+    setRitualName(ritual.name);
+    setRitualDescription(ritual.description);
+    setRitualElement(ritual.element);
+    setRitualCircle(ritual.circle);
+    setRitualCost(ritual.cost);
+    setRitualRange(ritual.range);
+    setRitualExecTime(ritual.execTime);
+    setRitualArea(ritual.area);
+    setRitualDuration(ritual.duration);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -39,7 +59,10 @@ export const Rituals = ({ details }) => {
         {rituals?.map(({ ritual }) => {
           return (
             <div key={ritual.id}>
-              <div onClick={handleOpen} className={styles.gridRitual}>
+              <div
+                onClick={() => handleOpen(ritual)}
+                className={styles.gridRitual}
+              >
                 <p>{ritual.name}</p>
                 <p className={styles.ellipsis}>{ritual.description}</p>
                 <p>{ritual.element}</p>
@@ -60,39 +83,39 @@ export const Rituals = ({ details }) => {
                   <div className={styles.modalGrid}>
                     <div className={styles.gridRow}>
                       <p>Nome: </p>
-                      <p>{ritual.name}</p>
+                      <p>{ritualName}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Descricao: </p>
-                      <p>{ritual.description}</p>
+                      <p>{ritualDescription}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Elemento: </p>
-                      <p>{ritual.element}</p>
+                      <p>{ritualElement}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Circulo: </p>
-                      <p>{ritual.circle}</p>
+                      <p>{ritualCircle}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Custo: </p>
-                      <p>{ritual.cost}</p>
+                      <p>{ritualCost}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Distancia: </p>
-                      <p>{ritual.range}</p>
+                      <p>{ritualRange}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Acao: </p>
-                      <p>{ritual.execTime}</p>
+                      <p>{ritualExecTime}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Area: </p>
-                      <p>{ritual.area}</p>
+                      <p>{ritualArea}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Duracao: </p>
-                      <p>{ritual.duration}</p>
+                      <p>{ritualDuration}</p>
                     </div>
                   </div>
                   <div className={styles.buttonContainer}>
