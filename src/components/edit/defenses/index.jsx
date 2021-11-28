@@ -5,6 +5,11 @@ import { api } from "../../../services/api";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const EditDefenses = ({ details }) => {
   const [medo, setMedo] = useState("");
@@ -15,6 +20,8 @@ export const EditDefenses = ({ details }) => {
   const [sangue, setSangue] = useState("");
   const [conhecimento, setConhecimento] = useState("");
   const [defesa, setDefesa] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setDefaultState();
@@ -32,22 +39,47 @@ export const EditDefenses = ({ details }) => {
   };
 
   const handleUpdateSheet = async () => {
-    const response = await api.put(
-      `/characters/${details.character_id}/defenses`,
-      {
-        medo_res: medo,
-        morte_res: morte,
-        fisico_res: fisico,
-        balistico_res: balistico,
-        energia_res: energia,
-        sangue_res: sangue,
-        conhecimento_res: conhecimento,
-        defesa_def: defesa,
-      }
-    );
-
-    console.log(response.data);
+    setLoading(true);
+    try {
+      const response = await api.put(
+        `/characters/${details.character_id}/defenses`,
+        {
+          medo_res: medo,
+          morte_res: morte,
+          fisico_res: fisico,
+          balistico_res: balistico,
+          energia_res: energia,
+          sangue_res: sangue,
+          conhecimento_res: conhecimento,
+          defesa_def: defesa,
+        }
+      );
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <div className={styles.defensesContainer}>
@@ -56,8 +88,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="defInput"
           label="Defesa"
-          defaultValue={details.defesa}
-          value={defesa}
+          value={defesa ?? ""}
           onChange={(e) => setDefesa(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -70,8 +101,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="physicalResInput"
           label="Fisico"
-          defaultValue={details.fisico}
-          value={fisico}
+          value={fisico ?? ""}
           onChange={(e) => setFisico(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -81,8 +111,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="ballisticResInput"
           label="Balistico"
-          defaultValue={details.balistico}
-          value={balistico}
+          value={balistico ?? ""}
           onChange={(e) => setBalistico(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -95,8 +124,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="bloodResInput"
           label="Sangue"
-          defaultValue={details.sangue}
-          value={sangue}
+          value={sangue ?? ""}
           onChange={(e) => setSangue(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -107,8 +135,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="knowledgeResInput"
           label="Conhecimento"
-          defaultValue={details.conhecimento}
-          value={conhecimento}
+          value={conhecimento ?? ""}
           onChange={(e) => setConhecimento(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -121,8 +148,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="deathResInput"
           label="Morte"
-          defaultValue={details.morte}
-          value={morte}
+          value={morte ?? ""}
           onChange={(e) => setMorte(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -132,8 +158,7 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="energyResInput"
           label="Energia"
-          defaultValue={details.energia}
-          value={energia}
+          value={energia ?? ""}
           onChange={(e) => setEnergia(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -146,18 +171,29 @@ export const EditDefenses = ({ details }) => {
         <TextField
           id="fearResInput"
           label="Medo"
-          defaultValue={details.medo}
-          value={medo}
+          value={medo ?? ""}
           onChange={(e) => setMedo(e.target.value)}
           InputProps={{
             readOnly: false,
             autoFocus: true,
           }}
         />
-        <Button onClick={handleUpdateSheet} variant="outlined">
+        <LoadingButton
+          loading={loading}
+          onClick={handleUpdateSheet}
+          variant="outlined"
+        >
           ATUALIZAR
-        </Button>
+        </LoadingButton>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível atualizar as Defesas!"
+        action={action}
+      />
     </div>
   );
 };
