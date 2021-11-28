@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 export const Attacks = ({ details }) => {
+  const [attackId, setAttackId] = useState("");
   const [attacks, setAttacks] = useState([]);
   const [open, setOpen] = useState(false);
   const [attackName, setAttackName] = useState("");
@@ -21,6 +22,7 @@ export const Attacks = ({ details }) => {
   const [attackDescription, setAttackDescription] = useState("");
 
   const handleOpen = (attack) => {
+    setAttackId(attack.id);
     setAttackName(attack.name);
     setAttackType(attack.type);
     setAttackSkill(attack.skill);
@@ -129,7 +131,7 @@ export const Attacks = ({ details }) => {
                   <div className={styles.buttonContainer}>
                     <Button
                       onClick={() => setOpen(false)}
-                      color="inherit"
+                      color="error"
                       variant="outlined"
                       sx={{
                         mt: 2,
