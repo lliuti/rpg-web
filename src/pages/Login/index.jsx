@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { useAuth } from "../../contexts/useAuth";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -6,9 +6,20 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
 
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
   const context = useAuth();
@@ -17,9 +28,13 @@ export const Login = () => {
     document.title = "RPG - LOGIN";
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const lowerUsername = username.toLowerCase().trim();
-    context.Login(lowerUsername, password.trim());
+    const loginResponse = await context.Login(lowerUsername, password.trim());
+    if (loginResponse === false) {
+      setOpen(true);
+      return;
+    }
     navigate("/");
   };
 
@@ -28,6 +43,27 @@ export const Login = () => {
       handleLogin();
     }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
@@ -71,6 +107,14 @@ export const Login = () => {
           </Button>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Usuário/Email ou senha incorreto(s)!"
+        action={action}
+      />
     </Container>
   );
 };
