@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { api } from "../../../services/api";
 
@@ -28,6 +33,9 @@ export const EditSkills = ({ details }) => {
   const [tatica, setTatica] = useState("");
   const [tecnologia, setTecnologia] = useState("");
   const [vontade, setVontade] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setDefaultState();
@@ -59,36 +67,62 @@ export const EditSkills = ({ details }) => {
   };
 
   const handleUpdateSheet = async () => {
-    const response = await api.put(
-      `/characters/${details.character_id}/skills`,
-      {
-        atletismo_skill: atletismo,
-        atualidades_skill: atualidades,
-        ciencia_skill: ciencia,
-        diplomacia_skill: diplomacia,
-        enganacao_skill: enganacao,
-        fortitude_skill: fortitude,
-        furtividade_skill: furtividade,
-        intimidacao_skill: intimidacao,
-        investigacao_skill: investigacao,
-        luta_skill: luta,
-        medicina_skill: medicina,
-        ocultismo_skill: ocultismo,
-        percepcao_skill: percepcao,
-        pilotagem_skill: pilotagem,
-        pontaria_skill: pontaria,
-        prestidigitacao_skill: prestidigitacao,
-        profissao_skill: profissao,
-        reflexos_skill: reflexos,
-        religiao_skill: religiao,
-        tatica_skill: tatica,
-        tecnologia_skill: tecnologia,
-        vontade_skill: vontade,
-      }
-    );
-
-    console.log(response.data);
+    setLoading(true);
+    try {
+      const response = await api.put(
+        `/characters/${details.character_id}/skills`,
+        {
+          atletismo_skill: atletismo,
+          atualidades_skill: atualidades,
+          ciencia_skill: ciencia,
+          diplomacia_skill: diplomacia,
+          enganacao_skill: enganacao,
+          fortitude_skill: fortitude,
+          furtividade_skill: furtividade,
+          intimidacao_skill: intimidacao,
+          investigacao_skill: investigacao,
+          luta_skill: luta,
+          medicina_skill: medicina,
+          ocultismo_skill: ocultismo,
+          percepcao_skill: percepcao,
+          pilotagem_skill: pilotagem,
+          pontaria_skill: pontaria,
+          prestidigitacao_skill: prestidigitacao,
+          profissao_skill: profissao,
+          reflexos_skill: reflexos,
+          religiao_skill: religiao,
+          tatica_skill: tatica,
+          tecnologia_skill: tecnologia,
+          vontade_skill: vontade,
+        }
+      );
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setOpen(true);
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <div className={styles.skillsContainer}>
@@ -97,8 +131,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="atletistmoInput"
           label="Atletismo"
-          defaultValue={details.atletismo}
-          value={atletismo}
+          value={atletismo ?? ""}
           onChange={(e) => setAtletismo(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -108,8 +141,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="atualidadesInput"
           label="Atualidades"
-          defaultValue={details.atualidades}
-          value={atualidades}
+          value={atualidades ?? ""}
           onChange={(e) => setAtualidades(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -121,8 +153,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="cienciaInput"
           label="Ciencia"
-          defaultValue={details.ciencia}
-          value={ciencia}
+          value={ciencia ?? ""}
           onChange={(e) => setCiencia(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -132,8 +163,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="diplomaciaInput"
           label="Diplomacia"
-          defaultValue={details.diplomacia}
-          value={diplomacia}
+          value={diplomacia ?? ""}
           onChange={(e) => setDiplomacia(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -145,8 +175,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="enganacaoInput"
           label="Enganacao"
-          defaultValue={details.enganacao}
-          value={enganacao}
+          value={enganacao ?? ""}
           onChange={(e) => setEnganacao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -156,8 +185,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="fortitudeInput"
           label="Fortitude"
-          defaultValue={details.fortitude}
-          value={fortitude}
+          value={fortitude ?? ""}
           onChange={(e) => setFortitude(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -169,8 +197,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="furtividadeInput"
           label="Furtividade"
-          defaultValue={details.furtividade}
-          value={furtividade}
+          value={furtividade ?? ""}
           onChange={(e) => setFurtividade(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -180,8 +207,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="intimidacaoInput"
           label="Intimidacao"
-          defaultValue={details.intimidacao}
-          value={intimidacao}
+          value={intimidacao ?? ""}
           onChange={(e) => setIntimidacao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -193,8 +219,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="investigacaoInput"
           label="Investigacao"
-          defaultValue={details.investigacao}
-          value={investigacao}
+          value={investigacao ?? ""}
           onChange={(e) => setInvestigacao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -204,8 +229,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="lutaInput"
           label="Luta"
-          defaultValue={details.luta}
-          value={luta}
+          value={luta ?? ""}
           onChange={(e) => setLuta(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -217,8 +241,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="medicinaInput"
           label="Medicina"
-          defaultValue={details.medicina}
-          value={medicina}
+          value={medicina ?? ""}
           onChange={(e) => setMedicina(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -228,8 +251,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="ocultismoInput"
           label="Ocultismo"
-          defaultValue={details.ocultismo}
-          value={ocultismo}
+          value={ocultismo ?? ""}
           onChange={(e) => setOcultismo(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -241,8 +263,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="percepcaoInput"
           label="Percepcao"
-          defaultValue={details.percepcao}
-          value={percepcao}
+          value={percepcao ?? ""}
           onChange={(e) => setPercepcao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -252,8 +273,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="pilotagemInput"
           label="Pilotagem"
-          defaultValue={details.pilotagem}
-          value={pilotagem}
+          value={pilotagem ?? ""}
           onChange={(e) => setPilotagem(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -265,8 +285,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="pontariaInput"
           label="Pontaria"
-          defaultValue={details.pontaria}
-          value={pontaria}
+          value={pontaria ?? ""}
           onChange={(e) => setPontaria(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -276,8 +295,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="prestidigitacaoInput"
           label="Prestidigitacao"
-          defaultValue={details.prestidigitacao}
-          value={prestidigitacao}
+          value={prestidigitacao ?? ""}
           onChange={(e) => setPrestidigitacao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -289,8 +307,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="profissaoInput"
           label="Profissao"
-          defaultValue={details.profissao}
-          value={profissao}
+          value={profissao ?? ""}
           onChange={(e) => setProfissao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -300,8 +317,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="reflexosInput"
           label="Reflexos"
-          defaultValue={details.reflexos}
-          value={reflexos}
+          value={reflexos ?? ""}
           onChange={(e) => setReflexos(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -313,8 +329,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="religaoInput"
           label="Religiao"
-          defaultValue={details.religiao}
-          value={religiao}
+          value={religiao ?? ""}
           onChange={(e) => setReligiao(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -324,8 +339,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="taticaInput"
           label="Tatica"
-          defaultValue={details.tatica}
-          value={tatica}
+          value={tatica ?? ""}
           onChange={(e) => setTatica(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -337,8 +351,7 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="tecnologiaInput"
           label="Tecnologia"
-          defaultValue={details.tecnologia}
-          value={tecnologia}
+          value={tecnologia ?? ""}
           onChange={(e) => setTecnologia(e.target.value)}
           InputProps={{
             readOnly: false,
@@ -348,18 +361,29 @@ export const EditSkills = ({ details }) => {
         <TextField
           id="vontadeInput"
           label="Vontade"
-          defaultValue={details.vontade}
           onChange={(e) => setVontade(e.target.value)}
-          value={vontade}
+          value={vontade ?? ""}
           InputProps={{
             readOnly: false,
             autoFocus: true,
           }}
         />
       </div>
-      <Button onClick={handleUpdateSheet} variant="outlined">
+      <LoadingButton
+        loading={loading}
+        onClick={handleUpdateSheet}
+        variant="outlined"
+      >
         ATUALIZAR
-      </Button>
+      </LoadingButton>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível atualizar as Defesas!"
+        action={action}
+      />
     </div>
   );
 };
