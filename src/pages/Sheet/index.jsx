@@ -22,24 +22,39 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 export const Sheet = () => {
   const [characterSheet, setCharacterSheet] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const { character_id } = useParams();
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+
+  const handleCloseBackdrop = () => {
+    setOpenBackdrop(false);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   useEffect(() => {
+    setOpenBackdrop(true);
     fetchCharacter();
   }, [character_id]);
 
   const fetchCharacter = async () => {
-    const response = await api.get(`/characters/${character_id}`);
-    setCharacterSheet(response.data);
-    document.title = `RPG - ${response.data.name}`;
+    try {
+      const response = await api.get(`/characters/${character_id}`);
+      setCharacterSheet(response.data);
+      document.title = `RPG - ${response.data.name}`;
+      setOpenBackdrop(false);
+    } catch (err) {
+      setOpenBackdrop(false);
+      navigate("/");
+    }
   };
 
   return (
@@ -176,6 +191,13 @@ export const Sheet = () => {
           </Accordion>
         </div>
       </div>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+        onClick={handleCloseBackdrop}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Container>
   );
 };
