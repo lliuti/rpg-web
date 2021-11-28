@@ -6,7 +6,6 @@ export const DashboardLogs = ({ logsProp }) => {
 
   useEffect(() => {
     setLogs([...logs, logsProp]);
-    console.log(logsProp);
   }, [logsProp]);
 
   return (
