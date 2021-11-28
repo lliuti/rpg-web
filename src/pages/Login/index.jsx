@@ -9,13 +9,8 @@ import styles from "./styles.module.scss";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
-const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 export const Login = () => {
   const [username, setUsername] = useState("");
