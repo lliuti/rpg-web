@@ -26,12 +26,26 @@ import DeleteForever from "@mui/icons-material/DeleteForever";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import LoadingButton from "@mui/lab/LoadingButton";
+
 export const EditSheet = () => {
   const [characterSheet, setCharacterSheet] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const { character_id } = useParams();
   const [openBackdrop, setOpenBackdrop] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleCloseBackdrop = () => {
     setOpenBackdrop(false);
@@ -60,13 +74,36 @@ export const EditSheet = () => {
   };
 
   const handleDeleteCharacter = async () => {
+    setDeleteLoading(true);
     try {
       await api.delete(`/characters/${character_id}`);
+      setDeleteLoading(false);
       navigate("/dashboard");
     } catch (err) {
-      console.log(err);
+      setDeleteLoading(false);
     }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
@@ -208,13 +245,51 @@ export const EditSheet = () => {
         <div className={styles.deleteButtonContainer}>
           <Button
             variant="outlined"
-            onClick={handleDeleteCharacter}
+            onClick={() => setOpenDeleteModal(true)}
             color="inherit"
             startIcon={<DeleteForever />}
             sx={{ width: "100%" }}
           >
             DELETAR
           </Button>
+          <Dialog
+            open={openDeleteModal}
+            onClose={() => setOpenDeleteModal(false)}
+            aria-labelledby="diceResultDialogTitle"
+            aria-describedby="diceResultDialogDescription"
+          >
+            <DialogTitle id="diceResultDialogTitle">
+              {"Resultado dados"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText
+                id="diceResultDialogDescription"
+                sx={{ display: "flex", flexDirection: "column" }}
+              >
+                Voce tem certeza que deseja deletar esse personagem
+                permanentemente?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setOpenDeleteModal(false)}
+                autoFocus
+                color="inherit"
+                variant="outlined"
+              >
+                Cancelar
+              </Button>
+              <LoadingButton
+                loading={deleteLoading}
+                onClick={handleDeleteCharacter}
+                autoFocus
+                color="error"
+                variant="contained"
+              >
+                Deletar
+              </LoadingButton>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
       <Backdrop
@@ -224,6 +299,14 @@ export const EditSheet = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível deletar este personagem!"
+        action={action}
+      />
     </Container>
   );
 };
