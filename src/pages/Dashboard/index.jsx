@@ -17,6 +17,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import AssignmentInd from "@mui/icons-material/AssignmentInd";
 
 const socket = io("https://rpg-platform.herokuapp.com/");
 // const socket = io("http://localhost:3333");
@@ -101,15 +102,15 @@ export const Dashboard = () => {
               color="primary"
               startIcon={<Add />}
             >
-              CRIAR RITUAL
+              RITUAL
             </Button>
             <Button
-              variant="outlined"
+              variant="text"
               onClick={() => navigate("/assign-ritual")}
               color="primary"
               sx={{ ml: 1 }}
             >
-              ATRIBUIR RITUAL
+              ATRIBUIR
             </Button>
             <Button
               variant="outlined"
@@ -118,15 +119,15 @@ export const Dashboard = () => {
               startIcon={<Add />}
               sx={{ ml: 1 }}
             >
-              CRIAR ATAQUE
+              ATAQUE
             </Button>
             <Button
-              variant="outlined"
+              variant="text"
               onClick={() => navigate("/assign-attack")}
               color="success"
               sx={{ ml: 1 }}
             >
-              ATRIBUIR ATAQUE
+              ATRIBUIR
             </Button>
             {/* <IconButton
               color="inherit"
@@ -145,7 +146,7 @@ export const Dashboard = () => {
               edge="start"
               sx={{ mr: 2, ml: 1, ...(open && { display: "none" }) }}
             >
-              ROLAGENS
+              DADOS
             </Button>
           </div>
         </div>
