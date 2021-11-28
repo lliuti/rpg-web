@@ -9,15 +9,24 @@ import ExitToApp from "@mui/icons-material/ExitToApp";
 import Add from "@mui/icons-material/Add";
 import Dashboard from "@mui/icons-material/Dashboard";
 
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import { api } from "../../services/api";
 
 export const Main = () => {
   const [characters, setCharacters] = useState([]);
 
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+
+  const handleCloseBackdrop = () => {
+    setOpenBackdrop(false);
+  };
   const navigate = useNavigate();
   const context = useAuth();
 
   useEffect(() => {
+    setOpenBackdrop(true);
     fetchMyCharacters();
     context.VerifyAdmin();
     document.title = "RPG - PLATFORM";
@@ -28,16 +37,15 @@ export const Main = () => {
     navigate("/login");
   };
 
-  const fetchMyCharacters = () => {
-    setTimeout(async () => {
-      try {
-        const response = await api.get("/characters");
-        setCharacters(response.data);
-      } catch (err) {
-        console.log(err);
-        navigate("/login");
-      }
-    }, 150);
+  const fetchMyCharacters = async () => {
+    try {
+      const response = await api.get("/characters");
+      setCharacters(response.data);
+      setOpenBackdrop(false);
+    } catch (err) {
+      setOpenBackdrop(false);
+      navigate("/login");
+    }
   };
 
   return (
@@ -109,6 +117,13 @@ export const Main = () => {
             ))}
           </div>
         </div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={openBackdrop}
+          onClick={handleCloseBackdrop}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </Container>
     </>
   );
