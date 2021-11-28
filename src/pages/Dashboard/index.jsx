@@ -17,6 +17,9 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
 
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 const socket = io("https://rpg-platform.herokuapp.com/");
 // const socket = io("http://localhost:3333");
 
@@ -35,11 +38,18 @@ export const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [logs, setLogs] = useState([]);
 
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+
+  const handleCloseBackdrop = () => {
+    setOpenBackdrop(false);
+  };
+
   const context = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
 
   useEffect(() => {
+    setOpenBackdrop(true);
     document.title = "RPG - Dashboard";
     fetchCharacters();
   }, [data]);
@@ -54,6 +64,10 @@ export const Dashboard = () => {
 
     socket.on("vitalsChanged", (data) => {
       setData(data);
+      setLogs([
+        ...logs,
+        `${data.character} updated ${data.vital} from ${data.previousCurrVital}/${data.previousMaxVital} to ${data.currVital}/${data.maxVital}`,
+      ]);
     });
   }, [socket]);
 
@@ -66,8 +80,14 @@ export const Dashboard = () => {
   };
 
   const fetchCharacters = async () => {
-    const response = await api.get("/dashboard/characters");
-    setCharacterList(response.data);
+    try {
+      const response = await api.get("/dashboard/characters");
+      setCharacterList(response.data);
+      setOpenBackdrop(false);
+    } catch (err) {
+      setOpenBackdrop(false);
+      navigate("/");
+    }
   };
 
   return (
@@ -175,7 +195,14 @@ export const Dashboard = () => {
         anchor="right"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            paddingLeft: "60px",
+          }}
+        >
+          <h1>Logs</h1>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -186,6 +213,13 @@ export const Dashboard = () => {
         </DrawerHeader>
         <DashboardLogs logsProp={logs} />
       </Drawer>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+        onClick={handleCloseBackdrop}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Container>
   );
 };
