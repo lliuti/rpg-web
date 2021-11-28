@@ -16,19 +16,15 @@ import Drawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import AssignmentInd from "@mui/icons-material/AssignmentInd";
 
 const socket = io("https://rpg-platform.herokuapp.com/");
 // const socket = io("http://localhost:3333");
 
 const drawerWidth = 320;
-// const drawerHeight = 300;
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
@@ -129,15 +125,6 @@ export const Dashboard = () => {
             >
               ATRIBUIR
             </Button>
-            {/* <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton> */}
             <Button
               color="inherit"
               variant="outlined"
@@ -178,11 +165,9 @@ export const Dashboard = () => {
       <Drawer
         sx={{
           width: drawerWidth,
-          // height: drawerHeight,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            // height: drawerHeight,
             boxSizing: "border-box",
           },
         }}
