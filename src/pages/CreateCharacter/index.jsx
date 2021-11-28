@@ -19,16 +19,13 @@ import MuiAlert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 export const CreateCharacter = () => {
   const [archetype, setArchetype] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [occupation, setOccupation] = useState("");
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
