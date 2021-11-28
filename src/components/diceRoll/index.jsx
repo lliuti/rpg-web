@@ -143,13 +143,13 @@ export const DiceRoll = ({ details }) => {
                 label="Faces"
                 onChange={handleDiceFaceAmountChange}
               >
+                <MenuItem value={"D20"}>D20</MenuItem>
                 <MenuItem value={"D3"}>D3</MenuItem>
                 <MenuItem value={"D4"}>D4</MenuItem>
                 <MenuItem value={"D6"}>D6</MenuItem>
                 <MenuItem value={"D8"}>D8</MenuItem>
                 <MenuItem value={"D10"}>D10</MenuItem>
                 <MenuItem value={"D12"}>D12</MenuItem>
-                <MenuItem value={"D20"}>D20</MenuItem>
                 <MenuItem value={"D100"}>D100</MenuItem>
               </Select>
             </FormControl>
