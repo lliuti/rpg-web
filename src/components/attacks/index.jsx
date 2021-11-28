@@ -9,8 +9,30 @@ import Button from "@mui/material/Button";
 export const Attacks = ({ details }) => {
   const [attacks, setAttacks] = useState([]);
   const [open, setOpen] = useState(false);
+  const [attackName, setAttackName] = useState("");
+  const [attackType, setAttackType] = useState("");
+  const [attackSkill, setAttackSkill] = useState("");
+  const [attackRange, setAttackRange] = useState("");
+  const [attackDamage, setAttackDamage] = useState("");
+  const [attackDamageType, setAttackDamageType] = useState("");
+  const [attackCritical, setAttackCritical] = useState("");
+  const [attackCriticalDamage, setAttackCriticalDamage] = useState("");
+  const [attackWeight, setAttackWeight] = useState("");
+  const [attackDescription, setAttackDescription] = useState("");
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (attack) => {
+    setAttackName(attack.name);
+    setAttackType(attack.type);
+    setAttackSkill(attack.skill);
+    setAttackRange(attack.range);
+    setAttackDamage(attack.damage);
+    setAttackDamageType(attack.damageType);
+    setAttackCritical(attack.critical);
+    setAttackCriticalDamage(attack.criticalDamage);
+    setAttackWeight(attack.weight);
+    setAttackDescription(attack.description);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -40,7 +62,10 @@ export const Attacks = ({ details }) => {
         {attacks?.map(({ attack }) => {
           return (
             <div key={attack.id}>
-              <div onClick={handleOpen} className={styles.gridAttack}>
+              <div
+                onClick={() => handleOpen(attack)}
+                className={styles.gridAttack}
+              >
                 <p>{attack.name}</p>
                 <p>{attack.type}</p>
                 <p>{attack.skill}</p>
@@ -50,7 +75,7 @@ export const Attacks = ({ details }) => {
                 <p>{attack.critical}</p>
                 <p>{attack.criticalDamage}</p>
                 <p>{attack.weight}</p>
-                <p>{attack.description}</p>
+                <p className={styles.ellipsis}>{attack.description}</p>
               </div>
               <Modal
                 open={open}
@@ -62,43 +87,43 @@ export const Attacks = ({ details }) => {
                   <div className={styles.modalGrid}>
                     <div className={styles.gridRow}>
                       <p>Nome: </p>
-                      <p>{attack.name}</p>
+                      <p>{attackName}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Tipo: </p>
-                      <p>{attack.type}</p>
+                      <p>{attackType}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Perícia</p>
-                      <p>{attack.skill}</p>
+                      <p>{attackSkill}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Alcance</p>
-                      <p>{attack.range}</p>
+                      <p>{attackRange}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Dano</p>
-                      <p>{attack.damage}</p>
+                      <p>{attackDamage}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Tipo Dano</p>
-                      <p>{attack.damageType}</p>
+                      <p>{attackDamageType}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Crítico</p>
-                      <p>{attack.critical}</p>
+                      <p>{attackCritical}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Dano Crítico</p>
-                      <p>{attack.criticalDamage}</p>
+                      <p>{attackCriticalDamage}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Peso</p>
-                      <p>{attack.weight}</p>
+                      <p>{attackWeight}</p>
                     </div>
                     <div className={styles.gridRow}>
                       <p>Descricao</p>
-                      <p>{attack.description}</p>
+                      <p>{attackDescription}</p>
                     </div>
                   </div>
                   <div className={styles.buttonContainer}>
