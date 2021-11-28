@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
+
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
@@ -12,11 +14,21 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export const CreateCharacter = () => {
   const [archetype, setArchetype] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [occupation, setOccupation] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,15 +41,42 @@ export const CreateCharacter = () => {
   };
 
   const handleCreateCharacter = async () => {
-    const response = await api.post("/characters", {
-      name,
-      occupation,
-      age: parseInt(age),
-      archetype,
-    });
+    setLoading(true);
+    try {
+      const response = await api.post("/characters", {
+        name,
+        occupation,
+        age: parseInt(age),
+        archetype,
+      });
 
-    navigate("/");
+      setLoading(false);
+      navigate("/");
+    } catch (err) {
+      setLoading(false);
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
@@ -92,11 +131,23 @@ export const CreateCharacter = () => {
           >
             VOLTAR
           </Button>
-          <Button onClick={handleCreateCharacter} variant="outlined">
+          <LoadingButton
+            loading={loading}
+            onClick={handleCreateCharacter}
+            variant="outlined"
+          >
             CRIAR
-          </Button>
+          </LoadingButton>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível cadastrar um novo personagem!"
+        action={action}
+      />
     </Container>
   );
 };
