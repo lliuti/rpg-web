@@ -4,6 +4,8 @@ import styles from "./styles.module.scss";
 import { api } from "../../services/api";
 import { DiceRoll } from "../diceRoll/index";
 
+import LoadingButton from "@mui/lab/LoadingButton";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -20,6 +22,7 @@ export const Vitals = ({ details }) => {
   const [lifeDialogOpen, setLifeDialogOpen] = useState(false);
   const [sanityDialogOpen, setSanityDialogOpen] = useState(false);
   const [effortDialogOpen, setEffortDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [currLife, setCurrLife] = useState("");
   const [maxLife, setMaxLife] = useState("");
@@ -67,42 +70,66 @@ export const Vitals = ({ details }) => {
 
   // CHANGE VALUES
   const handleChangeLife = async () => {
-    const response = await api.put(`/characters/${details.character_id}/life`, {
-      currLife,
-      maxLife,
-    });
+    setLoading(true);
+    try {
+      const response = await api.put(
+        `/characters/${details.character_id}/life`,
+        {
+          currLife,
+          maxLife,
+        }
+      );
 
-    setCurrLife(response.data.currVital);
-    setMaxLife(response.data.maxVital);
-    setLifeDialogOpen(false);
+      setCurrLife(response.data.currVital);
+      setMaxLife(response.data.maxVital);
+      setLoading(false);
+      setLifeDialogOpen(false);
+    } catch (err) {
+      setLoading(false);
+      setLifeDialogOpen(false);
+    }
   };
 
   const handleChangeSanity = async () => {
-    const response = await api.put(
-      `/characters/${details.character_id}/sanity`,
-      {
-        currSan,
-        maxSan,
-      }
-    );
+    setLoading(true);
+    try {
+      const response = await api.put(
+        `/characters/${details.character_id}/sanity`,
+        {
+          currSan,
+          maxSan,
+        }
+      );
 
-    setCurrSan(response.data.currVital);
-    setMaxSan(response.data.maxVital);
-    setSanityDialogOpen(false);
+      setCurrSan(response.data.currVital);
+      setMaxSan(response.data.maxVital);
+      setLoading(false);
+      setSanityDialogOpen(false);
+    } catch (err) {
+      setLoading(false);
+      setSanityDialogOpen(false);
+    }
   };
 
   const handleChangeEffort = async () => {
-    const response = await api.put(
-      `/characters/${details.character_id}/effort`,
-      {
-        currEff,
-        maxEff,
-      }
-    );
+    setLoading(true);
+    try {
+      const response = await api.put(
+        `/characters/${details.character_id}/effort`,
+        {
+          currEff,
+          maxEff,
+        }
+      );
 
-    setCurrEff(response.data.currVital);
-    setMaxEff(response.data.maxVital);
-    setEffortDialogOpen(false);
+      setCurrEff(response.data.currVital);
+      setMaxEff(response.data.maxVital);
+      setLoading(false);
+      setEffortDialogOpen(false);
+    } catch (err) {
+      setLoading(false);
+      setEffortDialogOpen(false);
+    }
   };
 
   return (
@@ -164,14 +191,15 @@ export const Vitals = ({ details }) => {
           <Button onClick={handleLifeDialogClose} color="error" variant="text">
             Cancelar
           </Button>
-          <Button
+          <LoadingButton
+            loading={loading}
             onClick={handleChangeLife}
             autoFocus
             color="error"
             variant="outlined"
           >
             Salvar
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
 
@@ -230,14 +258,15 @@ export const Vitals = ({ details }) => {
           >
             Cancelar
           </Button>
-          <Button
+          <LoadingButton
+            loading={loading}
             onClick={handleChangeSanity}
             autoFocus
             color="primary"
             variant="outlined"
           >
             Salvar
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
 
@@ -295,14 +324,15 @@ export const Vitals = ({ details }) => {
           >
             Cancelar
           </Button>
-          <Button
+          <LoadingButton
+            loading={loading}
             onClick={handleChangeEffort}
             autoFocus
             color="warning"
             variant="outlined"
           >
             Salvar
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </div>
