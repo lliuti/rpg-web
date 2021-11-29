@@ -49,9 +49,7 @@ export const AssignRitual = () => {
       return;
     }
 
-    const response = await api.post(
-      `/characters/${character}/rituals/${ritual}`
-    );
+    await api.post(`/characters/${character}/rituals/${ritual}`);
 
     setCharacter("");
     setRitual("");
