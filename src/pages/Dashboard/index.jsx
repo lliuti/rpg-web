@@ -121,14 +121,6 @@ export const Dashboard = () => {
               RITUAL
             </Button>
             <Button
-              variant="text"
-              onClick={() => navigate("/assign-ritual")}
-              color="primary"
-              sx={{ ml: 1 }}
-            >
-              ATRIBUIR
-            </Button>
-            <Button
               variant="outlined"
               onClick={() => navigate("/create-attack")}
               color="success"
@@ -138,9 +130,9 @@ export const Dashboard = () => {
               ATAQUE
             </Button>
             <Button
-              variant="text"
-              onClick={() => navigate("/assign-attack")}
-              color="success"
+              variant="outlined"
+              onClick={() => navigate("/assign")}
+              color="warning"
               sx={{ ml: 1 }}
             >
               ATRIBUIR
