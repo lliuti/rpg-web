@@ -28,7 +28,6 @@ export const Main = () => {
   useEffect(() => {
     setOpenBackdrop(true);
     fetchMyCharacters();
-    context.VerifyAdmin();
     document.title = "RPG - PLATFORM";
   }, []);
 
