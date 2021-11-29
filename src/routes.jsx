@@ -9,8 +9,7 @@ import { NotFound } from "./pages/NotFound/index";
 import { Dashboard } from "./pages/Dashboard/index";
 import { CreateRitual } from "./pages/CreateRitual/index";
 import { CreateAttack } from "./pages/CreateAttack/index";
-import { AssignAttack } from "./pages/AssignAttack/index";
-import { AssignRitual } from "./pages/AssignRitual/index";
+import { AssignAttackRitual } from "./pages/AssignAttackRitual/index";
 import { EditSheet } from "./pages/EditSheet/index";
 import { ForgotPassword } from "./pages/ForgotPassword/index";
 import { NewPassword } from "./pages/NewPassword/index";
@@ -36,9 +35,8 @@ export const Router = () => {
         />
         <Route path={"/dashboard"} element={<ProtectedDashboard />} />
         <Route path={"/create-ritual"} element={<ProtectedCreateRitual />} />
-        <Route path={"/assign-ritual"} element={<ProtectedAssignRitual />} />
         <Route path={"/create-attack"} element={<ProtectedCreateAttack />} />
-        <Route path={"/assign-attack"} element={<ProtectedAssignAttack />} />
+        <Route path={"/assign"} element={<ProtectedAssignAttackRitual />} />
         <Route path={"/player/forgot-password"} element={<ForgotPassword />} />
         <Route
           path={"/players/:player_id/new-password"}
@@ -52,60 +50,40 @@ export const Router = () => {
 
 const ProtectedMain = () => {
   const context = useAuth();
-
   return context.signed ? <Main /> : <Login />;
 };
 
 const ProtectedCreateCharacter = () => {
   const context = useAuth();
-
   return context.signed ? <CreateCharacter /> : <Login />;
 };
 
 const ProtectedSheet = () => {
   const context = useAuth();
-
   return context.signed ? <Sheet /> : <Login />;
 };
 
 const ProtectedEditSheet = () => {
   const context = useAuth();
-  context.VerifyAdmin();
-
   return context.admin ? <EditSheet /> : <Login />;
 };
 
 const ProtectedDashboard = () => {
   const context = useAuth();
-  context.VerifyAdmin();
-
   return context.admin ? <Dashboard /> : <Login />;
 };
 
 const ProtectedCreateRitual = () => {
   const context = useAuth();
-  context.VerifyAdmin();
-
   return context.admin ? <CreateRitual /> : <Login />;
 };
 
 const ProtectedCreateAttack = () => {
   const context = useAuth();
-  context.VerifyAdmin();
-
   return context.admin ? <CreateAttack /> : <Login />;
 };
 
-const ProtectedAssignAttack = () => {
+const ProtectedAssignAttackRitual = () => {
   const context = useAuth();
-  context.VerifyAdmin();
-
-  return context.admin ? <AssignAttack /> : <Login />;
-};
-
-const ProtectedAssignRitual = () => {
-  const context = useAuth();
-  context.VerifyAdmin();
-
-  return context.admin ? <AssignRitual /> : <Login />;
+  return context.admin ? <AssignAttackRitual /> : <Login />;
 };
