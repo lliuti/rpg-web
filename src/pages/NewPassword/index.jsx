@@ -6,9 +6,16 @@ import { api } from "../../services/api";
 
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const NewPassword = () => {
+  const [loading, setLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,13 +28,41 @@ export const NewPassword = () => {
       return;
     }
 
-    const response = await api.post(`/players/${player_id}/update-password`, {
-      newPassword: password,
-    });
+    setLoading(true);
 
-    console.log(response.data);
-    navigate("/login");
+    try {
+      await api.post(`/players/${player_id}/update-password`, {
+        newPassword: password,
+      });
+
+      setLoading(false);
+      navigate("/login");
+    } catch (err) {
+      setOpenSnackbar(true);
+      setLoading(false);
+    }
   };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const actionSnackbar = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleCloseSnackbar}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
@@ -53,15 +88,24 @@ export const NewPassword = () => {
           />
         </div>
         <div className={styles.gridOneItem}>
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             color="primary"
             onClick={handleNewPassword}
           >
             ATUALIZAR
-          </Button>
+          </LoadingButton>
         </div>
       </div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        color="error"
+        message="Não foi possível enviar email!"
+        action={actionSnackbar}
+      />
     </Container>
   );
 };
