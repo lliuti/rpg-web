@@ -6,6 +6,10 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 export const Attacks = ({ details }) => {
   const [attackId, setAttackId] = useState("");
   const [attacks, setAttacks] = useState([]);
@@ -20,6 +24,7 @@ export const Attacks = ({ details }) => {
   const [attackCriticalDamage, setAttackCriticalDamage] = useState("");
   const [attackWeight, setAttackWeight] = useState("");
   const [attackDescription, setAttackDescription] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleOpen = (attack) => {
     setAttackId(attack.id);
@@ -42,9 +47,34 @@ export const Attacks = ({ details }) => {
   }, [details]);
 
   const fetchAttacks = async () => {
-    const response = await api.get(`/characters/${details}/attacks`);
-    setAttacks(response.data);
+    try {
+      const response = await api.get(`/characters/${details}/attacks`);
+      setAttacks(response.data);
+    } catch (err) {
+      setSnackbarOpen(true);
+    }
   };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleCloseSnackbar}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <div className={styles.attacks}>
@@ -146,6 +176,14 @@ export const Attacks = ({ details }) => {
           );
         })}
       </div>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        color="error"
+        message="Não foi possível carregar os ataques!"
+        action={action}
+      />
     </div>
   );
 };
