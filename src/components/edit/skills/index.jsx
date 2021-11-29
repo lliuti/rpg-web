@@ -69,33 +69,30 @@ export const EditSkills = ({ details }) => {
   const handleUpdateSheet = async () => {
     setLoading(true);
     try {
-      const response = await api.put(
-        `/characters/${details.character_id}/skills`,
-        {
-          atletismo_skill: atletismo,
-          atualidades_skill: atualidades,
-          ciencia_skill: ciencia,
-          diplomacia_skill: diplomacia,
-          enganacao_skill: enganacao,
-          fortitude_skill: fortitude,
-          furtividade_skill: furtividade,
-          intimidacao_skill: intimidacao,
-          investigacao_skill: investigacao,
-          luta_skill: luta,
-          medicina_skill: medicina,
-          ocultismo_skill: ocultismo,
-          percepcao_skill: percepcao,
-          pilotagem_skill: pilotagem,
-          pontaria_skill: pontaria,
-          prestidigitacao_skill: prestidigitacao,
-          profissao_skill: profissao,
-          reflexos_skill: reflexos,
-          religiao_skill: religiao,
-          tatica_skill: tatica,
-          tecnologia_skill: tecnologia,
-          vontade_skill: vontade,
-        }
-      );
+      await api.put(`/characters/${details.character_id}/skills`, {
+        atletismo_skill: atletismo,
+        atualidades_skill: atualidades,
+        ciencia_skill: ciencia,
+        diplomacia_skill: diplomacia,
+        enganacao_skill: enganacao,
+        fortitude_skill: fortitude,
+        furtividade_skill: furtividade,
+        intimidacao_skill: intimidacao,
+        investigacao_skill: investigacao,
+        luta_skill: luta,
+        medicina_skill: medicina,
+        ocultismo_skill: ocultismo,
+        percepcao_skill: percepcao,
+        pilotagem_skill: pilotagem,
+        pontaria_skill: pontaria,
+        prestidigitacao_skill: prestidigitacao,
+        profissao_skill: profissao,
+        reflexos_skill: reflexos,
+        religiao_skill: religiao,
+        tatica_skill: tatica,
+        tecnologia_skill: tecnologia,
+        vontade_skill: vontade,
+      });
       setLoading(false);
     } catch (err) {
       setLoading(false);
