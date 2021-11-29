@@ -111,7 +111,7 @@ export const EditSheet = () => {
         <div className={styles.topContainer}>
           <Button
             variant="outlined"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
             color="inherit"
             startIcon={<ArrowBack />}
           >
