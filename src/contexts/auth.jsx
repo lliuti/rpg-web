@@ -16,6 +16,8 @@ export const AuthProvider = ({ children }) => {
       setToken(storedToken);
       api.defaults.headers.Authorization = `Bearer ${storedToken}`;
     }
+
+    VerifyAdmin();
   }, [token]);
 
   const Login = async (username, password) => {
@@ -47,13 +49,13 @@ export const AuthProvider = ({ children }) => {
       setAdmin(response.data);
       return response.data;
     } catch (err) {
-      console.log(err);
+      return false;
     }
   };
 
   return (
     <AuthContext.Provider
-      value={{ signed: Boolean(token), admin, Login, Logout, VerifyAdmin }}
+      value={{ signed: Boolean(token), admin, Login, Logout }}
     >
       {children}
     </AuthContext.Provider>
