@@ -49,9 +49,7 @@ export const AssignAttack = () => {
       return;
     }
 
-    const response = await api.post(
-      `/characters/${character}/attacks/${attack}`
-    );
+    await api.post(`/characters/${character}/attacks/${attack}`);
 
     setCharacter("");
     setAttack("");
