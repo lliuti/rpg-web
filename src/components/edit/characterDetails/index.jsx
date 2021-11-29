@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
 
 import { api } from "../../../services/api";
+import { useAuth } from "../../../contexts/useAuth";
+import styles from "./styles.module.scss";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -23,6 +24,8 @@ export const EditCharacterDetails = ({ details }) => {
   const [archetype, setArchetype] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState();
+
+  const context = useAuth();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -126,6 +129,7 @@ export const EditCharacterDetails = ({ details }) => {
             <MenuItem value={"Combatente"}>Combatente</MenuItem>
             <MenuItem value={"Especialista"}>Especialista</MenuItem>
             <MenuItem value={"Ocultista"}>Ocultista</MenuItem>
+            {context.admin && <MenuItem value={"Criatura"}>Criatura</MenuItem>}
           </Select>
         </FormControl>
 
