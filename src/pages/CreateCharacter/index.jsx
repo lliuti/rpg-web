@@ -1,6 +1,7 @@
 import { useState, useEffect, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { useAuth } from "../../contexts/useAuth";
 import styles from "./styles.module.scss";
 
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -28,6 +29,7 @@ export const CreateCharacter = () => {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
+  const context = useAuth();
 
   useEffect(() => {
     document.title = "RPG - CREATE CHARACTER";
@@ -116,6 +118,9 @@ export const CreateCharacter = () => {
               <MenuItem value={"Combatente"}>Combatente</MenuItem>
               <MenuItem value={"Especialista"}>Especialista</MenuItem>
               <MenuItem value={"Ocultista"}>Ocultista</MenuItem>
+              {context.admin && (
+                <MenuItem value={"Criatura"}>Criatura</MenuItem>
+              )}
             </Select>
           </FormControl>
         </div>
