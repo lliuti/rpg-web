@@ -85,6 +85,7 @@ export const Vitals = ({ details }) => {
       setLoading(false);
       setLifeDialogOpen(false);
     } catch (err) {
+      console.log(err);
       setLoading(false);
       setLifeDialogOpen(false);
     }
@@ -106,6 +107,7 @@ export const Vitals = ({ details }) => {
       setLoading(false);
       setSanityDialogOpen(false);
     } catch (err) {
+      console.log(err);
       setLoading(false);
       setSanityDialogOpen(false);
     }
@@ -127,6 +129,7 @@ export const Vitals = ({ details }) => {
       setLoading(false);
       setEffortDialogOpen(false);
     } catch (err) {
+      console.log(err);
       setLoading(false);
       setEffortDialogOpen(false);
     }
