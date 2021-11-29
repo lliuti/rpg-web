@@ -6,6 +6,10 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 export const Rituals = ({ details }) => {
   const [rituals, setRituals] = useState([]);
   const [open, setOpen] = useState(false);
@@ -18,6 +22,7 @@ export const Rituals = ({ details }) => {
   const [ritualExecTime, setRitualExecTime] = useState("");
   const [ritualArea, setRitualArea] = useState("");
   const [ritualDuration, setRitualDuration] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleOpen = (ritual) => {
     setRitualName(ritual.name);
@@ -38,9 +43,34 @@ export const Rituals = ({ details }) => {
   }, [details]);
 
   const fetchRituals = async () => {
-    const response = await api.get(`/characters/${details}/rituals`);
-    setRituals(response.data);
+    try {
+      const response = await api.get(`/characters/${details}/rituals`);
+      setRituals(response.data);
+    } catch (err) {
+      setOpenSnackbar(true);
+    }
   };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const actionSnackbar = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleCloseSnackbar}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <div className={styles.rituals}>
@@ -136,6 +166,14 @@ export const Rituals = ({ details }) => {
           );
         })}
       </div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        color="error"
+        message="Não foi possível carregar os rituais!"
+        action={actionSnackbar}
+      />
     </div>
   );
 };
