@@ -19,6 +19,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 export const DiceRoll = ({ details }) => {
   const [diceDialogOpen, setDiceDialogOpen] = useState(false);
   const [diceAmount, setDiceAmount] = useState("");
@@ -27,6 +31,7 @@ export const DiceRoll = ({ details }) => {
   const [diceRollResult, setDiceRollResult] = useState(0);
   const [diceRolls, setDiceRolls] = useState([]);
   const [diceGreaterRoll, setDiceGreaterRoll] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -61,24 +66,49 @@ export const DiceRoll = ({ details }) => {
       setDiceDialogOpen(false);
       return;
     }
+
     setLoading(true);
+    try {
+      const response = await api.post(
+        `/characters/${details.character_id}/dice`,
+        {
+          diceAmount,
+          diceFaceAmount,
+        }
+      );
 
-    const response = await api.post(
-      `/characters/${details.character_id}/dice`,
-      {
-        diceAmount,
-        diceFaceAmount,
-      }
-    );
-
-    setDiceRollResult(response.data.diceResult);
-    setDiceGreaterRoll(response.data.diceGreater);
-    setDiceRolls(response.data.diceRolls);
-    setDiceDialogOpen(false);
-    setLoading(false);
-    setDiceResultDialogOpen(true);
-    return;
+      setDiceRollResult(response.data.diceResult);
+      setDiceGreaterRoll(response.data.diceGreater);
+      setDiceRolls(response.data.diceRolls);
+      setDiceDialogOpen(false);
+      setLoading(false);
+      setDiceResultDialogOpen(true);
+      return;
+    } catch (err) {
+      setOpen(true);
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <div className={styles.imageDiceRollContainer}>
@@ -203,6 +233,14 @@ export const DiceRoll = ({ details }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível rolar os dados!"
+        action={action}
+      />
     </div>
   );
 };
