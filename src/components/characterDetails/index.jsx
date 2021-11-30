@@ -1,11 +1,14 @@
 import styles from "./styles.module.scss";
 
 import TextField from "@mui/material/TextField";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 export const CharacterDetails = ({ details }) => {
   return (
     <div className={styles.characterDetailsContainer}>
-      <h1>Informacoes Pessoais 📝</h1>
+      <h1>
+        Informacoes Pessoais <BadgeIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="nameInput"
