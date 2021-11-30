@@ -1,10 +1,13 @@
 import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 
 export const Defenses = ({ details }) => {
   return (
     <div className={styles.defensesContainer}>
-      <h1>Defesas / Resistencias 🛡</h1>
+      <h1>
+        Defesas / Resistencias <HealthAndSafetyIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="defInput"
