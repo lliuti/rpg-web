@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -33,7 +34,16 @@ export const DiceRoll = ({ details }) => {
   const [diceGreaterRoll, setDiceGreaterRoll] = useState(0);
   const [open, setOpen] = useState(false);
 
+  const [newPicture, setNewPicture] = useState("");
+  const [changeImageDialogOpen, setChangeImageDialogOpen] = useState(false);
+
+  const [changeImageLoading, setChangeImageLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleChangeImageDialogClose = () => {
+    setChangeImageDialogOpen(false);
+    setNewPicture("");
+  };
 
   const handleDiceResultDialogClose = () => {
     setDiceResultDialogOpen(false);
@@ -110,9 +120,69 @@ export const DiceRoll = ({ details }) => {
     </>
   );
 
+  const handleUpdatePortrait = async () => {
+    if (newPicture == "" || newPicture === details.picture) {
+      return;
+    }
+    setChangeImageLoading(true);
+    try {
+      await api.patch(`/characters/${details.character_id}/picture`, {
+        picture_url: newPicture,
+      });
+      setChangeImageLoading(false);
+      setChangeImageDialogOpen(false);
+    } catch (err) {
+      setChangeImageLoading(false);
+    }
+  };
+
   return (
     <div className={styles.imageDiceRollContainer}>
-      <img src={details.picture} alt="Character picture" />
+      <img
+        onClick={() => setChangeImageDialogOpen(true)}
+        src={details.picture}
+        alt="Character picture"
+      />
+      <Dialog
+        open={changeImageDialogOpen}
+        onClose={handleChangeImageDialogClose}
+        aria-labelledby="changeImageDialogTitle"
+        aria-describedby="changeImageDialogDescription"
+      >
+        <DialogTitle id="changeImageDialogTitle">
+          {"Alterar portrait"}
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            id="imageInput"
+            label="Link do .png"
+            value={newPicture ?? ""}
+            onChange={(e) => setNewPicture(e.target.value)}
+            InputProps={{
+              readOnly: false,
+              autoFocus: true,
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleChangeImageDialogClose}
+            autoFocus
+            color="inherit"
+            variant="outlined"
+          >
+            Fechar
+          </Button>
+          <LoadingButton
+            loading={changeImageLoading}
+            color="primary"
+            variant="outlined"
+            onClick={handleUpdatePortrait}
+          >
+            Atualizar
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
       <Button
         variant="outlined"
         onClick={handleDiceDialogOpen}
