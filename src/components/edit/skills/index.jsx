@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import LoadingButton from "@mui/lab/LoadingButton";
+import SurfingIcon from "@mui/icons-material/Surfing";
 
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
@@ -123,7 +124,9 @@ export const EditSkills = ({ details }) => {
 
   return (
     <div className={styles.skillsContainer}>
-      <h1>Perícias 🗡</h1>
+      <h1>
+        Perícias <SurfingIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="atletistmoInput"
