@@ -10,6 +10,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import CasinoIcon from "@mui/icons-material/Casino";
 
 export const EditAttributes = ({ details }) => {
   const [forca, setForca] = useState("");
@@ -72,7 +73,9 @@ export const EditAttributes = ({ details }) => {
 
   return (
     <div className={styles.attributesContainer}>
-      <h1>Atributos 💪🏻</h1>
+      <h1>
+        Atributos <CasinoIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="strInput"
