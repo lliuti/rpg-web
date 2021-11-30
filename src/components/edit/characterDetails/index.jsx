@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import LoadingButton from "@mui/lab/LoadingButton";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,6 +23,7 @@ export const EditCharacterDetails = ({ details }) => {
   const [age, setAge] = useState("");
   const [occupation, setOccupation] = useState("");
   const [archetype, setArchetype] = useState("");
+  const [exp, setExp] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState();
 
@@ -56,6 +58,7 @@ export const EditCharacterDetails = ({ details }) => {
         age: parseInt(age),
         occupation,
         archetype,
+        exp,
       });
       setLoading(false);
     } catch (err) {
@@ -73,6 +76,7 @@ export const EditCharacterDetails = ({ details }) => {
     setAge(details.age);
     setOccupation(details.occupation);
     setArchetype(details.archetype);
+    setExp(details.exp);
   };
 
   const handleArchetypeChange = (event) => {
@@ -81,7 +85,9 @@ export const EditCharacterDetails = ({ details }) => {
 
   return (
     <div className={styles.characterDetailsContainer}>
-      <h1>Informacoes Pessoais 📝</h1>
+      <h1>
+        Informacoes Pessoais <BadgeIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="nameInput"
@@ -132,25 +138,26 @@ export const EditCharacterDetails = ({ details }) => {
             {context.admin && <MenuItem value={"Criatura"}>Criatura</MenuItem>}
           </Select>
         </FormControl>
-
-        {/* <TextField
-          id="archetypeInput"
-          label="Arquétipo"
-          value={details.archetype}
-          defaultValue={details.archetype}
+      </div>
+      <div className={styles.gridTwoItems}>
+        <TextField
+          id="expInput"
+          label="EXP"
+          value={exp ?? ""}
+          onChange={(e) => setExp(e.target.value)}
           InputProps={{
             readOnly: false,
             autoFocus: true,
           }}
-        /> */}
+        />
+        <LoadingButton
+          loading={loading}
+          onClick={handleUpdateSheet}
+          variant="outlined"
+        >
+          ATUALIZAR
+        </LoadingButton>
       </div>
-      <LoadingButton
-        loading={loading}
-        onClick={handleUpdateSheet}
-        variant="outlined"
-      >
-        ATUALIZAR
-      </LoadingButton>
       <Snackbar
         open={open}
         autoHideDuration={6000}
