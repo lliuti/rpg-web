@@ -1,10 +1,13 @@
 import TextField from "@mui/material/TextField";
+import SurfingIcon from "@mui/icons-material/Surfing";
 import styles from "./styles.module.scss";
 
 export const Skills = ({ details }) => {
   return (
     <div className={styles.skillsContainer}>
-      <h1>Perícias 🗡</h1>
+      <h1>
+        Perícias <SurfingIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="atletistmoInput"
