@@ -1,11 +1,14 @@
 import styles from "./styles.module.scss";
 
 import TextField from "@mui/material/TextField";
+import CasinoIcon from "@mui/icons-material/Casino";
 
 export const Attributes = ({ details }) => {
   return (
     <div className={styles.attributesContainer}>
-      <h1>Atributos 💪🏻</h1>
+      <h1>
+        Atributos <CasinoIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="strInput"
