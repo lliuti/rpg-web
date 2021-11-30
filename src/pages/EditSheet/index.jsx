@@ -128,6 +128,7 @@ export const EditSheet = () => {
                 occupation: characterSheet?.occupation,
                 archetype: characterSheet?.archetype,
                 character_id: character_id,
+                exp: characterSheet?.exp,
               }}
             />
             <EditAttributes
