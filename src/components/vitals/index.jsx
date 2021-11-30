@@ -8,12 +8,14 @@ import LoadingButton from "@mui/lab/LoadingButton";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
 import TextField from "@mui/material/TextField";
+
+import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+
 import EmojiEmotions from "@mui/icons-material/EmojiEmotions";
 import Favorite from "@mui/icons-material/Favorite";
 import BatteryCharging50 from "@mui/icons-material/BatteryCharging50";
@@ -137,7 +139,9 @@ export const Vitals = ({ details }) => {
 
   return (
     <div className={styles.vitalsContainer}>
-      <h1>Detalhes Vitais ❤</h1>
+      <h1>
+        Detalhes Vitais <Favorite sx={{ ml: 2 }} />
+      </h1>
       <DiceRoll
         details={{
           picture: details.picture,
