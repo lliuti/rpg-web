@@ -42,7 +42,7 @@ export const CreateCharacter = () => {
   const handleCreateCharacter = async () => {
     setLoading(true);
     try {
-      const response = await api.post("/characters", {
+      await api.post("/characters", {
         name,
         occupation,
         age: parseInt(age),
