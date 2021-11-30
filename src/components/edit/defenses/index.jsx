@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 
 import { api } from "../../../services/api";
 
@@ -83,7 +84,9 @@ export const EditDefenses = ({ details }) => {
 
   return (
     <div className={styles.defensesContainer}>
-      <h1>Defesas / Resistencias 🛡</h1>
+      <h1>
+        Defesas / Resistencias <HealthAndSafetyIcon sx={{ ml: 2 }} />
+      </h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="defInput"
@@ -96,7 +99,6 @@ export const EditDefenses = ({ details }) => {
           }}
         />
       </div>
-
       <div className={styles.gridTwoItems}>
         <TextField
           id="physicalResInput"
@@ -119,7 +121,6 @@ export const EditDefenses = ({ details }) => {
           }}
         />
       </div>
-
       <div className={styles.gridTwoItems}>
         <TextField
           id="bloodResInput"
@@ -143,7 +144,6 @@ export const EditDefenses = ({ details }) => {
           }}
         />
       </div>
-
       <div className={styles.gridTwoItems}>
         <TextField
           id="deathResInput"
@@ -166,7 +166,6 @@ export const EditDefenses = ({ details }) => {
           }}
         />
       </div>
-
       <div className={styles.gridTwoItems}>
         <TextField
           id="fearResInput"
