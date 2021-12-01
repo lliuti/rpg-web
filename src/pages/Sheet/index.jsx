@@ -55,6 +55,11 @@ export const Sheet = () => {
     setGetNotesLoading(true);
     try {
       const response = await api.get(`/characters/${character_id}/notes`);
+      if (response.data.length < 1) {
+        setGetNotesLoading(false);
+        setAnnotationsDialogOpen(true);
+        return;
+      }
       setBackgroundMultiline(response.data[0].background_text);
       setAnnotationsMultiline(response.data[0].note_text);
       setGetNotesLoading(false);
