@@ -115,7 +115,7 @@ export const Dashboard = () => {
             <Button
               variant="outlined"
               onClick={() => navigate("/create-ritual")}
-              color="primary"
+              color="secondary"
               startIcon={<Add />}
             >
               RITUAL
@@ -123,11 +123,20 @@ export const Dashboard = () => {
             <Button
               variant="outlined"
               onClick={() => navigate("/create-attack")}
-              color="success"
+              color="primary"
               startIcon={<Add />}
               sx={{ ml: 1 }}
             >
               ATAQUE
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/create-ability")}
+              color="success"
+              startIcon={<Add />}
+              sx={{ ml: 1 }}
+            >
+              HABILIDADE
             </Button>
             <Button
               variant="outlined"
