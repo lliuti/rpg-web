@@ -9,7 +9,8 @@ import { NotFound } from "./pages/NotFound/index";
 import { Dashboard } from "./pages/Dashboard/index";
 import { CreateRitual } from "./pages/CreateRitual/index";
 import { CreateAttack } from "./pages/CreateAttack/index";
-import { AssignAttackRitual } from "./pages/AssignAttackRitual/index";
+import { CreateAbility } from "./pages/CreateAbility/index";
+import { Assign } from "./pages/Assign/index";
 import { EditSheet } from "./pages/EditSheet/index";
 import { ForgotPassword } from "./pages/ForgotPassword/index";
 import { NewPassword } from "./pages/NewPassword/index";
@@ -36,7 +37,8 @@ export const Router = () => {
         <Route path={"/dashboard"} element={<ProtectedDashboard />} />
         <Route path={"/create-ritual"} element={<ProtectedCreateRitual />} />
         <Route path={"/create-attack"} element={<ProtectedCreateAttack />} />
-        <Route path={"/assign"} element={<ProtectedAssignAttackRitual />} />
+        <Route path={"/create-ability"} element={<ProtectedCreateAbility />} />
+        <Route path={"/assign"} element={<ProtectedAssign />} />
         <Route path={"/player/forgot-password"} element={<ForgotPassword />} />
         <Route
           path={"/players/:player_id/new-password"}
@@ -83,7 +85,12 @@ const ProtectedCreateAttack = () => {
   return context.admin ? <CreateAttack /> : <Login />;
 };
 
-const ProtectedAssignAttackRitual = () => {
+const ProtectedCreateAbility = () => {
   const context = useAuth();
-  return context.admin ? <AssignAttackRitual /> : <Login />;
+  return context.admin ? <CreateAbility /> : <Login />;
+};
+
+const ProtectedAssign = () => {
+  const context = useAuth();
+  return context.admin ? <Assign /> : <Login />;
 };
