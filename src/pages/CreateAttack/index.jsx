@@ -10,6 +10,12 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Container from "@mui/material/Container";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { api } from "../../services/api";
 
@@ -24,6 +30,8 @@ export const CreateAttack = () => {
   const [criticalDamage, setCriticalDamage] = useState("");
   const [description, setDescription] = useState("");
   const [weight, setWeight] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,36 +41,65 @@ export const CreateAttack = () => {
   const handleDamageTypeChange = (e) => setDamageType(e.target.value);
 
   const handleCreate = async () => {
-    const response = await api.post("/attacks", {
-      name,
-      type,
-      skill,
-      range,
-      damage,
-      damageType,
-      critical,
-      criticalDamage,
-      description,
-      weight,
-    });
+    setLoading(true);
+    try {
+      await api.post("/attacks", {
+        name,
+        type,
+        skill,
+        range,
+        damage,
+        damageType,
+        critical,
+        criticalDamage,
+        description,
+        weight,
+      });
 
-    setName("");
-    setType("");
-    setSkill("");
-    setRange("");
-    setDamage("");
-    setDamageType("");
-    setCritical("");
-    setCriticalDamage("");
-    setDescription("");
-    setWeight("");
+      setName("");
+      setType("");
+      setSkill("");
+      setRange("");
+      setDamage("");
+      setDamageType("");
+      setCritical("");
+      setCriticalDamage("");
+      setDescription("");
+      setWeight("");
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setOpen(true);
+      setLoading(false);
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
       <div className={styles.createAttackContainer}>
         <div className={styles.topArea}>
-          <h1>Create Attack</h1>
+          <h1>Criar Ataque</h1>
         </div>
         <div className={styles.gridTwoItems}>
           <TextField
@@ -185,11 +222,24 @@ export const CreateAttack = () => {
           >
             VOLTAR
           </Button>
-          <Button variant="contained" onClick={handleCreate} color="primary">
+          <LoadingButton
+            loading={loading}
+            variant="contained"
+            onClick={handleCreate}
+            color="primary"
+          >
             CRIAR
-          </Button>
+          </LoadingButton>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível cadastrar um novo ataque!"
+        action={action}
+      />
     </Container>
   );
 };
