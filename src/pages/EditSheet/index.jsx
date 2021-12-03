@@ -11,6 +11,7 @@ import { Vitals } from "../../components/vitals/index";
 import { Inventory } from "../../components/inventory/index";
 import { Attacks } from "../../components/attacks/index";
 import { Rituals } from "../../components/rituals/index";
+import { Abilities } from "../../components/abilities/index";
 
 import Button from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
@@ -240,6 +241,27 @@ export const EditSheet = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Rituals details={character_id} />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel3"}
+            onChange={handleChange("panel3")}
+            sx={{ mt: 5 }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel3bh-content"
+              id="panel3bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                Habilidades
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                Lista de habilidades
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Abilities details={character_id} />
             </AccordionDetails>
           </Accordion>
         </div>
