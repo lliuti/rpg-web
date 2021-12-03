@@ -12,6 +12,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const CreateRitual = () => {
   const [name, setName] = useState("");
@@ -23,6 +29,8 @@ export const CreateRitual = () => {
   const [exec, setExec] = useState("");
   const [area, setArea] = useState("");
   const [duration, setDuration] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,29 +41,59 @@ export const CreateRitual = () => {
   const handleAreaChange = (e) => setArea(e.target.value);
 
   const handleCreate = async () => {
-    if (name == "" || description == "" || element == "" || cost == "") return;
-    const response = await api.post("/rituals", {
-      name,
-      description,
-      element,
-      circle,
-      cost,
-      range,
-      execTime: exec,
-      area,
-      duration,
-    });
+    setLoading(true);
+    try {
+      if (name == "" || description == "" || element == "" || cost == "")
+        return;
+      const response = await api.post("/rituals", {
+        name,
+        description,
+        element,
+        circle,
+        cost,
+        range,
+        execTime: exec,
+        area,
+        duration,
+      });
 
-    setName("");
-    setDescription("");
-    setElement("");
-    setCost("");
-    setCircle("");
-    setRange("");
-    setArea("");
-    setDuration("");
-    setExec("");
+      setName("");
+      setDescription("");
+      setElement("");
+      setCost("");
+      setCircle("");
+      setRange("");
+      setArea("");
+      setDuration("");
+      setExec("");
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setOpen(true);
+      setLoading(false);
+    }
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="error"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   return (
     <Container>
@@ -185,11 +223,23 @@ export const CreateRitual = () => {
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
           />
-          <Button onClick={handleCreate} variant="contained">
+          <LoadingButton
+            loading={loading}
+            onClick={handleCreate}
+            variant="contained"
+          >
             CRIAR
-          </Button>
+          </LoadingButton>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        color="error"
+        message="Não foi possível cadastrar um novo ritual!"
+        action={action}
+      />
     </Container>
   );
 };
