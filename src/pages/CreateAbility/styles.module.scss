@@ -1,0 +1,22 @@
+.createAbilityContainer {
+  padding: 60px;
+  box-shadow: 5px 5px 0px #000;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+
+  .topArea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .gridTwoItems {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+
+    margin-top: 25px;
+  }
+}
