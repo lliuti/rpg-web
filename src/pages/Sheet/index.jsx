@@ -167,14 +167,14 @@ export const Sheet = () => {
               </AppBar>
               <div className={styles.annotationsContainer}>
                 <Accordion
-                  expanded={expanded === "panel2"}
-                  onChange={handleChange("panel2")}
+                  expanded={expanded === "panel4"}
+                  onChange={handleChange("panel4")}
                   sx={{ mb: 5 }}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel2bh-content"
-                    id="panel2bh-header"
+                    aria-controls="panel4bh-content"
+                    id="panel4bh-header"
                   >
                     <Typography sx={{ width: "33%", flexShrink: 0 }}>
                       Anotacoes
@@ -196,13 +196,13 @@ export const Sheet = () => {
                   </AccordionDetails>
                 </Accordion>
                 <Accordion
-                  expanded={expanded === "panel1"}
-                  onChange={handleChange("panel1")}
+                  expanded={expanded === "panel5"}
+                  onChange={handleChange("panel5")}
                 >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
+                    aria-controls="panel5bh-content"
+                    id="panel5bh-header"
                   >
                     <Typography sx={{ width: "33%", flexShrink: 0 }}>
                       História
