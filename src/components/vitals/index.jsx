@@ -36,38 +36,27 @@ export const Vitals = ({ details }) => {
   const [maxEff, setMaxEff] = useState("");
 
   useEffect(() => {
-    setCurrLife(details?.curr_life);
-    setMaxLife(details?.max_life);
-
-    setCurrSan(details?.curr_san);
-    setMaxSan(details?.max_san);
-
-    setCurrEff(details?.curr_eff);
-    setMaxEff(details?.max_eff);
+    fetchCharacterVitals();
   }, [details]);
 
-  const handleLifeDialogOpen = () => {
-    setLifeDialogOpen(true);
-  };
+  const handleLifeDialogOpen = () => setLifeDialogOpen(true);
+  const handleLifeDialogClose = () => setLifeDialogOpen(false);
+  const handleSanityDialogOpen = () => setSanityDialogOpen(true);
+  const handleSanityDialogClose = () => setSanityDialogOpen(false);
+  const handleEffortDialogOpen = () => setEffortDialogOpen(true);
+  const handleEffortDialogClose = () => setEffortDialogOpen(false);
 
-  const handleLifeDialogClose = () => {
-    setLifeDialogOpen(false);
-  };
+  const fetchCharacterVitals = async () => {
+    const response = await api.get(`/characters/${details.character_id}`);
 
-  const handleSanityDialogOpen = () => {
-    setSanityDialogOpen(true);
-  };
+    setCurrLife(response.data.curr_life);
+    setMaxLife(response.data.max_life);
 
-  const handleSanityDialogClose = () => {
-    setSanityDialogOpen(false);
-  };
+    setCurrSan(response.data.curr_san);
+    setMaxSan(response.data.max_san);
 
-  const handleEffortDialogOpen = () => {
-    setEffortDialogOpen(true);
-  };
-
-  const handleEffortDialogClose = () => {
-    setEffortDialogOpen(false);
+    setCurrEff(response.data.curr_eff);
+    setMaxEff(response.data.max_eff);
   };
 
   // CHANGE VALUES
