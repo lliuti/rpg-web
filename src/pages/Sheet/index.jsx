@@ -276,12 +276,6 @@ export const Sheet = () => {
           <div className={styles.rightGridContainer}>
             <Vitals
               details={{
-                max_life: characterSheet?.max_life,
-                curr_life: characterSheet?.curr_life,
-                max_san: characterSheet?.max_san,
-                curr_san: characterSheet?.curr_san,
-                max_eff: characterSheet?.max_eff,
-                curr_eff: characterSheet?.curr_eff,
                 picture: characterSheet?.picture_url,
                 character_id: character_id,
               }}
