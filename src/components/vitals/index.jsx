@@ -52,11 +52,20 @@ export const Vitals = ({ details }) => {
   }, [details]);
 
   const handleLifeDialogOpen = () => setLifeDialogOpen(true);
-  const handleLifeDialogClose = () => setLifeDialogOpen(false);
+  const handleLifeDialogClose = () => {
+    setLifeDialogOpen(false);
+    fetchCharacterVitals();
+  };
   const handleSanityDialogOpen = () => setSanityDialogOpen(true);
-  const handleSanityDialogClose = () => setSanityDialogOpen(false);
+  const handleSanityDialogClose = () => {
+    setSanityDialogOpen(false);
+    fetchCharacterVitals();
+  };
   const handleEffortDialogOpen = () => setEffortDialogOpen(true);
-  const handleEffortDialogClose = () => setEffortDialogOpen(false);
+  const handleEffortDialogClose = () => {
+    setEffortDialogOpen(false);
+    fetchCharacterVitals();
+  };
 
   const fetchCharacterVitals = async () => {
     try {
