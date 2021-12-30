@@ -68,7 +68,7 @@ export const Inventory = ({ details }) => {
   return (
     <div className={styles.inventoryContainer}>
       <h1>
-        Inventário: {currWeight.toFixed(1) ?? 0}/{maxWeight ?? 0}
+        Inventário: {currWeight?.toFixed(1) ?? 0}/{maxWeight ?? 0}
       </h1>
       <div className={styles.gridThreeItems}>
         <TextField
