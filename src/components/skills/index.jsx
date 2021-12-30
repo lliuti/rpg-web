@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
 import SurfingIcon from "@mui/icons-material/Surfing";
 import styles from "./styles.module.scss";
+import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 
 export const Skills = ({ details }) => {
   return (
@@ -31,7 +32,7 @@ export const Skills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="cienciaInput"
-          label="Ciencia"
+          label="Ciencia ⭐"
           value={details.ciencia ?? ""}
           InputProps={{
             readOnly: true,
@@ -91,7 +92,7 @@ export const Skills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="investigacaoInput"
-          label="Investigacao"
+          label="Investigacao ⭐"
           value={details.investigacao ?? ""}
           InputProps={{
             readOnly: true,
@@ -111,7 +112,7 @@ export const Skills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="medicinaInput"
-          label="Medicina"
+          label="Medicina ⭐"
           value={details.medicina ?? ""}
           InputProps={{
             readOnly: true,
@@ -120,7 +121,7 @@ export const Skills = ({ details }) => {
         />
         <TextField
           id="ocultismoInput"
-          label="Ocultismo"
+          label="Ocultismo ⭐"
           value={details.ocultismo ?? ""}
           InputProps={{
             readOnly: true,
@@ -140,7 +141,7 @@ export const Skills = ({ details }) => {
         />
         <TextField
           id="pilotagemInput"
-          label="Pilotagem"
+          label="Pilotagem ⭐"
           value={details.pilotagem ?? ""}
           InputProps={{
             readOnly: true,
@@ -200,7 +201,7 @@ export const Skills = ({ details }) => {
         />
         <TextField
           id="taticaInput"
-          label="Tatica"
+          label="Tatica ⭐"
           value={details.tatica ?? ""}
           InputProps={{
             readOnly: true,
@@ -211,7 +212,7 @@ export const Skills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="tecnologiaInput"
-          label="Tecnologia"
+          label="Tecnologia ⭐"
           value={details.tecnologia ?? ""}
           InputProps={{
             readOnly: true,
