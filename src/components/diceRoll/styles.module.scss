@@ -12,4 +12,13 @@
       cursor: pointer;
     }
   }
+
+  .buttonsColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.ammo {
+  margin-top: 10px;
 }
