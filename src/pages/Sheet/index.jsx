@@ -292,7 +292,11 @@ export const Sheet = () => {
                 energia: characterSheet?.energia_res,
               }}
             />
-            {/* <Inventory /> */}
+            <Inventory
+              details={{
+                character_id: character_id,
+              }}
+            />
           </div>
         </div>
 
