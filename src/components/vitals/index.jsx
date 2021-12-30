@@ -20,11 +20,19 @@ import EmojiEmotions from "@mui/icons-material/EmojiEmotions";
 import Favorite from "@mui/icons-material/Favorite";
 import BatteryCharging50 from "@mui/icons-material/BatteryCharging50";
 
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+
 export const Vitals = ({ details }) => {
   const [lifeDialogOpen, setLifeDialogOpen] = useState(false);
   const [sanityDialogOpen, setSanityDialogOpen] = useState(false);
   const [effortDialogOpen, setEffortDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [lifeValueInput, setLifeValueInput] = useState(0);
+  const [sanityValueInput, setSanityValueInput] = useState(0);
+  const [effortValueInput, setEffortValueInput] = useState(0);
 
   const [currLife, setCurrLife] = useState("");
   const [maxLife, setMaxLife] = useState("");
@@ -34,6 +42,10 @@ export const Vitals = ({ details }) => {
 
   const [currEff, setCurrEff] = useState("");
   const [maxEff, setMaxEff] = useState("");
+
+  const [lifeSwitchChecked, setLifeSwitchChecked] = useState(false);
+  const [sanitySwitchChecked, setSanitySwitchChecked] = useState(false);
+  const [effortSwitchChecked, setEffortSwitchChecked] = useState(false);
 
   useEffect(() => {
     fetchCharacterVitals();
@@ -47,16 +59,20 @@ export const Vitals = ({ details }) => {
   const handleEffortDialogClose = () => setEffortDialogOpen(false);
 
   const fetchCharacterVitals = async () => {
-    const response = await api.get(`/characters/${details.character_id}`);
+    try {
+      const response = await api.get(`/characters/${details.character_id}`);
 
-    setCurrLife(response.data.curr_life);
-    setMaxLife(response.data.max_life);
+      setCurrLife(response.data.curr_life);
+      setMaxLife(response.data.max_life);
 
-    setCurrSan(response.data.curr_san);
-    setMaxSan(response.data.max_san);
+      setCurrSan(response.data.curr_san);
+      setMaxSan(response.data.max_san);
 
-    setCurrEff(response.data.curr_eff);
-    setMaxEff(response.data.max_eff);
+      setCurrEff(response.data.curr_eff);
+      setMaxEff(response.data.max_eff);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // CHANGE VALUES
@@ -66,13 +82,18 @@ export const Vitals = ({ details }) => {
       const response = await api.put(
         `/characters/${details.character_id}/life`,
         {
-          currLife,
+          currLife:
+            lifeSwitchChecked === true
+              ? parseInt(currLife) + parseInt(lifeValueInput)
+              : parseInt(currLife) - parseInt(lifeValueInput),
           maxLife,
         }
       );
 
       setCurrLife(response.data.currVital);
       setMaxLife(response.data.maxVital);
+      setLifeValueInput("0");
+      setLifeSwitchChecked(false);
       setLoading(false);
       setLifeDialogOpen(false);
     } catch (err) {
@@ -88,13 +109,18 @@ export const Vitals = ({ details }) => {
       const response = await api.put(
         `/characters/${details.character_id}/sanity`,
         {
-          currSan,
+          currSan:
+            sanitySwitchChecked === true
+              ? parseInt(currSan) + parseInt(sanityValueInput)
+              : parseInt(currSan) - parseInt(sanityValueInput),
           maxSan,
         }
       );
 
       setCurrSan(response.data.currVital);
       setMaxSan(response.data.maxVital);
+      setSanityValueInput("0");
+      setSanitySwitchChecked(false);
       setLoading(false);
       setSanityDialogOpen(false);
     } catch (err) {
@@ -110,13 +136,18 @@ export const Vitals = ({ details }) => {
       const response = await api.put(
         `/characters/${details.character_id}/effort`,
         {
-          currEff,
+          currEff:
+            effortSwitchChecked === true
+              ? parseInt(currEff) + parseInt(effortValueInput)
+              : parseInt(currEff) - parseInt(effortValueInput),
           maxEff,
         }
       );
 
       setCurrEff(response.data.currVital);
       setMaxEff(response.data.maxVital);
+      setEffortValueInput("0");
+      setEffortSwitchChecked(false);
       setLoading(false);
       setEffortDialogOpen(false);
     } catch (err) {
@@ -181,6 +212,28 @@ export const Vitals = ({ details }) => {
               color="error"
               sx={{ my: 3, width: "100%" }}
             />
+
+            <FormGroup sx={{ alignItems: "center", justifyContent: "center" }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={lifeSwitchChecked}
+                    onChange={(e) => setLifeSwitchChecked(event.target.checked)}
+                    color="error"
+                  />
+                }
+                label="Adicionar"
+              />
+            </FormGroup>
+
+            <TextField
+              id="lifeValueInput"
+              label="Valor"
+              value={lifeValueInput}
+              onChange={(e) => setLifeValueInput(e.target.value)}
+              color="error"
+              sx={{ my: 0, width: "100%" }}
+            />
           </Box>
         </DialogContent>
         <DialogActions>
@@ -243,6 +296,30 @@ export const Vitals = ({ details }) => {
               onChange={(e) => setMaxSan(e.target.value)}
               color="primary"
               sx={{ my: 3, width: "100%" }}
+            />
+
+            <FormGroup sx={{ alignItems: "center", justifyContent: "center" }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={sanitySwitchChecked}
+                    onChange={(e) =>
+                      setSanitySwitchChecked(event.target.checked)
+                    }
+                    color="primary"
+                  />
+                }
+                label="Adicionar"
+              />
+            </FormGroup>
+
+            <TextField
+              id="sanityValueInput"
+              label="Valor"
+              value={sanityValueInput}
+              onChange={(e) => setSanityValueInput(e.target.value)}
+              color="primary"
+              sx={{ my: 0, width: "100%" }}
             />
           </Box>
         </DialogContent>
@@ -309,6 +386,30 @@ export const Vitals = ({ details }) => {
               onChange={(e) => setMaxEff(e.target.value)}
               color="warning"
               sx={{ my: 3, width: "100%" }}
+            />
+
+            <FormGroup sx={{ alignItems: "center", justifyContent: "center" }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={effortSwitchChecked}
+                    onChange={(e) =>
+                      setEffortSwitchChecked(event.target.checked)
+                    }
+                    color="warning"
+                  />
+                }
+                label="Adicionar"
+              />
+            </FormGroup>
+
+            <TextField
+              id="effortValueInput"
+              label="Valor"
+              value={effortValueInput}
+              onChange={(e) => setEffortValueInput(e.target.value)}
+              color="warning"
+              sx={{ my: 0, width: "100%" }}
             />
           </Box>
         </DialogContent>
