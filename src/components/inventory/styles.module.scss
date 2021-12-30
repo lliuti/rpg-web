@@ -6,14 +6,25 @@
   border: 1px solid #000;
   margin-bottom: 50px;
 
+  max-height: 760px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: #333;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #111;
+  }
+
   h1 {
     margin-bottom: 25px;
   }
 
-  .gridTwoItems {
+  .gridThreeItems {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    grid-template-columns: 5fr 80px 1fr;
+    grid-gap: 10px;
     margin-bottom: 25px;
   }
 }
