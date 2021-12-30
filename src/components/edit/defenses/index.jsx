@@ -167,7 +167,7 @@ export const EditDefenses = ({ details }) => {
         />
       </div>
       <div className={styles.gridTwoItems}>
-        <TextField
+        {/* <TextField
           id="fearResInput"
           label="Medo"
           value={medo ?? ""}
@@ -176,7 +176,7 @@ export const EditDefenses = ({ details }) => {
             readOnly: false,
             autoFocus: true,
           }}
-        />
+        /> */}
         <LoadingButton
           loading={loading}
           onClick={handleUpdateSheet}
