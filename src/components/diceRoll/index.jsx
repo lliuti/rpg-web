@@ -29,6 +29,7 @@ export const DiceRoll = ({ details }) => {
   const [shootDialogOpen, setShootDialogOpen] = useState(false);
 
   const [weapon, setWeapon] = useState("");
+  const [guns, setGuns] = useState([]);
 
   const [diceAmount, setDiceAmount] = useState("");
   const [diceFaceAmount, setDiceFaceAmount] = useState("");
@@ -66,9 +67,10 @@ export const DiceRoll = ({ details }) => {
   const handleShootDialogOpen = async () => {
     setShootDialogOpen(true);
     const response = await api.get(
-      `/characters/${details.character_id}/attacks`
+      `/characters/${details.character_id}/attacks/guns`
     );
     console.log(response.data);
+    setGuns(response.data);
   };
 
   const handleDiceDialogClose = () => {
@@ -338,30 +340,29 @@ export const DiceRoll = ({ details }) => {
           onClose={handleShootDialogClose}
           aria-labelledby="shootDialogTitle"
           aria-describedby="shootDialogDescription"
-          fullWidth="xs"
+          fullWidth={true}
           maxWidth="xs"
         >
           <DialogTitle id="shootDialogTitle">{"Atirar"}</DialogTitle>
           <DialogContent>
-            <DialogContentText
-              id="shootDialogDescription"
-              sx={{ display: "flex", flexDirection: "column" }}
-            >
-              <FormControl>
-                <InputLabel id="weapon-select-label">Arma</InputLabel>
-                <Select
-                  labelId="weapon-select-label"
-                  id="weapon-select"
-                  value={weapon || ""}
-                  label="Faces"
-                  onChange={handleWeaponChange}
-                >
-                  <MenuItem value={"Glock"}>Glock</MenuItem>
-                  <MenuItem value={"Rifle m4"}>Rifle m4</MenuItem>
-                </Select>
-              </FormControl>
-              <p className={styles.ammo}>Municão: 0/6</p>
-            </DialogContentText>
+            <FormControl>
+              <InputLabel id="weapon-select-label">Arma</InputLabel>
+              <Select
+                labelId="weapon-select-label"
+                id="weapon-select"
+                value={weapon || ""}
+                label="Faces"
+                onChange={handleWeaponChange}
+                sx={{ mt: 0, minWidth: "200px" }}
+              >
+                {guns?.map((gun, index) => (
+                  <MenuItem key={index} value={gun.attack.name}>
+                    {gun.attack.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <p className={styles.ammo}>Municão: 0/6</p>
           </DialogContent>
           <DialogActions>
             <Button
