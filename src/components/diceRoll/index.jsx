@@ -26,6 +26,10 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export const DiceRoll = ({ details }) => {
   const [diceDialogOpen, setDiceDialogOpen] = useState(false);
+  const [shootDialogOpen, setShootDialogOpen] = useState(false);
+
+  const [weapon, setWeapon] = useState("");
+
   const [diceAmount, setDiceAmount] = useState("");
   const [diceFaceAmount, setDiceFaceAmount] = useState("");
   const [diceResultDialogOpen, setDiceResultDialogOpen] = useState(false);
@@ -53,6 +57,18 @@ export const DiceRoll = ({ details }) => {
 
   const handleDiceDialogOpen = () => {
     setDiceDialogOpen(true);
+  };
+
+  const handleShootDialogClose = () => {
+    setShootDialogOpen(false);
+  };
+
+  const handleShootDialogOpen = async () => {
+    setShootDialogOpen(true);
+    const response = await api.get(
+      `/characters/${details.character_id}/attacks`
+    );
+    console.log(response.data);
   };
 
   const handleDiceDialogClose = () => {
@@ -136,6 +152,12 @@ export const DiceRoll = ({ details }) => {
     }
   };
 
+  const handleWeaponChange = (event) => {
+    setWeapon(event.target.value);
+  };
+
+  const handleShootButton = () => {};
+
   return (
     <div className={styles.imageDiceRollContainer}>
       <img
@@ -183,126 +205,185 @@ export const DiceRoll = ({ details }) => {
           </LoadingButton>
         </DialogActions>
       </Dialog>
-      <Button
-        variant="outlined"
-        onClick={handleDiceDialogOpen}
-        color="inherit"
-        sx={{ mb: 2 }}
-      >
-        Rolar dados
-      </Button>
-      <Dialog
-        open={diceDialogOpen}
-        onClose={handleDiceDialogClose}
-        aria-labelledby="diceDialogTitle"
-        aria-describedby="diceDialogDescription"
-      >
-        <DialogTitle id="diceDialogTitle">{"Rolar dados"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="diceDialogDescription"
-            sx={{ display: "flex", flexDirection: "column" }}
-          >
-            Rolar dados para testar qualidade de determinada acao.
-          </DialogContentText>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gridGap: "20px",
-              mt: 3,
-            }}
-          >
-            <FormControl>
-              <InputLabel id="dice-amount-select-label">Qtde</InputLabel>
-              <Select
-                labelId="dice-amount-select-label"
-                id="dice-amount-select"
-                value={diceAmount || ""}
-                label="Qtde"
-                onChange={handleDiceAmountChange}
-              >
-                <MenuItem value={"1"}>1</MenuItem>
-                <MenuItem value={"2"}>2</MenuItem>
-                <MenuItem value={"3"}>3</MenuItem>
-                <MenuItem value={"4"}>4</MenuItem>
-                <MenuItem value={"5"}>5</MenuItem>
-                <MenuItem value={"6"}>6</MenuItem>
-                <MenuItem value={"7"}>7</MenuItem>
-                <MenuItem value={"8"}>8</MenuItem>
-                <MenuItem value={"9"}>9</MenuItem>
-                <MenuItem value={"10"}>10</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl>
-              <InputLabel id="dice-face-select-label">Faces</InputLabel>
-              <Select
-                labelId="dice-face-select-label"
-                id="dice-face-select"
-                value={diceFaceAmount || ""}
-                label="Faces"
-                onChange={handleDiceFaceAmountChange}
-              >
-                <MenuItem value={"D20"}>D20</MenuItem>
-                <MenuItem value={"D3"}>D3</MenuItem>
-                <MenuItem value={"D4"}>D4</MenuItem>
-                <MenuItem value={"D6"}>D6</MenuItem>
-                <MenuItem value={"D8"}>D8</MenuItem>
-                <MenuItem value={"D10"}>D10</MenuItem>
-                <MenuItem value={"D12"}>D12</MenuItem>
-                <MenuItem value={"D100"}>D100</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDiceDialogClose} color="inherit">
-            Cancelar
-          </Button>
-          <LoadingButton
-            loading={loading}
-            onClick={handleRollDice}
-            autoFocus
-            color="inherit"
-            variant="outlined"
-          >
-            Rolar
-          </LoadingButton>
-        </DialogActions>
-      </Dialog>
+      <div className={styles.buttonsColumn}>
+        <Button
+          variant="outlined"
+          onClick={handleDiceDialogOpen}
+          color="inherit"
+          sx={{ mb: 2 }}
+        >
+          Rolar dados
+        </Button>
+        <Dialog
+          open={diceDialogOpen}
+          onClose={handleDiceDialogClose}
+          aria-labelledby="diceDialogTitle"
+          aria-describedby="diceDialogDescription"
+        >
+          <DialogTitle id="diceDialogTitle">{"Rolar dados"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText
+              id="diceDialogDescription"
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              Rolar dados para testar qualidade de determinada acao.
+            </DialogContentText>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gridGap: "20px",
+                mt: 3,
+              }}
+            >
+              <FormControl>
+                <InputLabel id="dice-amount-select-label">Qtde</InputLabel>
+                <Select
+                  labelId="dice-amount-select-label"
+                  id="dice-amount-select"
+                  value={diceAmount || ""}
+                  label="Qtde"
+                  onChange={handleDiceAmountChange}
+                >
+                  <MenuItem value={"1"}>1</MenuItem>
+                  <MenuItem value={"2"}>2</MenuItem>
+                  <MenuItem value={"3"}>3</MenuItem>
+                  <MenuItem value={"4"}>4</MenuItem>
+                  <MenuItem value={"5"}>5</MenuItem>
+                  <MenuItem value={"6"}>6</MenuItem>
+                  <MenuItem value={"7"}>7</MenuItem>
+                  <MenuItem value={"8"}>8</MenuItem>
+                  <MenuItem value={"9"}>9</MenuItem>
+                  <MenuItem value={"10"}>10</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl>
+                <InputLabel id="dice-face-select-label">Faces</InputLabel>
+                <Select
+                  labelId="dice-face-select-label"
+                  id="dice-face-select"
+                  value={diceFaceAmount || ""}
+                  label="Faces"
+                  onChange={handleDiceFaceAmountChange}
+                >
+                  <MenuItem value={"D20"}>D20</MenuItem>
+                  <MenuItem value={"D3"}>D3</MenuItem>
+                  <MenuItem value={"D4"}>D4</MenuItem>
+                  <MenuItem value={"D6"}>D6</MenuItem>
+                  <MenuItem value={"D8"}>D8</MenuItem>
+                  <MenuItem value={"D10"}>D10</MenuItem>
+                  <MenuItem value={"D12"}>D12</MenuItem>
+                  <MenuItem value={"D100"}>D100</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDiceDialogClose} color="inherit">
+              Cancelar
+            </Button>
+            <LoadingButton
+              loading={loading}
+              onClick={handleRollDice}
+              autoFocus
+              color="inherit"
+              variant="outlined"
+            >
+              Rolar
+            </LoadingButton>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={diceResultDialogOpen}
+          onClose={handleDiceResultDialogClose}
+          aria-labelledby="diceResultDialogTitle"
+          aria-describedby="diceResultDialogDescription"
+        >
+          <DialogTitle id="diceResultDialogTitle">
+            {"Resultado dados"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText
+              id="diceResultDialogDescription"
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              Resultado da rolagem de dados. <br />
+              &nbsp; <br />
+              Rolagens: {diceRolls.map((roll) => `${roll} `)} <br />
+              Maior número: {diceGreaterRoll} <br />
+              Soma rolagens: {diceRollResult}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleDiceResultDialogClose}
+              autoFocus
+              color="inherit"
+              variant="outlined"
+            >
+              Fechar
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Button
+          variant="outlined"
+          onClick={handleShootDialogOpen}
+          color="inherit"
+          sx={{ mb: 2 }}
+        >
+          Atirar
+        </Button>
+        <Dialog
+          open={shootDialogOpen}
+          onClose={handleShootDialogClose}
+          aria-labelledby="shootDialogTitle"
+          aria-describedby="shootDialogDescription"
+          fullWidth="xs"
+          maxWidth="xs"
+        >
+          <DialogTitle id="shootDialogTitle">{"Atirar"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText
+              id="shootDialogDescription"
+              sx={{ display: "flex", flexDirection: "column" }}
+            >
+              <FormControl>
+                <InputLabel id="weapon-select-label">Arma</InputLabel>
+                <Select
+                  labelId="weapon-select-label"
+                  id="weapon-select"
+                  value={weapon || ""}
+                  label="Faces"
+                  onChange={handleWeaponChange}
+                >
+                  <MenuItem value={"Glock"}>Glock</MenuItem>
+                  <MenuItem value={"Rifle m4"}>Rifle m4</MenuItem>
+                </Select>
+              </FormControl>
+              <p className={styles.ammo}>Municão: 0/6</p>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleShootDialogClose}
+              autoFocus
+              color="inherit"
+              variant="outlined"
+            >
+              Fechar
+            </Button>
+            <Button
+              onClick={handleShootButton}
+              autoFocus
+              color="primary"
+              variant="outlined"
+            >
+              Atirar
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
 
-      <Dialog
-        open={diceResultDialogOpen}
-        onClose={handleDiceResultDialogClose}
-        aria-labelledby="diceResultDialogTitle"
-        aria-describedby="diceResultDialogDescription"
-      >
-        <DialogTitle id="diceResultDialogTitle">
-          {"Resultado dados"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="diceResultDialogDescription"
-            sx={{ display: "flex", flexDirection: "column" }}
-          >
-            Resultado da rolagem de dados. <br />
-            &nbsp; <br />
-            Rolagens: {diceRolls.map((roll) => `${roll} `)} <br />
-            Maior número: {diceGreaterRoll} <br />
-            Soma rolagens: {diceRollResult}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleDiceResultDialogClose}
-            autoFocus
-            color="inherit"
-            variant="outlined"
-          >
-            Fechar
-          </Button>
-        </DialogActions>
-      </Dialog>
       <Snackbar
         open={open}
         autoHideDuration={6000}
