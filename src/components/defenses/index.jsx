@@ -85,7 +85,7 @@ export const Defenses = ({ details }) => {
       </div>
 
       <div className={styles.gridTwoItems}>
-        <TextField
+        {/* <TextField
           id="fearResInput"
           label="Medo"
           value={details.medo ?? ""}
@@ -93,7 +93,7 @@ export const Defenses = ({ details }) => {
             readOnly: true,
             autoFocus: true,
           }}
-        />
+        /> */}
       </div>
     </div>
   );
