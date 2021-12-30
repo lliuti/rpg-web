@@ -196,7 +196,11 @@ export const EditSheet = () => {
                 character_id: character_id,
               }}
             />
-            {/* <Inventory /> */}
+            <Inventory
+              details={{
+                character_id: character_id,
+              }}
+            />
           </div>
         </div>
 
