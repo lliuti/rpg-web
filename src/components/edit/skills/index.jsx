@@ -152,7 +152,7 @@ export const EditSkills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="cienciaInput"
-          label="Ciencia"
+          label="Ciencia ⭐"
           value={ciencia ?? ""}
           onChange={(e) => setCiencia(e.target.value)}
           InputProps={{
@@ -218,7 +218,7 @@ export const EditSkills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="investigacaoInput"
-          label="Investigacao"
+          label="Investigacao ⭐"
           value={investigacao ?? ""}
           onChange={(e) => setInvestigacao(e.target.value)}
           InputProps={{
@@ -240,7 +240,7 @@ export const EditSkills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="medicinaInput"
-          label="Medicina"
+          label="Medicina ⭐"
           value={medicina ?? ""}
           onChange={(e) => setMedicina(e.target.value)}
           InputProps={{
@@ -250,7 +250,7 @@ export const EditSkills = ({ details }) => {
         />
         <TextField
           id="ocultismoInput"
-          label="Ocultismo"
+          label="Ocultismo ⭐"
           value={ocultismo ?? ""}
           onChange={(e) => setOcultismo(e.target.value)}
           InputProps={{
@@ -272,7 +272,7 @@ export const EditSkills = ({ details }) => {
         />
         <TextField
           id="pilotagemInput"
-          label="Pilotagem"
+          label="Pilotagem ⭐"
           value={pilotagem ?? ""}
           onChange={(e) => setPilotagem(e.target.value)}
           InputProps={{
@@ -338,7 +338,7 @@ export const EditSkills = ({ details }) => {
         />
         <TextField
           id="taticaInput"
-          label="Tatica"
+          label="Tatica ⭐"
           value={tatica ?? ""}
           onChange={(e) => setTatica(e.target.value)}
           InputProps={{
@@ -350,7 +350,7 @@ export const EditSkills = ({ details }) => {
       <div className={styles.gridTwoItems}>
         <TextField
           id="tecnologiaInput"
-          label="Tecnologia"
+          label="Tecnologia ⭐"
           value={tecnologia ?? ""}
           onChange={(e) => setTecnologia(e.target.value)}
           InputProps={{
