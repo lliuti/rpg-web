@@ -1,14 +1,23 @@
+import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-import SurfingIcon from "@mui/icons-material/Surfing";
 import styles from "./styles.module.scss";
-import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 
 export const Skills = ({ details }) => {
+  const [totalSkills, setTotalSkills] = useState(0);
+
+  useEffect(() => {
+    const teste = Object.values(details);
+    let skillTotalPoints = 0;
+    teste.map((skill) => {
+      skillTotalPoints += parseInt(skill);
+    });
+
+    setTotalSkills(skillTotalPoints);
+  }, [details]);
+
   return (
     <div className={styles.skillsContainer}>
-      <h1>
-        Perícias <SurfingIcon sx={{ ml: 2 }} />
-      </h1>
+      <h1>Perícias ({totalSkills})</h1>
       <div className={styles.gridTwoItems}>
         <TextField
           id="atletistmoInput"
