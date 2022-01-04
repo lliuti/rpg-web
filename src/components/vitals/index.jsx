@@ -175,6 +175,7 @@ export const Vitals = ({ details }) => {
         details={{
           picture: details.picture,
           character_id: details.character_id,
+          agilidade: details.agilidade,
         }}
       />
       <Button
@@ -227,7 +228,7 @@ export const Vitals = ({ details }) => {
                 control={
                   <Switch
                     checked={lifeSwitchChecked}
-                    onChange={(e) => setLifeSwitchChecked(event.target.checked)}
+                    onChange={(e) => setLifeSwitchChecked(e.target.checked)}
                     color="error"
                   />
                 }
@@ -312,9 +313,7 @@ export const Vitals = ({ details }) => {
                 control={
                   <Switch
                     checked={sanitySwitchChecked}
-                    onChange={(e) =>
-                      setSanitySwitchChecked(event.target.checked)
-                    }
+                    onChange={(e) => setSanitySwitchChecked(e.target.checked)}
                     color="primary"
                   />
                 }
@@ -402,9 +401,7 @@ export const Vitals = ({ details }) => {
                 control={
                   <Switch
                     checked={effortSwitchChecked}
-                    onChange={(e) =>
-                      setEffortSwitchChecked(event.target.checked)
-                    }
+                    onChange={(e) => setEffortSwitchChecked(e.target.checked)}
                     color="warning"
                   />
                 }
