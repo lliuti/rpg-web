@@ -28,8 +28,11 @@ export const DiceRoll = ({ details }) => {
   const [diceDialogOpen, setDiceDialogOpen] = useState(false);
   const [shootDialogOpen, setShootDialogOpen] = useState(false);
 
-  const [weapon, setWeapon] = useState("");
+  const [weaponName, setWeaponName] = useState("");
+  const [weaponId, setWeaponId] = useState("");
+  const [weaponAmmo, setWeaponAmmo] = useState(0);
   const [guns, setGuns] = useState([]);
+  const [currentShots, setCurrentShots] = useState(0);
 
   const [diceAmount, setDiceAmount] = useState("");
   const [diceFaceAmount, setDiceFaceAmount] = useState("");
@@ -69,7 +72,6 @@ export const DiceRoll = ({ details }) => {
     const response = await api.get(
       `/characters/${details.character_id}/attacks/guns`
     );
-    console.log(response.data);
     setGuns(response.data);
   };
 
@@ -155,10 +157,43 @@ export const DiceRoll = ({ details }) => {
   };
 
   const handleWeaponChange = (event) => {
-    setWeapon(event.target.value);
+    const gun = guns.filter(
+      (weapon) => weapon.attack.name == event.target.value
+    );
+
+    console.log(gun);
+
+    setWeaponName(gun[0].attack.name);
+    setWeaponId(gun[0].attack.id);
+    setWeaponAmmo(gun[0].attack.ammo);
+    setCurrentShots(gun[0].curr_shots);
   };
 
-  const handleShootButton = () => {};
+  const handleShootButton = async () => {
+    const response = await api.post(
+      `/characters/${details.character_id}/attacks/${weaponId}/shoot`,
+      {}
+    );
+    console.log(response.data);
+    setCurrentShots(response.data);
+    automaticRoll();
+  };
+
+  const handleReloadButton = async () => {
+    const response = await api.post(
+      `/characters/${details.character_id}/attacks/${weaponId}/reload`,
+      {}
+    );
+    console.log(response.data);
+    setCurrentShots(response.data);
+  };
+
+  const automaticRoll = async () => {
+    setShootDialogOpen(false);
+    setDiceAmount(details.agilidade);
+    setDiceFaceAmount("D20");
+    setDiceDialogOpen(true);
+  };
 
   return (
     <div className={styles.imageDiceRollContainer}>
@@ -350,28 +385,40 @@ export const DiceRoll = ({ details }) => {
               <Select
                 labelId="weapon-select-label"
                 id="weapon-select"
-                value={weapon || ""}
-                label="Faces"
+                value={weaponName || ""}
+                label="Arma"
                 onChange={handleWeaponChange}
                 sx={{ mt: 0, minWidth: "200px" }}
               >
-                {guns?.map((gun, index) => (
-                  <MenuItem key={index} value={gun.attack.name}>
-                    {gun.attack.name}
-                  </MenuItem>
-                ))}
+                {guns?.map((gun, index) => {
+                  return (
+                    <MenuItem key={index} value={gun.attack.name}>
+                      {gun.attack.name}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
-            <p className={styles.ammo}>Municão: 0/6</p>
+            <p className={styles.ammo}>
+              Disparos: {currentShots}/{weaponAmmo}
+            </p>
           </DialogContent>
           <DialogActions>
             <Button
               onClick={handleShootDialogClose}
               autoFocus
               color="inherit"
-              variant="outlined"
+              variant="text"
             >
               Fechar
+            </Button>
+            <Button
+              onClick={handleReloadButton}
+              autoFocus
+              color="success"
+              variant="outlined"
+            >
+              Recarregar
             </Button>
             <Button
               onClick={handleShootButton}
