@@ -121,6 +121,7 @@ export const CreateAttack = () => {
               <MenuItem value={"Leve"}>Leve</MenuItem>
               <MenuItem value={"Uma mao"}>Uma mao</MenuItem>
               <MenuItem value={"Duas maos"}>Duas maos</MenuItem>
+              <MenuItem value={"Arma de Fogo"}>Arma de Fogo</MenuItem>
             </Select>
           </FormControl>
         </div>
