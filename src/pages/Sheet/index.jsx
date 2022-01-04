@@ -278,6 +278,7 @@ export const Sheet = () => {
               details={{
                 picture: characterSheet?.picture_url,
                 character_id: character_id,
+                agilidade: characterSheet?.agilidade,
               }}
             />
             <Defenses
