@@ -73,7 +73,7 @@ export const Inventory = ({ details }) => {
       <div className={styles.gridThreeItems}>
         <TextField
           id="itemInput"
-          label="Item"
+          label="Novo Item"
           value={itemInput}
           onChange={(e) => setItemInput(e.target.value)}
         />
