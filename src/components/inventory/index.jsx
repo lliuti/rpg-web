@@ -4,17 +4,22 @@ import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 import { api } from "../../services/api";
 
 export const Inventory = ({ details }) => {
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loadingRemove, setLoadingRemove] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   const [currWeight, setCurrWeight] = useState(0);
   const [maxWeight, setMaxWeight] = useState(0);
 
   const [itemInput, setItemInput] = useState("");
   const [weightInput, setWeightInput] = useState(0);
+
+  const [editItemInput, setEditItemInput] = useState("");
+  const [editWeightInput, setEditWeightInput] = useState(0);
 
   const [itemList, setItemList] = useState([]);
 
@@ -65,6 +70,11 @@ export const Inventory = ({ details }) => {
     setWeightInput(e);
   };
 
+  const handleUpdateItem = (id) => {
+    console.log(id);
+    console.log(this);
+  };
+
   return (
     <div className={styles.inventoryContainer}>
       <h1>
@@ -94,25 +104,19 @@ export const Inventory = ({ details }) => {
         </LoadingButton>
       </div>
       {itemList?.map((item) => (
-        <div key={item.id} className={styles.gridThreeItems}>
+        <div id={item.id} key={item.id} className={styles.gridFourItems}>
           <TextField
             id="itemInput"
             label="Item"
-            value={item.item}
-            InputProps={{
-              readOnly: true,
-              autoFocus: true,
-            }}
+            value={editItemInput || item.item}
+            onChange={(e) => setEditItemInput(e.target.value)}
           />
           <TextField
             id="volumeInput"
             type="number"
-            value={item.weight}
+            value={editWeightInput || item.weight}
             label="Peso"
-            InputProps={{
-              readOnly: true,
-              autoFocus: true,
-            }}
+            onChange={(e) => setEditWeightInput(e.target.value)}
           />
           <LoadingButton
             loading={loadingRemove}
@@ -121,6 +125,14 @@ export const Inventory = ({ details }) => {
             onClick={() => handleRemoveItem(item.id)}
           >
             <DeleteForeverIcon />
+          </LoadingButton>
+          <LoadingButton
+            loading={loadingUpdate}
+            variant="outlined"
+            color="warning"
+            onClick={() => handleUpdateItem(item.id)}
+          >
+            <EditIcon />
           </LoadingButton>
         </div>
       ))}
