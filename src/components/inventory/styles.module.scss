@@ -23,14 +23,14 @@
 
   .gridThreeItems {
     display: grid;
-    grid-template-columns: 5fr 1fr 1fr;
+    grid-template-columns: 5fr 70px 70px;
     grid-gap: 5px;
     margin-bottom: 25px;
   }
 
   .gridFourItems {
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr 1fr;
+    grid-template-columns: 4fr 70px 70px 70px;
     grid-gap: 5px;
     margin-bottom: 25px;
   }
