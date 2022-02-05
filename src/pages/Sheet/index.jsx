@@ -108,7 +108,7 @@ export const Sheet = () => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="xl">
       <div className={styles.sheetContainer}>
         <div className={styles.topContainer}>
           <div className={styles.leftArea}>
