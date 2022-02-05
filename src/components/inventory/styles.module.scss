@@ -23,8 +23,15 @@
 
   .gridThreeItems {
     display: grid;
-    grid-template-columns: 5fr 80px 1fr;
-    grid-gap: 10px;
+    grid-template-columns: 5fr 1fr 1fr;
+    grid-gap: 5px;
+    margin-bottom: 25px;
+  }
+
+  .gridFourItems {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr;
+    grid-gap: 5px;
     margin-bottom: 25px;
   }
 }
