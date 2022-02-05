@@ -70,9 +70,35 @@ export const Inventory = ({ details }) => {
     setWeightInput(e);
   };
 
-  const handleUpdateItem = (id) => {
-    console.log(id);
-    console.log(this);
+  const handleUpdateItem = async (item) => {
+    const response = await api.put(
+      `/characters/${details.character_id}/inventory/${item.id}`,
+      {
+        item: item.item,
+        weight: parseFloat(item.weight),
+      }
+    );
+    fetchInventory();
+  };
+
+  const handleEditItem = (value, index, item) => {
+    const newItem = { ...item };
+    newItem.item = value;
+
+    const newList = itemList;
+    newList[index] = newItem;
+
+    setItemList([...newList]);
+  };
+
+  const handleEditWeight = (value, index, item) => {
+    const newItem = { ...item };
+    newItem.weight = value;
+
+    const newList = itemList;
+    newList[index] = newItem;
+
+    setItemList([...newList]);
   };
 
   return (
@@ -103,20 +129,22 @@ export const Inventory = ({ details }) => {
           <AddIcon />
         </LoadingButton>
       </div>
-      {itemList?.map((item) => (
-        <div id={item.id} key={item.id} className={styles.gridFourItems}>
+      {itemList?.map((item, index) => (
+        <div id={item.id} key={item.id} className={styles.gridThreeItems}>
           <TextField
             id="itemInput"
             label="Item"
-            value={editItemInput || item.item}
-            onChange={(e) => setEditItemInput(e.target.value)}
+            value={item.item}
+            onChange={(e) => handleEditItem(e.target.value, index, item)}
+            onBlur={() => handleUpdateItem(item)}
           />
           <TextField
             id="volumeInput"
             type="number"
-            value={editWeightInput || item.weight}
+            value={item.weight}
             label="Peso"
-            onChange={(e) => setEditWeightInput(e.target.value)}
+            onChange={(e) => handleEditWeight(e.target.value, index, item)}
+            onBlur={() => handleUpdateItem(item)}
           />
           <LoadingButton
             loading={loadingRemove}
@@ -126,14 +154,14 @@ export const Inventory = ({ details }) => {
           >
             <DeleteForeverIcon />
           </LoadingButton>
-          <LoadingButton
+          {/* <LoadingButton
             loading={loadingUpdate}
             variant="outlined"
             color="warning"
-            onClick={() => handleUpdateItem(item.id)}
+            onClick={() => handleUpdateItem(item)}
           >
             <EditIcon />
-          </LoadingButton>
+          </LoadingButton> */}
         </div>
       ))}
     </div>
